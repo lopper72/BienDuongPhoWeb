@@ -214,31 +214,31 @@ class EditProduct extends Component
             //'product_uom.required' => 'Đơn vị tính là bắt buộc.'
         ]);
 
-        for($i = 0; $i < $this->product_detail_number; $i++){
-            $this->validate([
-                'product_detail_title.'.$i => 'required',
-                'product_detail_order.'.$i => 'required',
-                'product_detail_order.*' => 'distinct',
-            ], [
-                'product_detail_title.'.$i.'.required' => 'Tiêu đề là bắt buộc.',
-                'product_detail_order.'.$i.'.required' => 'Thứ tự là bắt buộc.',
-                'product_detail_order.*.distinct' => 'Các Chương Trong Bài Đăng không được trùng nhau!',
-            ]);
-        }
+        // for($i = 0; $i < $this->product_detail_number; $i++){
+        //     $this->validate([
+        //         'product_detail_title.'.$i => 'required',
+        //         'product_detail_order.'.$i => 'required',
+        //         'product_detail_order.*' => 'distinct',
+        //     ], [
+        //         'product_detail_title.'.$i.'.required' => 'Tiêu đề là bắt buộc.',
+        //         'product_detail_order.'.$i.'.required' => 'Thứ tự là bắt buộc.',
+        //         'product_detail_order.*.distinct' => 'Các Chương Trong Bài Đăng không được trùng nhau!',
+        //     ]);
+        // }
 
-        if ($this->photo) {
-            $this->validate([
-                'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-            ], [
-                'photo.image' => 'File không phải là ảnh',
-                'photo.mimes' => 'Ảnh không đúng định dạng',
-                'photo.max' => 'Ảnh không được lớn hơn 2MB'
-            ]);
-            Storage::delete('public\\' . $this->existedPhoto);
-            $photo_name = time() . uniqid() . '.' . $this->photo->extension();
-            ImageOptimizer::optimize($this->photo->path());
-            $this->photo->storeAs(path: "public\images\products", name: $photo_name);
-        }
+        // if ($this->photo) {
+        //     $this->validate([
+        //         'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        //     ], [
+        //         'photo.image' => 'File không phải là ảnh',
+        //         'photo.mimes' => 'Ảnh không đúng định dạng',
+        //         'photo.max' => 'Ảnh không được lớn hơn 2MB'
+        //     ]);
+        //     Storage::delete('public\\' . $this->existedPhoto);
+        //     $photo_name = time() . uniqid() . '.' . $this->photo->extension();
+        //     ImageOptimizer::optimize($this->photo->path());
+        //     $this->photo->storeAs(path: "public\images\products", name: $photo_name);
+        // }
 
         $product = Product::find($this->id);
         $product->code = $this->product_code;
@@ -274,77 +274,77 @@ class EditProduct extends Component
 
         $product->save();
 
-        foreach($this->product_size_list_deleted as $size){
-            if(is_array($size) && array_key_exists('id', $size)){
-                ProductSize::find($size['id'])->delete();
-            }
-        }
-        foreach($this->product_size_list as $size){
-            if(is_array($size) && array_key_exists('id', $size)){
-                $product_size = ProductSize::find($size['id']);
-                $product_size->size = $size['size'];
-                $product_size->save();
-                continue;
-            }
-            $product_size = new ProductSize();
-            $product_size->product_id = $this->id;
-            $product_size->size = $size["size"];
-            $product_size->save();
-        }
+        // foreach($this->product_size_list_deleted as $size){
+        //     if(is_array($size) && array_key_exists('id', $size)){
+        //         ProductSize::find($size['id'])->delete();
+        //     }
+        // }
+        // foreach($this->product_size_list as $size){
+        //     if(is_array($size) && array_key_exists('id', $size)){
+        //         $product_size = ProductSize::find($size['id']);
+        //         $product_size->size = $size['size'];
+        //         $product_size->save();
+        //         continue;
+        //     }
+        //     $product_size = new ProductSize();
+        //     $product_size->product_id = $this->id;
+        //     $product_size->size = $size["size"];
+        //     $product_size->save();
+        // }
 
-        foreach($this->product_detail_list_deleted as $product_detail){
-            if(is_array($product_detail) && array_key_exists('id', $product_detail)){
-                ProductDetail::find($product_detail['id'])->delete();
-            }
-        }
+        // foreach($this->product_detail_list_deleted as $product_detail){
+        //     if(is_array($product_detail) && array_key_exists('id', $product_detail)){
+        //         ProductDetail::find($product_detail['id'])->delete();
+        //     }
+        // }
 
-        for($i = 0; $i < $this->product_detail_number; $i++){
+        // for($i = 0; $i < $this->product_detail_number; $i++){
             
 
-            if(is_array($this->product_detail_list[$i])){
-                $this->product_detail_list[$i] = ProductDetail::find($this->product_detail_list[$i]['id']);
-            }
-            else{
-                $this->product_detail_list[$i]->product_id = $product->id;
-            }
+        //     if(is_array($this->product_detail_list[$i])){
+        //         $this->product_detail_list[$i] = ProductDetail::find($this->product_detail_list[$i]['id']);
+        //     }
+        //     else{
+        //         $this->product_detail_list[$i]->product_id = $product->id;
+        //     }
 
-            $this->product_detail_list[$i]->title = $this->product_detail_title[$i];
-            $this->product_detail_list[$i]->number_order = $this->product_detail_order[$i];
+        //     $this->product_detail_list[$i]->title = $this->product_detail_title[$i];
+        //     $this->product_detail_list[$i]->number_order = $this->product_detail_order[$i];
             
-            if(array_key_exists($i, $this->product_detail_short_description)){
-                $this->product_detail_list[$i]->short_description = $this->product_detail_short_description[$i];
-            }
-            $this->product_detail_list[$i]->retail_price = $product->retail_price;
-            $this->product_detail_list[$i]->wholesale_price = $product->wholesale_price;
+        //     if(array_key_exists($i, $this->product_detail_short_description)){
+        //         $this->product_detail_list[$i]->short_description = $this->product_detail_short_description[$i];
+        //     }
+        //     $this->product_detail_list[$i]->retail_price = $product->retail_price;
+        //     $this->product_detail_list[$i]->wholesale_price = $product->wholesale_price;
 
-            if(array_key_exists($i, $this->product_detail_image_list)){
-                $image_list = $this->product_detail_image_list[$i];
-                if($image_list != null){
-                    $images_store = [];
-                    if(is_string($image_list)){
-                        $image_list = json_decode($image_list);
-                    }
-                    if(count($image_list) > 0){
-                        foreach($image_list as $image){
-                            if(is_string($image)){
-                                $images_store[] = $image;
-                                continue;
-                            }
-                            $image_name = time() . uniqid() . '.' . $image->extension();
+        //     if(array_key_exists($i, $this->product_detail_image_list)){
+        //         $image_list = $this->product_detail_image_list[$i];
+        //         if($image_list != null){
+        //             $images_store = [];
+        //             if(is_string($image_list)){
+        //                 $image_list = json_decode($image_list);
+        //             }
+        //             if(count($image_list) > 0){
+        //                 foreach($image_list as $image){
+        //                     if(is_string($image)){
+        //                         $images_store[] = $image;
+        //                         continue;
+        //                     }
+        //                     $image_name = time() . uniqid() . '.' . $image->extension();
 
-                            $this->product_detail_list[$i]->image = $image_name;
-                            $image->storeAs(path: "public\images\products", name: $image_name);
-                            $images_store[] = $image_name;
-                        }
-                        $this->product_detail_list[$i]->image = json_encode($images_store);
-                    }
-                }else{
-                    $this->product_detail_list[$i]->image = null;
-                }
+        //                     $this->product_detail_list[$i]->image = $image_name;
+        //                     $image->storeAs(path: "public\images\products", name: $image_name);
+        //                     $images_store[] = $image_name;
+        //                 }
+        //                 $this->product_detail_list[$i]->image = json_encode($images_store);
+        //             }
+        //         }else{
+        //             $this->product_detail_list[$i]->image = null;
+        //         }
                 
-            }
-            $this->product_detail_list[$i]->save();
-        }
+        //     }
+        //     $this->product_detail_list[$i]->save();
+        // }
 
         session()->flash('message', 'Product has been created successfully!');
         return redirect()->route('admin.products');
