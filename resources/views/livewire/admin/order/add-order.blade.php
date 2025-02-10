@@ -116,7 +116,7 @@
                 </div>
                 <div class="mt-6">
                     <div class="flex justify-between items-center">
-                        <h4 class="text-xl font-bold text-black dark:text-white inline">DANH SÁCH Truyện</h4>
+                        <h4 class="text-xl font-bold text-black dark:text-white inline">DANH SÁCH Bài Đăng</h4>
                         <button type="button" 
                                 wire:click="$dispatch('openModal', { component: 'admin.order.add-product-modal', arguments : { mode : 'New' } })"
                                 class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150"
@@ -128,7 +128,7 @@
                         <thead class="bg-gray-200">
                             <tr>
                                 <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider w-12 text-center">STT</th>
-                                <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider text-left">Truyện</th>
+                                <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider text-left">Bài Đăng</th>
                                 <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider w-40 text-left">Mẫu</th>
                                 <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider w-24 text-left">Size</th>
                                 <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider w-48 text-left">Kho</th>

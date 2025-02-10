@@ -1,6 +1,6 @@
 @extends('client.layouts.master')
 
-@section('title', 'Chi tiết Truyện')
+@section('title', 'Chi tiết Bài Đăng')
 
 @section('content')
 <div class="bg-gray-100 dark:bg-gray-800 py-8">
@@ -67,7 +67,7 @@
     <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
         <nav class="w-full z-30 top-0 px-6 py-1">
             <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
-                <h2 class="text-2xl font-bold text-gray-800 mb-2">Truyện khác</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Bài Đăng khác</h2>
             </div>
         </nav>
         <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">

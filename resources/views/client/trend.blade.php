@@ -6,7 +6,7 @@
     <div class="slidePage" style="background-image: url({{ asset('library/images/slide-banner.jpg') }});">
         <div class="container">
             <div class="slideContent">
-                <div class="titleIndex">Truyện đề cử</div>
+                <div class="titleIndex">Bài Đăng đề cử</div>
                 <div class="mySlide">
                     @foreach ($top_products as $key => $top_product)
                             @php

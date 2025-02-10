@@ -17,7 +17,7 @@
             <form class="p-4 md:p-5">
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Truyện</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bài Đăng</label>
                         <div class="mt-2">
                             <select id="product_add" wire:model.defer="product_add" name="product_add" wire:change.prevent="loadProductDetails()" class="convert-to-dropdown block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 <option value="">-</option>
@@ -71,7 +71,7 @@
         let category = document.getElementById('category');
         let description = document.getElementById('description');
         if(mode == 'add'){
-            title.innerHTML = 'Thêm Truyện';
+            title.innerHTML = 'Thêm Bài Đăng';
             name.value = '';
             price.value = '';
             category.value = '';

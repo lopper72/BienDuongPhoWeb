@@ -122,7 +122,7 @@
     </div>
     <div class="px-4 py-6 md:px-6 xl:px-7.5">
         <div class="text-red-500 text-sm mt-4">
-            Lưu ý: Những kho hàng không thể xóa bao gồm các kho hàng đã có Truyện nhập vào. Điều này là để đảm bảo tính toàn vẹn dữ liệu.
+            Lưu ý: Những kho hàng không thể xóa bao gồm các kho hàng đã có Bài Đăng nhập vào. Điều này là để đảm bảo tính toàn vẹn dữ liệu.
         </div>
     </div>
     <div class="hidden" data-modal-target="popup-delete-multiple-item" data-modal-toggle="popup-delete-multiple-item"></div>

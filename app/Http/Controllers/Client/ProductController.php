@@ -168,7 +168,7 @@ class ProductController extends Controller
         if (isset($checkCommnet)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Bạn đã bình luận truyện này.<br> Xin cảm ơn!',
+                'message' => 'Bạn đã bình luận Bài Đăng này.<br> Xin cảm ơn!',
             ]);
         }
 
@@ -194,7 +194,7 @@ class ProductController extends Controller
         if (!Auth::user()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Vui lòng đăng nhập để lưu truyện.',
+                'message' => 'Vui lòng đăng nhập để lưu Bài Đăng.',
             ]);
         }else{
             $checkBookMark = BookMark::where('product_id', '=', $request['productIdDetail'])->where('user_id', '=', Auth::user()->id)->first();
@@ -202,7 +202,7 @@ class ProductController extends Controller
                 $checkBookMark->delete();
                 return response()->json([
                     'success' => true,
-                    'message' => 'Bạn đã gỡ đánh dấu truyện thành công.',
+                    'message' => 'Bạn đã gỡ đánh dấu Bài Đăng thành công.',
                 ]);
             }else{
                 $bookmark = new BookMark();
@@ -212,7 +212,7 @@ class ProductController extends Controller
                 $bookmark->save();
                 return response()->json([
                     'success' => true,
-                    'message' => 'Bạn đã đánh dấu truyện thành công.',
+                    'message' => 'Bạn đã đánh dấu Bài Đăng thành công.',
                 ]);
             }
         }

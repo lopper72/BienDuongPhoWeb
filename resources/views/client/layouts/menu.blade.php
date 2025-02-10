@@ -17,7 +17,7 @@
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link" href="{{route('xu_huong')}}">Xu Hướng</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('truyen')}}">Truyện Mới</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('truyen')}}">Bài Đăng Mới</a></li>
                     </ul>
                 </div>
             </nav>
@@ -37,7 +37,7 @@
             <a class="iconLogin" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modalSignUp">Đăng Ký</a>
         @endif
         <div class="itemUser">
-            <a href="{{ route('item_bookmark') }}">Truyện đã đánh dấu</a>
+            <a href="{{ route('item_bookmark') }}">Bài Đăng đã đánh dấu</a>
             <a style="border-top:1px solid #ddd" href="{{ route('logout') }}">Đăng xuất</a>
         </div>
     </div>
@@ -51,7 +51,7 @@
     </div>
     <ul>
         <li><a href="{{route('xu_huong')}}">Xu Hướng</a></li>
-        <li><a href="{{route('truyen')}}">Truyện Mới</a></li>
+        <li><a href="{{route('truyen')}}">Bài Đăng Mới</a></li>
     </ul>
 </div>
 <span id="scrollToTopBtn"><i class="fa-solid fa-arrow-up"></i></span>

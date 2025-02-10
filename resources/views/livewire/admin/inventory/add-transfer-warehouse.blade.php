@@ -52,7 +52,7 @@
                 <div class="col-span-1 sm:col-span-2 md:col-span-4"></div>
                 <div class="col-span-1 sm:col-span-2 md:col-span-8">
                     <div class="flex justify-between items-center bg-slate-800">
-                        <h3 class="font-bold text-gray-300 px-3 py-3">THÊM Truyện</h3>
+                        <h3 class="font-bold text-gray-300 px-3 py-3">THÊM Bài Đăng</h3>
                         <div class="flex flex-col sm:flex-row items-center justify-end gap-x-6 px-3">
                             <button type="button" wire:click="addTransferWarehouseDetail" class="inline-flex items-center px-2 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" version="1.1" id="Capa_1" width="10" height="10" viewBox="0 0 45.402 45.402" xml:space="preserve">
@@ -71,8 +71,8 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th scope="col" class="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider w-20 text-left">STT</th>
-                                        <th scope="col" class="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider text-left">Truyện</th>
-                                        <th scope="col" class="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider w-80 text-left">Mẫu Truyện</th>
+                                        <th scope="col" class="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider text-left">Bài Đăng</th>
+                                        <th scope="col" class="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider w-80 text-left">Mẫu Bài Đăng</th>
                                         <th scope="col" class="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider w-64 text-left">Size</th>
                                         <th scope="col" class="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider w-64 text-left">Số lượng</th>
                                         <th scope="col" class="px-6 py-4 text-xs font-medium text-gray-500 uppercase tracking-wider w-20 text-left"></th>

@@ -5,8 +5,8 @@
                 <tr>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-12 text-center">STT</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-20 text-center"></th>
-                    <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-36 text-center">Mã Truyện</th>
-                    <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Tên Truyện</th>
+                    <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-36 text-center">Mã Bài Đăng</th>
+                    <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Tên Bài Đăng</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Danh Mục</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Thể Loại</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-32 text-center">Đã được đặt</th>
@@ -29,9 +29,9 @@
                                         $imageThumbnailCheck = json_decode($product->productDetails[0]->image);   
                                         $imageThumbnail = $imageThumbnailCheck ? $imageThumbnailCheck[0] : $product->productDetails[0]->image;
                                     @endphp
-                                    <img src="{{ asset('storage/images/products/' . $imageThumbnail) }}" alt="Hình ảnh Truyện" class="w-15 h-15 shadow-md">
+                                    <img src="{{ asset('storage/images/products/' . $imageThumbnail) }}" alt="Hình ảnh Bài Đăng" class="w-15 h-15 shadow-md">
                                 @else
-                                    <img src="{{ asset('library/images/image-not-found.jpg') }}" alt="Không có hình ảnh Truyện" class="w-15 h-15 shadow-md">
+                                    <img src="{{ asset('library/images/image-not-found.jpg') }}" alt="Không có hình ảnh Bài Đăng" class="w-15 h-15 shadow-md">
                                 @endif
                             </div>
                         </td>

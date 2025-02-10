@@ -39,7 +39,7 @@ class ListCategory extends Component
         $this->selected_index = [];
         if(count($list_has_product) > 0){
             $list_has_product = implode(', ', $list_has_product);
-            $this->dispatch('error', ['error' => 'Danh mục <b>'.$list_has_product.'</b> đã có Truyện, vì vậy không thể xóa.']);
+            $this->dispatch('error', ['error' => 'Danh mục <b>'.$list_has_product.'</b> đã có Bài Đăng, vì vậy không thể xóa.']);
         }
         $this->render();
     }
@@ -48,7 +48,7 @@ class ListCategory extends Component
         $category = Category::find($id);
         $product = Product::where('category_id', $id)->first();
         if($product){
-            $this->dispatch('error', ['error' => 'Danh mục <b>'.$category->name.'</b> đã có Truyện, vì vậy không thể xóa.']);
+            $this->dispatch('error', ['error' => 'Danh mục <b>'.$category->name.'</b> đã có Bài Đăng, vì vậy không thể xóa.']);
         }else{
             $category->delete();
         }

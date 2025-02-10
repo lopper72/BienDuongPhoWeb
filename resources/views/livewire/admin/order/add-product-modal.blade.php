@@ -1,7 +1,7 @@
 <div>
     <!-- Modal header -->
     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">THÊM Truyện VÀO ĐƠN HÀNG</h3>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">THÊM Bài Đăng VÀO ĐƠN HÀNG</h3>
         <button type="button" wire:click="$dispatch('closeModal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="modal-order-product">
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -13,7 +13,7 @@
     <form class="p-4 md:p-5" wire:submit.prevent="storeOrderProduct" onsubmit="return false">
         <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Truyện <span class="text-red-700">*</span></label>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bài Đăng <span class="text-red-700">*</span></label>
                 <div class="mt-2">
                     <select id="product_id" wire:model="product_id" name="product_id" wire:change="loadProductAttributes()" class="convert-to-dropdown block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         <option value="">-</option>

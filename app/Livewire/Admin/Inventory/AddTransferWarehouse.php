@@ -93,7 +93,7 @@ class AddTransferWarehouse extends Component
             'transfer_warehouse_code.unique' => 'Mã chuyển kho đã tồn tại.',
             'transfer_warehouse_name.required' => 'Vui lòng nhập tiêu đề.',
             'from_warehouse_id.required' => 'Vui lòng chọn kho hàng đi.',
-            'from_warehouse_id.exists' => 'Kho hàng đi chưa có Truyện',
+            'from_warehouse_id.exists' => 'Kho hàng đi chưa có Bài Đăng',
             'to_warehouse_id.required' => 'Vui lòng chọn kho hàng đến.',
             'to_warehouse_id.different' => 'Vui lòng chọn kho hàng đến khác với kho hàng đi.',
         ]);
@@ -101,7 +101,7 @@ class AddTransferWarehouse extends Component
         if ($this->transfer_warehouse_detail_count == 0) {
             $this->dispatch('successTransferProduct', [
                 'title' => 'Thất bại',
-                'message' => 'Bạn chưa chọn Truyện, vui lòng nhập lại.',
+                'message' => 'Bạn chưa chọn Bài Đăng, vui lòng nhập lại.',
                 'type' => 'error',
                 'timeout' => 3000
             ]);
@@ -119,10 +119,10 @@ class AddTransferWarehouse extends Component
                     'product_detail_id.'.$i => 'required|exists:import_product_detail,product_detail_id',
                     'transfer_warehouse_detail_qnty.'.$i => 'required|gt:0',
                 ], [
-                    'product_id.'.$i.'.required' => 'Vui lòng chọn Truyện',
-                    'product_id.'.$i.'.exists' => 'Truyện chưa được nhập hàng',
-                    'product_detail_id.'.$i.'.required' => 'Vui lòng chọn mẫu Truyện',
-                    'product_detail_id.'.$i.'.exists' => 'Mẫu Truyện chưa được nhập hàng',
+                    'product_id.'.$i.'.required' => 'Vui lòng chọn Bài Đăng',
+                    'product_id.'.$i.'.exists' => 'Bài Đăng chưa được nhập hàng',
+                    'product_detail_id.'.$i.'.required' => 'Vui lòng chọn mẫu Bài Đăng',
+                    'product_detail_id.'.$i.'.exists' => 'Mẫu Bài Đăng chưa được nhập hàng',
                     'transfer_warehouse_detail_qnty.'.$i.'.required' => 'Vui lòng nhập số lượng',
                     'transfer_warehouse_detail_qnty.'.$i.'.gt' => 'Số lượng phải lớn hơn 0',
                 ]);
@@ -204,7 +204,7 @@ class AddTransferWarehouse extends Component
                             $this->validate([
                                 'product_id.'.$i => 'in:'.$empty_product[$i],
                             ], [
-                                'product_id.'.$i.'.in' => 'Truyện không thuộc kho hàng đi',
+                                'product_id.'.$i.'.in' => 'Bài Đăng không thuộc kho hàng đi',
                             ]);
                         }
                     }

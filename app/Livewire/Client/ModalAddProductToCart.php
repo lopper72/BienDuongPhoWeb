@@ -65,7 +65,7 @@ class ModalAddProductToCart extends ModalComponent
         if ($this->listProductAdded[$product_size_id] < $available_quantity){
             $this->listProductAdded[$product_size_id]++;
         }else{
-            $this->listProductAddedError[$product_size_id] = "Tối đa ". $available_quantity . " Truyện";
+            $this->listProductAddedError[$product_size_id] = "Tối đa ". $available_quantity . " Bài Đăng";
         }
         $this->updateTotal();
     }
@@ -90,7 +90,7 @@ class ModalAddProductToCart extends ModalComponent
         $this->listProductAddedError[$product_size_id] = "";
         $available_quantity = Warehouse::find($this->warehouse_id)->totalProductAvailable($this->product->product_id, $this->product_detail_id, $product_size_id);
         if ($this->listProductAdded[$product_size_id] > $available_quantity){
-            $this->listProductAddedError[$product_size_id] = "Tối đa ". $available_quantity . " Truyện";
+            $this->listProductAddedError[$product_size_id] = "Tối đa ". $available_quantity . " Bài Đăng";
             $this->listProductAdded[$product_size_id] = $available_quantity;
         }
         $this->updateTotal();
@@ -106,7 +106,7 @@ class ModalAddProductToCart extends ModalComponent
 
     public function addToCart(){
         if($this->totalQuantity == 0){
-            session()->flash('error', 'Vui lòng chọn số lượng Truyện');
+            session()->flash('error', 'Vui lòng chọn số lượng Bài Đăng');
             return;
         }
         $cart = CartMD::where('user_id', Auth::user()->id)->first();

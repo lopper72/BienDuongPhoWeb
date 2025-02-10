@@ -8,12 +8,12 @@
     @if ($product->shopper_link != "" && $chap->number_order != 1 && $_SESSION['show_url_shopee'] == 'y')
         <div class="container">
             <div class="contentShopee">
-                <p>Mời bạn CLICK vào liên kết bên dưới và <span>MỞ ỨNG DỤNG SHOPEE</span> để mở khóa toàn bộ chương truyện!</p>
+                <p>Mời bạn CLICK vào liên kết bên dưới và <span>MỞ ỨNG DỤNG SHOPEE</span> để mở khóa toàn bộ chương Bài Đăng!</p>
                 <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="unlockPage();" target="blank" href="{{$product->shopper_link}}">{{$product->shopper_link}}</a></p>
                 <div class="imgShopee">
                     <img src="{{asset('library/images/image-shopee-v2.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
                 </div>
-                <h4>TRUYỆN FULL BỘ XIN CHÂN THÀNH CẢM ƠN QUÝ ĐỘC GIẢ!</h4>
+                <h4>Bài Đăng FULL BỘ XIN CHÂN THÀNH CẢM ƠN QUÝ ĐỘC GIẢ!</h4>
             </div>
             <input type="hidden" name="idProduct" id="idProduct" value="{{$product->id}}">
             <input type="hidden" name="idChap" id="idChap" value="{{$chap->id}}">
@@ -47,7 +47,7 @@
         <div class="container">
             <h3 class="chapTitle mb-3">{{$product->name}} - {{$chap->title}}</h3>
             <div class="breadcrumbChap">
-                <a href="{{route('index')}}">Trang chủ</a> / <a href="{{route('truyen')}}">Tất cả truyện</a> / <a href="{{route('truyen_chitiet',$product->slug)}}">{{$product->name}}</a> / <span>{{$chap->title}}</span>
+                <a href="{{route('index')}}">Trang chủ</a> / <a href="{{route('truyen')}}">Tất cả Bài Đăng</a> / <a href="{{route('truyen_chitiet',$product->slug)}}">{{$product->name}}</a> / <span>{{$chap->title}}</span>
             </div>
             <div class="btnChapContent">
                 <select id="selChap" class="form-select">

@@ -90,7 +90,7 @@ class AddImportProduct extends Component
         if ($this->import_product_detail_count == 0) {
             $this->dispatch('successImportProduct', [
                 'title' => 'Thất bại',
-                'message' => 'Bạn chưa chọn Truyện, vui lòng nhập lại.',
+                'message' => 'Bạn chưa chọn Bài Đăng, vui lòng nhập lại.',
                 'type' => 'error',
                 'timeout' => 3000
             ]);
@@ -108,8 +108,8 @@ class AddImportProduct extends Component
                     'product_detail_id.'.$i => 'required',
                     'import_product_detail_qnty.'.$i => 'required',
                 ], [
-                    'product_id.'.$i => 'Vui lòng chọn Truyện',
-                    'product_detail_id.'.$i => 'Vui lòng chọn mẫu Truyện',
+                    'product_id.'.$i => 'Vui lòng chọn Bài Đăng',
+                    'product_detail_id.'.$i => 'Vui lòng chọn mẫu Bài Đăng',
                     'import_product_detail_qnty.'.$i => 'Vui lòng nhập số lượng',
                 ]);
                 if (count($product_size[$i]) > 0) {

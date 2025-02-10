@@ -81,7 +81,7 @@
                 </div>
                 <div class="mt-6">
                     <div class="flex justify-between items-center">
-                        <h4 class="text-xl font-bold text-black dark:text-white inline">DANH SÁCH Truyện</h4>
+                        <h4 class="text-xl font-bold text-black dark:text-white inline">DANH SÁCH Bài Đăng</h4>
                     </div>
                 </div>
                 <div class="overflow-x-auto mt-2">
@@ -89,7 +89,7 @@
                         <thead class="bg-gray-200">
                             <tr>
                                 <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider w-12 text-center">STT</th>
-                                <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider text-left">Truyện</th>
+                                <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider text-left">Bài Đăng</th>
                                 <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider w-40 text-left">Mẫu</th>
                                 <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider w-24 text-left">Size</th>
                                 <th scope="col" class="px-2 py-4 text-xs font-medium text-gray-700 uppercase tracking-wider w-48 text-left">Kho</th>

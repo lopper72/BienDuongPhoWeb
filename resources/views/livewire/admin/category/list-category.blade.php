@@ -114,7 +114,7 @@
     </div>
     <div class="px-4 py-6 md:px-6 xl:px-7.5">
         <div class="text-red-500 text-sm mt-4">
-            Lưu ý: Những danh mục không thể xóa bao gồm các danh mục đã có Truyện. Điều này là để đảm bảo tính toàn vẹn dữ liệu.
+            Lưu ý: Những danh mục không thể xóa bao gồm các danh mục đã có Bài Đăng. Điều này là để đảm bảo tính toàn vẹn dữ liệu.
         </div>
     </div>
     <div class="hidden" data-modal-target="popup-delete-multiple-item" data-modal-toggle="popup-delete-multiple-item"></div>

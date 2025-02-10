@@ -81,7 +81,7 @@ class EditMac extends Component
                 ['id' => 12, 'name' => 'Đơn Hàng', 'code' => 'TMDTDH', 'active_yn' => 'y'],
                 ['id' => 12, 'name' => 'Danh Mục', 'code' => 'TMDTDM', 'active_yn' => 'y'],
                 ['id' => 12, 'name' => 'Thể Loại', 'code' => 'TMDTNH', 'active_yn' => 'y'],
-                ['id' => 12, 'name' => 'Truyện', 'code' => 'TMDTSP', 'active_yn' => 'y'],
+                ['id' => 12, 'name' => 'Bài Đăng', 'code' => 'TMDTSP', 'active_yn' => 'y'],
                 ['id' => 12, 'name' => 'Tồn Kho', 'code' => 'TMDTTK', 'active_yn' => 'y'],
                 ['id' => 12, 'name' => 'Kho Hàng', 'code' => 'TMDTKH', 'active_yn' => 'y'],
                 ['id' => 12, 'name' => 'Khách Hàng', 'code' => 'TMDTKY', 'active_yn' => 'y'],

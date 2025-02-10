@@ -55,7 +55,7 @@
                         <h4 class="text-title-md font-bold text-black dark:text-white">
                             {{number_format($total_product)}}
                         </h4>
-                        <span class="text-sm font-medium">Tổng số Truyện</span>
+                        <span class="text-sm font-medium">Tổng số Bài Đăng</span>
                     </div>
                 </div>
             </div>

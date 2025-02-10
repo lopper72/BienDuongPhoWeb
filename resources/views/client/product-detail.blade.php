@@ -1,6 +1,6 @@
 @extends('client.layouts.master')
 
-@section('title', 'Chi tiết Truyện')
+@section('title', 'Chi tiết Bài Đăng')
 
 @section('content')
     <div class="itemDetail" style="background-image: url({{ asset('library/images/slide-banner.jpg') }});">
@@ -87,7 +87,7 @@
                                 @if ($checkBookMarkYN == 'y')
                                     Đã đánh dấu
                                 @else
-                                    Đánh dấu truyện
+                                    Đánh dấu Bài Đăng
                                 @endif
                             </div>
                         </div>
@@ -106,7 +106,7 @@
         <div class="row">
             <div class="col-12 col-lg-8 mb-3 mb-lg-0">
                 <div class="titleIndex2">
-                    <i class="fa-solid fa-star"></i><span>Giới thiệu truyện</span>
+                    <i class="fa-solid fa-star"></i><span>Giới thiệu Bài Đăng</span>
                 </div>
                 <div class="itemDesc mb-4">
                     @php
@@ -114,7 +114,7 @@
                     @endphp
                 </div>
                 <div class="titleIndex2">
-                    <i class="fa-solid fa-star"></i><span>Chương truyện</span>
+                    <i class="fa-solid fa-star"></i><span>Chương Bài Đăng</span>
                 </div>
                 <ul class="listChap mb-4">
                     @foreach ($chaps as $key => $chap)

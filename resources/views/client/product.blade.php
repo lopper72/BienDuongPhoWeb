@@ -1,12 +1,12 @@
 @extends('client.layouts.master')
 
-@section('title', 'Truyện')
+@section('title', 'Bài Đăng')
 
 @section('content')
     <div class="container">
         <div class="orderPage">
             <div class="titleIndex2">
-                <i class="fa-solid fa-star"></i><span>Tất cả truyện</span>
+                <i class="fa-solid fa-star"></i><span>Tất cả Bài Đăng</span>
             </div>
             <ul>
                 <li>

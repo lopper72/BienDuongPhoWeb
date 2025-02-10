@@ -124,7 +124,7 @@
                         @endif
                     </div>
                     <div class="pb-2">
-                        <span class="text-sm md:text-md font-bold text-gray-700 dark:text-gray-300 uppercase">Mô tả Truyện</span>
+                        <span class="text-sm md:text-md font-bold text-gray-700 dark:text-gray-300 uppercase">Mô tả Bài Đăng</span>
                         <div class="text-xs md:text-sm">
                             {!! $product->description !!}
                         </div>
@@ -181,7 +181,7 @@
                 
                 setTimeout(() => {
                     title.innerHTML = "Thành công";
-                    message.innerHTML = "Truyện đã được thêm vào giỏ hàng";
+                    message.innerHTML = "Bài Đăng đã được thêm vào giỏ hàng";
                     svgIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
                     modal.click();
                     updateCartNumber(cartCount);
@@ -196,7 +196,7 @@
                 
                 setTimeout(() => {
                     title.innerHTML = "Thất bại";
-                    message.innerHTML = "Không thể thêm vượt quá số lượng trong kho vào giỏ hàng. Số lượng tối đa cho Truyện này : "+available_quantity;
+                    message.innerHTML = "Không thể thêm vượt quá số lượng trong kho vào giỏ hàng. Số lượng tối đa cho Bài Đăng này : "+available_quantity;
                     svgIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>'
                     modal.click();
                 }, 200);

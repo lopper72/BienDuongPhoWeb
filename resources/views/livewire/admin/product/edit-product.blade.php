@@ -15,10 +15,10 @@
                 <div class="border-b border-gray-900/10 pb-12">
                     <div class="grid gap-x-6 gap-y-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-6">
                         <div class="col-span-1 sm:col-span-2 md:col-span-3">
-                            <h3 class="font-bold bg-slate-800 text-gray-300 px-3 py-3 mb-6">THÔNG TIN Truyện</h3>
+                            <h3 class="font-bold bg-slate-800 text-gray-300 px-3 py-3 mb-6">THÔNG TIN Bài Đăng</h3>
                             <div class="grid gap-x-6 gap-y-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-8 px-2">
                                 <div class="col-span-1 sm:col-span-2">
-                                    <label for="product_code" class="block text-sm font-medium leading-6 text-gray-900">Tên Truyện <span class="text-red-700">*</span></label>
+                                    <label for="product_code" class="block text-sm font-medium leading-6 text-gray-900">Tên Bài Đăng <span class="text-red-700">*</span></label>
                                     <div class="mt-2">
                                         <input wire:model="product_code" type="text" name="product_code" id="product_code" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     </div>
@@ -27,7 +27,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-span-1 sm:col-span-2 md:col-span-6">
-                                    <label for="product_name" class="block text-sm font-medium leading-6 text-gray-900">Tên Truyện <span class="text-red-700">*</span></label>
+                                    <label for="product_name" class="block text-sm font-medium leading-6 text-gray-900">Tên Bài Đăng <span class="text-red-700">*</span></label>
                                     <div class="mt-2">
                                         <input wire:model="product_name" type="text" name="product_name" id="product_name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     </div>
@@ -131,7 +131,7 @@
                                     @error('product_uom')
                                         <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                     @enderror --}}
-                                    <label for="is_full" class="block text-sm font-medium leading-6 text-gray-900">Truyện Full/ Đang Ra</label>
+                                    <label for="is_full" class="block text-sm font-medium leading-6 text-gray-900">Bài Đăng Full/ Đang Ra</label>
                                     <div class="mt-2">
                                         
                                         <input type="checkbox" @checked(old('active', $is_full)) class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:model="is_full" name="is_full" id="is_full" value="{{$is_full}}">
@@ -180,7 +180,7 @@
                                                     @endforeach
                                                 @else
                                                     <tr>
-                                                        <td class="px-2 py-0.5 text-gray-900 text-center">Truyện không có size</td>
+                                                        <td class="px-2 py-0.5 text-gray-900 text-center">Bài Đăng không có size</td>
                                                     </tr>
                                                 @endif
                                                 
@@ -189,7 +189,7 @@
                                     </div>
                                 </div> --}}
                                 <div class="col-span-1 sm:col-span-2 md:col-span-8">
-                                    <label for="product_description" class="block text-sm font-medium leading-6 text-gray-900">Mô tả Truyện</label> 
+                                    <label for="product_description" class="block text-sm font-medium leading-6 text-gray-900">Mô tả Bài Đăng</label> 
                                     <div class="mt-2">
                                         <div wire:ignore>
                                             <textarea wire:model="product_description"

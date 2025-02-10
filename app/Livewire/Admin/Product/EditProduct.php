@@ -203,10 +203,10 @@ class EditProduct extends Component
             //'product_wholesale_price' => 'required|numeric',
             //'product_uom' => 'required',
         ], [
-            'product_code.required' => 'Mã Truyện là bắt buộc.',
-            'product_code.unique' => 'Mã Truyện đã tồn tại.',
-            'product_name.required' => 'Tên Truyện là bắt buộc.',
-            'product_name.unique' => 'Tên Truyện đã tồn tại.',
+            'product_code.required' => 'Mã Bài Đăng là bắt buộc.',
+            'product_code.unique' => 'Mã Bài Đăng đã tồn tại.',
+            'product_name.required' => 'Tên Bài Đăng là bắt buộc.',
+            'product_name.unique' => 'Tên Bài Đăng đã tồn tại.',
             //'product_retail_price.required' => 'Giá bán lẻ là bắt buộc.',
             //'product_retail_price.numeric' => 'Giá bán lẻ phải là số.',
             //'product_wholesale_price.required' => 'Giá bán sỉ là bắt buộc.',
@@ -222,7 +222,7 @@ class EditProduct extends Component
             ], [
                 'product_detail_title.'.$i.'.required' => 'Tiêu đề là bắt buộc.',
                 'product_detail_order.'.$i.'.required' => 'Thứ tự là bắt buộc.',
-                'product_detail_order.*.distinct' => 'Các Chương Trong Truyện không được trùng nhau!',
+                'product_detail_order.*.distinct' => 'Các Chương Trong Bài Đăng không được trùng nhau!',
             ]);
         }
 

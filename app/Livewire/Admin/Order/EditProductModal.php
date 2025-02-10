@@ -81,8 +81,8 @@ class EditProductModal extends ModalComponent
                 'product_total_amount' => 'required|numeric|min:0',
             ],
             [
-                'product_id.required' => 'Trường Truyện là bắt buộc.',
-                'product_detail_id.required' => 'Trường chi tiết Truyện là bắt buộc.',
+                'product_id.required' => 'Trường Bài Đăng là bắt buộc.',
+                'product_detail_id.required' => 'Trường chi tiết Bài Đăng là bắt buộc.',
                 'product_size_id.required' => 'Trường kích thước là bắt buộc.',
                 'warehouse_id.required' => 'Trường kho hàng là bắt buộc.',
                 'product_quantity.required' => 'Trường số lượng là bắt buộc.',
@@ -128,7 +128,7 @@ class EditProductModal extends ModalComponent
         $totalAvailable = $totalImported - $totalOrdered + $totalTransferTo - $totalTransferFrom;
 
         if($this->product_quantity > $totalAvailable){
-            $this->addError('product_quantity', 'Số lượng Truyện trong kho không đủ. Truyện còn lại: '.$totalAvailable.' Truyện.');
+            $this->addError('product_quantity', 'Số lượng Bài Đăng trong kho không đủ. Bài Đăng còn lại: '.$totalAvailable.' Bài Đăng.');
             return;
         }
 

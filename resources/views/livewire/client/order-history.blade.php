@@ -19,7 +19,7 @@
                                     @endphp
                                     <img class="w-full h-full object-cover" src="{{ asset('storage/images/products/' . $imageThumbnail) }}" alt="{{$order_detail->product->name}}">
                                 @else
-                                    <img class="w-full h-full object-cover" src="{{ asset('library/images/image-not-found.jpg') }}" alt="Không có hình ảnh Truyện">
+                                    <img class="w-full h-full object-cover" src="{{ asset('library/images/image-not-found.jpg') }}" alt="Không có hình ảnh Bài Đăng">
                                 @endif
                             </div>
                             <div class="w-full flex justify-between ml-2 items-start">

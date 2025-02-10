@@ -6,7 +6,7 @@
     <div class="slidePage" style="background-image: url({{asset('library/images/slide-banner.jpg')}});">
         <div class="container">
             <div class="slideContent">
-                <div class="titleIndex">Truyện đề cử</div>
+                <div class="titleIndex">Bài Đăng đề cử</div>
                 <div class="mySlide">
                     @foreach ($top_products as $key => $top_product)
                             @php
@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="col-lg-8 col-12 mb-4 mb-lg-0">
                     @if ($history != "" && count($history))
-                        <div class="titleIndex2"><i class="fa-solid fa-star"></i><span>Truyện đã đọc</span></div>
+                        <div class="titleIndex2"><i class="fa-solid fa-star"></i><span>Bài Đăng đã đọc</span></div>
                         <div class="itemHistory">
                         @php
                             $current_date = new DateTime();

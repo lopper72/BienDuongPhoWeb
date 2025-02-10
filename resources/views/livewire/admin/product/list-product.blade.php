@@ -1,7 +1,7 @@
 <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
     <div class="px-4 py-6 md:px-6 xl:px-7.5">
         <div class="flex justify-between items-center">
-            <h4 class="text-xl font-bold text-black dark:text-white inline">DANH SÁCH Truyện</h4>
+            <h4 class="text-xl font-bold text-black dark:text-white inline">DANH SÁCH Bài Đăng</h4>
             <a href="{{route('admin.products.add')}}" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">
                 Thêm mới
             </a>
@@ -31,8 +31,8 @@
                     </th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-12 text-center">STT</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-20 text-center"></th>
-                    <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-36 text-center">Mã Truyện</th>
-                    <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Tên Truyện</th>
+                    <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-36 text-center">Mã Bài Đăng</th>
+                    <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Tên Bài Đăng</th>
                     {{-- <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-32 text-right">Giá lẽ (VND)</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-32 text-right">Giá sỉ (VND)</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-32 text-center">Tổng nhập kho</th>
@@ -134,7 +134,7 @@
     </div>
     <div class="px-4 py-6 md:px-6 xl:px-7.5">
         <div class="text-red-500 text-sm mt-4">
-            Lưu ý: Những Truyện không thể xóa bao gồm các Truyện đã được đặt hàng hoặc đã được nhập hàng. Điều này là để đảm bảo tính toàn vẹn dữ liệu.
+            Lưu ý: Những Bài Đăng không thể xóa bao gồm các Bài Đăng đã được đặt hàng hoặc đã được nhập hàng. Điều này là để đảm bảo tính toàn vẹn dữ liệu.
         </div>
     </div>
     <div class="hidden" data-modal-target="popup-delete-multiple-item" data-modal-toggle="popup-delete-multiple-item"></div>
@@ -155,7 +155,7 @@
             if (countChecked == 0) {
                 const popupWarning = document.querySelector('[data-modal-target="popup-warning"]');
                 popupWarning.click();
-                parseInfoWarning('Bạn chưa chọn Truyện nào để xóa');
+                parseInfoWarning('Bạn chưa chọn Bài Đăng nào để xóa');
             } else {
                 const popupDeleteMultiple = document.querySelector('[data-modal-target="popup-delete-multiple-item"]');
                 popupDeleteMultiple.click();

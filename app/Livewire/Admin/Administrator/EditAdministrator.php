@@ -136,7 +136,7 @@ class EditAdministrator extends Component
                 ['id' => 12, 'name' => 'Đơn Hàng', 'code' => 'TMDTDH', 'active_yn' => 'n', 'active_mac_yn' => 'n'],
                 ['id' => 13, 'name' => 'Danh Mục', 'code' => 'TMDTDM', 'active_yn' => 'n', 'active_mac_yn' => 'n'],
                 ['id' => 14, 'name' => 'Thể Loại', 'code' => 'TMDTNH', 'active_yn' => 'n', 'active_mac_yn' => 'n'],
-                ['id' => 15, 'name' => 'Quản Lý Truyện', 'code' => 'TMDTSP', 'active_yn' => 'n', 'active_mac_yn' => 'n'],
+                ['id' => 15, 'name' => 'Quản Lý Bài Đăng', 'code' => 'TMDTSP', 'active_yn' => 'n', 'active_mac_yn' => 'n'],
                 ['id' => 16, 'name' => 'Tồn Kho', 'code' => 'TMDTTK', 'active_yn' => 'n', 'active_mac_yn' => 'n'],
                 ['id' => 17, 'name' => 'Kho Hàng', 'code' => 'TMDTKH', 'active_yn' => 'n', 'active_mac_yn' => 'n'],
                 ['id' => 18, 'name' => 'Khách Hàng', 'code' => 'TMDTKY', 'active_yn' => 'n', 'active_mac_yn' => 'n'],

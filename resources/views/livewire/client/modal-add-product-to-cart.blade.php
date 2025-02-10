@@ -3,9 +3,9 @@
     <div class="flex items-center justify-between p-2 md:p-2 border-b dark:border-gray-600">
         <h3 class="text-lg font-bold text-gray-900 dark:text-white">
             @if ($this->mode == 'edit')
-                SỬA Truyện TRONG GIỎ HÀNG
+                SỬA Bài Đăng TRONG GIỎ HÀNG
             @else
-                THÊM Truyện VÀO GIỎ HÀNG
+                THÊM Bài Đăng VÀO GIỎ HÀNG
             @endif
         </h3>
         <button type="button" wire:click="$dispatch('closeModal')" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="modal-order-product">

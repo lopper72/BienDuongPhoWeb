@@ -165,7 +165,7 @@
                                             <path d="M12 12l-8 -4.5"></path>
                                             <path d="M16 5.25l-8 4.5"></path>
                                         </svg>
-                                        Truyện
+                                        Bài Đăng
                                     </a>
                                 </li>
                                 <li @if (in_array("TMDTTK", explode(',', $list_active_modules)) && in_array("TMDTTK", explode(',', $list_active_user))) @else style='display:none' @endif>

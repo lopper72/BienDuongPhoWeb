@@ -9,7 +9,7 @@
                 <div class="flex flex-col justify-start items-start dark:bg-gray-800 bg-gray-100 px-2 md:px-4 py-4 md:py-6 md:p-6 xl:p-6 w-full lg:overflow-auto lg:h-[430px]">
                         <div class="hidden lg:flex mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full border-b border-gray-200">
                             <div class="md:flex-row flex-col flex justify-between items-start w-full space-y-4 md:space-y-0">
-                                <div class="w-full flex flex-col justify-start items-start space-y-8 uppercase">Mô tả Truyện</div>
+                                <div class="w-full flex flex-col justify-start items-start space-y-8 uppercase">Mô tả Bài Đăng</div>
                             </div>
                         </div>
                       
@@ -36,7 +36,7 @@
                                         @endphp
                                         <img class="w-full h-full object-cover" src="{{ asset('storage/images/products/' . $imageThumbnail) }}" alt="{{$details_first->title}}">
                                     @else
-                                        <img class="w-full h-full object-cover" src="{{ asset('library/images/image-not-found.jpg') }}" alt="Không có hình ảnh Truyện">
+                                        <img class="w-full h-full object-cover" src="{{ asset('library/images/image-not-found.jpg') }}" alt="Không có hình ảnh Bài Đăng">
                                     @endif
                                 </div>
                                 <div class="w-full flex justify-between md:ml-2 items-start">
@@ -179,7 +179,7 @@
                 
                 setTimeout(() => {
                     title.innerHTML = "Thành công";
-                    message.innerHTML = "Truyện đã được cập nhật";
+                    message.innerHTML = "Bài Đăng đã được cập nhật";
                     svgIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
                     modal.click();
                 }, 200);
@@ -196,7 +196,7 @@
                 
                 setTimeout(() => {
                     title.innerHTML = "Thất bại";
-                    message.innerHTML = "Không thể thêm vượt quá số lượng trong kho vào giỏ hàng. Số lượng tối đa cho Truyện này : "+available_quantity;
+                    message.innerHTML = "Không thể thêm vượt quá số lượng trong kho vào giỏ hàng. Số lượng tối đa cho Bài Đăng này : "+available_quantity;
                     svgIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>'
                     modal.click();
                 }, 200);
