@@ -101,10 +101,10 @@ class EditProduct extends Component
             $this->is_active = '1';
         }
     }
-    public function updated()
-    {
-        $this->dispatch('reloadjs');
-    }
+    // public function updated()
+    // {
+    //     $this->dispatch('reloadjs');
+    // }
     public function addProductSize(){
         $this->validate([
             'product_size' => 'required'
