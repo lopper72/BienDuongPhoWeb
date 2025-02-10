@@ -1,5 +1,5 @@
 <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-    <form wire:submit='storeProduct'>
+    <form wire:submit.prevent='storeProduct'>
         <div class="px-4 py-6 md:px-6 xl:px-7.5">
             <div class="flex justify-between items-center">
                 <h4 class="text-xl font-bold text-black dark:text-white inline">THÊM MỚI</h4>
