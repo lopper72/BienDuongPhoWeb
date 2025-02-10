@@ -325,14 +325,5 @@
             console.error( error );
         } );
 
-
-        fetch('/livewire/update', {
-            method: 'POST', // Ensure this is POST, not GET
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ data: 'your_data' })
-        });
 </script>
 
