@@ -315,7 +315,10 @@
     .create( document.querySelector( '#product_description' ),{
         ckfinder: {
             uploadUrl: '{{route('admin.ck-upload-image').'?_token='.csrf_token()}}'
-        }
+        },
+        mediaEmbed: {
+            previewsInData: true
+        },
     } )
     .then(editor => {
      
