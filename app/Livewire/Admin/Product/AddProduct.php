@@ -264,10 +264,10 @@ class AddProduct extends Component
         $this->product_code = 'PROD-'.str_pad($id_latest->id + 1, 4, '0', STR_PAD_LEFT);
     }
 
-    public function updated()
-    {
-        $this->dispatch('reloadjs');
-    }
+    // public function updated()
+    // {
+    //     $this->dispatch('reloadjs');
+    // }
 
     public function updatedPhoto()
     {

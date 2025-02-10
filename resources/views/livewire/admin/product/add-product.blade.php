@@ -1,5 +1,5 @@
 <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-    <form wire:submit='storeProduct'>
+    <form wire:submit.prevent='storeProduct' method="POST">
         <div class="px-4 py-6 md:px-6 xl:px-7.5">
             <div class="flex justify-between items-center">
                 <h4 class="text-xl font-bold text-black dark:text-white inline">THÊM MỚI</h4>
@@ -325,79 +325,16 @@
             console.error( error );
         } );
 
-        function toggleDetail(index) {
-            $('#chuong'+index).toggle();
-        }
-
-
+        fetch('/livewire/update', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: "your_data" })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
 </script>
 
-@script()
-<script>
-
-    $(document).ready(function() {
-        function initSelect2(){
-                console.log('vaoxxx');
-                $('#selectBrand').select2({
-                        placeholder: 'Chọn một mục',
-                        allowClear: true
-                    });
-
-                    $('#selectBrand').on('change',function(){
-                        let data = $(this).val();
-                        $wire.set('selected_brands',data,false);
-                        $wire.selected_brands = data;
-                    });
-                    $('#selected_categories').select2({
-                        placeholder: 'Chọn một mục',
-                        allowClear: true
-                    });
-                    $('#selected_categories').on('change',function(){
-                        let data = $(this).val();
-                        $wire.set('selected_categories',data,false);
-                        $wire.selected_brands = data;
-                    });
-        };
-        let firstElement = $('div[id^="chuong"]').first().show();
-        initSelect2();
-    });
-    window.addEventListener('reloadjs', event => {
-        function initSelect2(){
-                console.log('vaoxxx');
-                $('#selectBrand').select2({
-                        placeholder: 'Chọn một mục',
-                        allowClear: true
-                    });
-
-                    $('#selectBrand').on('change',function(){
-                        let data = $(this).val();
-                        $wire.set('selected_brands',data,false);
-                        $wire.selected_brands = data;
-                    });
-                    $('#selected_categories').select2({
-                        placeholder: 'Chọn một mục',
-                        allowClear: true
-                    });
-                    $('#selected_categories').on('change',function(){
-                        let data = $(this).val();
-                        $wire.set('selected_categories',data,false);
-                        $wire.selected_brands = data;
-                    });
-        };
-        $(document).ready(function() {
-
-            let firstElement = $('div[id^="chuong"]').first().show();
-            document.addEventListener('livewire:load', function () {
-                initSelect2();
-            });
-
-            document.addEventListener('livewire:update', function () {
-                initSelect2();
-            });
-            initSelect2();
-        });
-    });
-    
-</script>
-
-@endscript
