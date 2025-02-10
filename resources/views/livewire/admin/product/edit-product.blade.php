@@ -318,7 +318,7 @@
         },
         mediaEmbed: {
             previewsInData: true
-        },
+        }
     } )
     .then(editor => {
      
