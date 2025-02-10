@@ -1,21 +1,22 @@
 @if ($paginator->hasPages())
-    <div class="pagination">
-        @if (!$paginator->onFirstPage())
-            <a href="{{$elements[0][1]}}"><i class="fa-solid fa-angle-left"></i></a>
-        @endif
-        @foreach ($elements as $element)
-            @if (is_array($element))
-                @foreach ($element as $page => $url)
-                    @if ($page == $paginator->currentPage())
-                        <a href="{{$url}}" class="active">{{$page}}</a>
-                    @else
-                        <a href="{{$url}}">{{$page}}</a>
-                    @endif
-                @endforeach
+    @php
+        $prevPage = $paginator->currentPage()-1;
+        $nextPage = $paginator->currentPage()+1;
+        if($prevPage == 0){
+            $prevPage = 1;
+        }
+    @endphp
+    <div class="paginationPage">
+        <div class="text-start">
+            @if (!$paginator->onFirstPage())
+                <a href="{{$elements[0][$prevPage]}}"><i class="fa-solid fa-arrow-left"></i> Trang trước</a>
             @endif
-        @endforeach
-        @if ($paginator->hasMorePages())
-            <a href="{{$elements[0][count($elements[0])]}}"><i class="fa-solid fa-angle-right"></i></a>
-        @endif
+        </div>
+        <div class="text-end">
+            @if ($paginator->hasMorePages())
+                <a href="{{$elements[0][$nextPage]}}">Trang sau <i class="fa-solid fa-arrow-right"></i></i></a>
+            @endif
+        </div>
+        
     </div>
 @endif
