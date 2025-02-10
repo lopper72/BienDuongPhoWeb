@@ -221,7 +221,7 @@
                         </div>
                     </li>
 
-                    <li @if(auth()->user()->is_super_admin != 1) style='display:none' @endif>
+                    <li @if (in_array("CDTM", explode(',', $list_active_modules)) && in_array("CDTM", explode(',', $list_active_user))) @else style='display:none' @endif>
                         <a
                             class="group relative flex items-center gap-2 rounded-sm py-1 px-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
                             href="#"
@@ -299,7 +299,7 @@
                         </div>
                     </li>
 
-                    <li @if(auth()->user()->is_super_admin != 1) style='display:none' @endif>
+                    <li @if ((in_array("CDTM", explode(',', $list_active_modules)) && in_array("CDTM", explode(',', $list_active_user)))|| auth()->user()->username == 'm8')) @else style='display:none' @endif >
                         <a
                             class="group relative flex items-center gap-2 rounded-sm py-1 px-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
                             href="#"

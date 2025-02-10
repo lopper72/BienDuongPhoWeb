@@ -35,7 +35,7 @@
                                         <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-span-1 sm:col-span-4">
+                                <div class="col-span-1 sm:col-span-4" style="display:none">
                                     <label class="block text-sm font-medium leading-6 text-gray-900">Thể Loại</label>
                                     <div class="mt-2">
                                         <select multiple id="selectBrand" wire:model="selected_brands" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" style="width: 100%">
@@ -45,7 +45,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-span-1 sm:col-span-2 md:col-span-4">
+                                <div class="col-span-1 sm:col-span-2 md:col-span-4" style="display:none">
                                     <label class="block text-sm font-medium leading-6 text-gray-900">Danh mục</label>
                                     <div class="mt-2">
                                         <select multiple wire:model="selected_categories" id="selected_categories" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" style="height: 100px;">
@@ -55,7 +55,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-span-1 sm:col-span-2 md:col-span-4">
+                                <div class="col-span-1 sm:col-span-2 md:col-span-4" style="display:none">
                                     <label for="product_source" class="block text-sm font-medium leading-6 text-gray-900">Nguồn</label>
                                     <div class="mt-2">
                                         <input wire:model="product_source" type="text" name="product_source" id="product_source" autocomplete="product_source" class="text-left block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{$product_source}}">
@@ -64,7 +64,7 @@
                                         <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-span-1 sm:col-span-2 md:col-span-4">
+                                <div class="col-span-1 sm:col-span-2 md:col-span-4" style="display:none">
                                     <label for="product_author" class="block text-sm font-medium leading-6 text-gray-900">Tác giả</label>
                                     <div class="mt-2">
                                         <input wire:model="product_author" type="text" name="product_author" id="product_author" autocomplete="product_author" class="text-left block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{$product_author}}">
@@ -94,7 +94,7 @@
                                 </div> --}}
                                 
                                
-                                <div class="col-span-1 sm:col-span-3">
+                                <div class="col-span-1 sm:col-span-3" style="display:none">
                                     <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Logo</label>
                                     <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                                         <div class="text-center mx-auto inline">
@@ -123,7 +123,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-span-1 sm:col-span-2">
+                                <div class="col-span-1 sm:col-span-2" style="display:none">
                                     {{-- <label for="product_uom" class="block text-sm font-medium leading-6 text-gray-900">Đơn vị tính <span class="text-red-700">*</span></label>
                                     <div class="mt-2">
                                         <input wire:model="product_uom" type="text" name="product_uom" id="product_uom" autocomplete="product_uom" class="text-right block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -137,7 +137,7 @@
                                         <input type="checkbox" @checked(old('active', $is_full)) class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:model="is_full" name="is_full" id="is_full" value="{{$is_full}}">
                                     </div>
                                 </div>
-                                <div class="col-span-1 sm:col-span-3">
+                                <div class="col-span-1 sm:col-span-3" style="display:none">
                                     <label for="is_active" class="block text-sm font-medium leading-6 text-gray-900">Hoạt động/ Không hoạt động</label>
                                     <div class="mt-2">
                                         
@@ -201,7 +201,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-span-1 sm:col-span-2 md:col-span-3 bg-slate-200 overflow-y-scroll" style="height: 1000px">
+                        {{-- <div class="col-span-1 sm:col-span-2 md:col-span-3 bg-slate-200 overflow-y-scroll" style="height: 1000px">
                             <div class="flex justify-between items-center bg-slate-800 mb-2">
                                 <h3 class="font-bold text-gray-300 px-3 py-3">Danh Sách Chương</h3>
                                 <div class="flex flex-col sm:flex-row items-center justify-end gap-x-6 px-3">
@@ -299,7 +299,7 @@
                                     </div>
                                 </div>
                             @endfor
-                        </div>
+                        </div> --}}
                         
                     </div>
                 </div>
