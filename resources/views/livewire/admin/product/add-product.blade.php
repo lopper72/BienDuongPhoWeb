@@ -302,29 +302,37 @@
 </div>
 
 <script>
-        
-
-        ClassicEditor
-        .create( document.querySelector( '#product_description' ),{
-            ckfinder: {
-                uploadUrl: '{{route('admin.ck-upload-image').'?_token='.csrf_token()}}'
-            },
-            mediaEmbed: {
-                previewsInData: true
-            }
-        } )
-        .then(editor => {
-         
-            editor.model.document.on('change:data', () => {
+        document.addEventListener('DOMContentLoaded', function () {
+            function initCKEditor(){
+                ClassicEditor
+                .create( document.querySelector( '#product_description' ),{
+                    ckfinder: {
+                        uploadUrl: '{{route('admin.ck-upload-image').'?_token='.csrf_token()}}'
+                    },
+                    mediaEmbed: {
+                        previewsInData: true
+                    }
+                } )
+                .then(editor => {
                 
-                @this.set('product_description', editor.getData());
-            })
-              
-        })
-        .catch( error => {
-            console.error( error );
-        } );
+                    editor.model.document.on('change:data', () => {
+                        
+                        @this.set('product_description', editor.getData());
+                    })
+                    
+                })
+                .catch( error => {
+                    console.error( error );
+                } );
+            }
+            // Initialize CKEditor on page load
+            initCKEditor();
 
+            // Reinitialize CKEditor on Livewire updates
+            Livewire.hook('message.processed', (message, component) => {
+                initCKEditor();
+            });
+        });
 
 </script>
 
