@@ -3,7 +3,7 @@
 @section('title', 'Trang chủ')
 
 @section('content')
-    <div class="container">
+    <div class="container mb-4">
         <div class="row">
             @foreach ($products as $item)
                 @php

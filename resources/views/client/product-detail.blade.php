@@ -51,7 +51,7 @@
             }
         </script>
     @else
-        <div class="container">
+        <div class="container mb-4">
             <h3 class="contentTitle">{{$product->name}}</h3>
             <div class="contentDetail">
                 @if ($product->description != "")
