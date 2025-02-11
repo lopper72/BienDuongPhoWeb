@@ -1,5 +1,5 @@
 <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-    <form wire:submit.prevent='storeProduct' method="POST">
+    <form wire:submit.prevent='storeProduct' method="POST" enctype="multipart/form-data">
         <div class="px-4 py-6 md:px-6 xl:px-7.5">
             <div class="flex justify-between items-center">
                 <h4 class="text-xl font-bold text-black dark:text-white inline">CHỈNH SỬA - <span class="uppercase font-bold text-sky-400">{{$product_name}}</span></h4>
@@ -309,40 +309,37 @@
 </div>
 
 <script>
-        
-
-    ClassicEditor
-    .create( document.querySelector( '#product_description' ),{
-        ckfinder: {
-            uploadUrl: '{{route('admin.ck-upload-image').'?_token='.csrf_token()}}'
-        },
-        mediaEmbed: {
-            previewsInData: true
-        }
-    } )
-    .then(editor => {
-     
-        editor.model.document.on('change:data', () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        function initCKEditor(){
+            ClassicEditor
+            .create( document.querySelector( '#product_description' ),{
+                ckfinder: {
+                    uploadUrl: '{{route('admin.ck-upload-image').'?_token='.csrf_token()}}'
+                },
+                mediaEmbed: {
+                    previewsInData: true
+                }
+            } )
+            .then(editor => {
             
-            @this.set('product_description', editor.getData());
-        })
-          
-    })
-    .catch( error => {
-        console.error( error );
-    } );
+                editor.model.document.on('change:data', () => {
+                    
+                    @this.set('product_description', editor.getData());
+                })
+                
+            })
+            .catch( error => {
+                console.error( error );
+            } );
+        }
+        // Initialize CKEditor on page load
+        initCKEditor();
 
-    fetch('/livewire/update', {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ data: "your_data" })
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
+        // Reinitialize CKEditor on Livewire updates
+        Livewire.hook('message.processed', (message, component) => {
+            initCKEditor();
+        });
+    });
 
 </script>
 
