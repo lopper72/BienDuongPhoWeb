@@ -15,10 +15,6 @@
                     foreach ($figures as $figure) {
                         $figure->parentNode->removeChild($figure);
                     }
-                    $hrefs = $dom->getElementsByTagName('a');
-                    foreach ($hrefs as $href) {
-                        $href->parentNode->removeChild($href);
-                    }
                     $imgs = $dom->getElementsByTagName('img');
                     foreach ($imgs as $img) {
                         $img->parentNode->removeChild($img);
@@ -28,6 +24,12 @@
                     foreach ($pTags as $p) {
                         $cleanHtml .= $dom->saveHTML($p);
                     }
+                    $cleanHtml = str_replace('<a', '<span', $cleanHtml);
+                    $cleanHtml = str_replace('</a>', '</span>', $cleanHtml);
+                    $cleanHtml = str_replace('<b>', '', $cleanHtml);
+                    $cleanHtml = str_replace('</b>', '', $cleanHtml);
+                    $cleanHtml = str_replace('<strong>', '', $cleanHtml);
+                    $cleanHtml = str_replace('</strong>', '', $cleanHtml);
                 @endphp
                 <div class="col-lg-4 col-md-6 col-12 mb-lg-5 mb-4">
                     <div class="item">
@@ -35,11 +37,7 @@
                         <div class="itemContent">
                             @php
                                 if($cleanHtml != ""){
-                                    $shortenedString = substr($cleanHtml, 0, 330);
-                                    if (strlen($cleanHtml) > 330) {
-                                        $shortenedString .= '...';
-                                    }
-                                    echo $shortenedString;
+                                    echo $cleanHtml;
                                 }
                             @endphp
                         </div>
