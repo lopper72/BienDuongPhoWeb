@@ -29,7 +29,7 @@
            
             setTimeout(function() {
                 myModal.show();
-            }, 2000);
+            }, 5000);
             
             function redirectToLink(url) {
                 var link = document.createElement('a');
