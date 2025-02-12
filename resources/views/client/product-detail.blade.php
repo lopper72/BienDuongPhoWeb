@@ -9,12 +9,17 @@
         <div id="showNoti" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
                     <div class="modal-body">
                         <div class="contentShopee">
                             <p>Mời bạn CLICK vào liên kết bên dưới và <span>MỞ ỨNG DỤNG SHOPEE</span> để xem thêm bài viết!</p>
                             <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="redirectToLink('{{$product->shopper_link}}');" href="javascript:void(0)">{{$product->shopper_link}}</a></p>
                             <div class="imgShopee">
-                                <img src="{{asset('library/images/image-shopee-v2.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
+                                <a onclick="redirectToLink('{{$product->shopper_link}}');" href="javascript:void(0)">
+                                    <img src="{{asset('library/images/image-shopee-v2.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
+                                </a>
                             </div>
                             <h4>BIẾN ĐƯỜNG PHỐ XIN CHÂN THÀNH CẢM ƠN QUÝ ĐỘC GIẢ!</h4>
                         </div>
