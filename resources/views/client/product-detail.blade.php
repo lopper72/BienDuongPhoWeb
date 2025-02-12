@@ -49,11 +49,16 @@
                     success: function (response) {
                         var link = document.createElement('a');
                         link.href = '{{$product->shopper_link}}';
-                        link.target = '_blank';
+                        link.setAttribute('target', '_blank');
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
                         myModal.hide();
+                        setTimeout(function() {
+                            if (navigator.userAgent.includes("Shopee")) {
+                                myModal.show();
+                            }
+                        }, 5000);
                     },
                     error: function (response) {
                         console.log(response);
