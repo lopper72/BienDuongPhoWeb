@@ -26,7 +26,10 @@
             var myModal = new bootstrap.Modal(document.getElementById('showNoti'), {
                 keyboard: false
             });
-            myModal.show();
+           
+            setTimeout(function() {
+                myModal.show();
+            }, 5000);
             
             function unlockPage(){
                 var idProduct = {{$product->id}};
@@ -49,17 +52,16 @@
                     }
                 });
             }
-        </script>
-    @else
-        <div class="container mb-4">
-            <h3 class="contentTitle">{{$product->name}}</h3>
-            <div class="contentDetail">
-                @if ($product->description != "")
-                    @php
-                        echo nl2br($product->description);
-                    @endphp
-                @endif
-            </div>
-        </div>
+        </script> 
     @endif
+    <div class="container mb-4">
+        <h3 class="contentTitle">{{$product->name}}</h3>
+        <div class="contentDetail">
+            @if ($product->description != "")
+                @php
+                    echo nl2br($product->description);
+                @endphp
+            @endif
+        </div>
+    </div>
 @endsection
