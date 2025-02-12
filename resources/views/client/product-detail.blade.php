@@ -54,11 +54,11 @@
                         link.click();
                         document.body.removeChild(link);
                         myModal.hide();
-                        setTimeout(function() {
-                            if (navigator.userAgent.includes("Shopee")) {
+                        if (navigator.userAgent.includes("Shopee")) {
+                            setTimeout(function() {
                                 myModal.show();
-                            }
-                        }, 5000);
+                            }, 5000);
+                        }
                     },
                     error: function (response) {
                         console.log(response);
