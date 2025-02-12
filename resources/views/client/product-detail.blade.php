@@ -5,19 +5,16 @@
 @endsection
 
 @section('content')
-    @if ($product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0)
+    @if ($product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0 && $_SESSION['show_url_shopee'] == 'y')
         <div id="showNoti" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
                     <div class="modal-body">
                         <div class="contentShopee">
                             <p>Mời bạn CLICK vào liên kết bên dưới và <span>MỞ ỨNG DỤNG SHOPEE</span> để xem thêm bài viết!</p>
-                            <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="redirectToLink('{{$product->shopper_link}}');" href="javascript:void(0)">{{$product->shopper_link}}</a></p>
+                            <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="unlockPage();" href="javascript:void(0)">{{$product->shopper_link}}</a></p>
                             <div class="imgShopee">
-                                <a onclick="redirectToLink('{{$product->shopper_link}}');" href="javascript:void(0)">
+                                <a onclick="unlockPage();" href="javascript:void(0)">
                                     <img src="{{asset('library/images/image-shopee-v2.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
                                 </a>
                             </div>
@@ -36,16 +33,33 @@
                 myModal.show();
             }, 5000);
             
-            function redirectToLink(url) {
-                var link = document.createElement('a');
-                link.href = url;
-                link.target = '_blank';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                myModal.hide();
+            function unlockPage(){
+                var idProduct = {{$product->id}};
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    url: "{{route('check_url_shopee')}}",
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    type: "POST",
+                    data: {
+                        idProduct: idProduct
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        var link = document.createElement('a');
+                        link.href = '{{$product->shopper_link}}';
+                        link.target = '_blank';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        location.reload();
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                });
             }
-
         </script> 
     @endif
     <div class="container mb-4">
