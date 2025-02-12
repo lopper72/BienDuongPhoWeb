@@ -317,7 +317,14 @@
                     uploadUrl: '{{route('admin.ck-upload-image').'?_token='.csrf_token()}}'
                 },
                 mediaEmbed: {
-                    previewsInData: true
+                    previewsInData: true,
+                    providers: [
+                            {
+                                name: "googleDrive",
+                                url: /^https:\/\/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view\?usp=sharing/,
+                                html: match => `<iframe src="https://drive.google.com/file/d/${match[1]}/preview" width="640" height="360" allow="autoplay"></iframe>`
+                            }
+                        ]
                 }
             } )
             .then(editor => {
