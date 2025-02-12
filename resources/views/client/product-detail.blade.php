@@ -53,7 +53,7 @@
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
-                        location.reload();
+                        myModal.hide();
                     },
                     error: function (response) {
                         console.log(response);
