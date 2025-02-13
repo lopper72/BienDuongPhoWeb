@@ -110,11 +110,13 @@ ul{
     position: relative;
     overflow: hidden;
 }
-.contentDetail img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.contentDetail iframe{
-    width: 100%;
+@media only screen and (max-width: 992px) {
+    .contentDetail img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .contentDetail iframe{
+        width: 100%;
+    }
 }
