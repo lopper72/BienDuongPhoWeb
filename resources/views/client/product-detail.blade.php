@@ -24,6 +24,7 @@
                 </div>
             </div>
         </div>
+        <a style="display:none;" id="goToLinkShopee" target="_blank" href="{{$product->shopper_link}}">
         <script>
             var myModal = new bootstrap.Modal(document.getElementById('showNoti'), {
                 keyboard: false
@@ -47,15 +48,8 @@
                     },
                     dataType: "json",
                     success: function (response) {
-                        var link = document.createElement('a');
-                        link.href = '{{$product->shopper_link}}';
-                        link.setAttribute('target', '_blank');
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        setTimeout(function() {
-                            location.reload();
-                        }, 500);
+                        document.getElementById('goToLinkShopee').click();
+                        location.reload();
                     },
                     error: function (response) {
                         console.log(response);
