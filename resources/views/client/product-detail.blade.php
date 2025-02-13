@@ -12,9 +12,9 @@
                     <div class="modal-body">
                         <div class="contentShopee">
                             <p>Mời bạn CLICK vào liên kết bên dưới và <span>MỞ ỨNG DỤNG SHOPEE</span> để xem thêm bài viết!</p>
-                            <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="unlockPage();" href="javascript:void(0)">{{$product->shopper_link}}</a></p>
+                            <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="unlockPage();" target="_blank" href="{{$product->shopper_link}}">{{$product->shopper_link}}</a></p>
                             <div class="imgShopee">
-                                <a onclick="unlockPage();" href="javascript:void(0)">
+                                <a onclick="unlockPage();" target="_blank" href="{{$product->shopper_link}}">
                                     <img src="{{asset('library/images/image-shopee.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
                                 </a>
                             </div>
@@ -24,7 +24,6 @@
                 </div>
             </div>
         </div>
-        <a style="display:none;" id="goToLinkShopee" target="_blank" href="{{$product->shopper_link}}">
         <script>
             var myModal = new bootstrap.Modal(document.getElementById('showNoti'), {
                 keyboard: false
@@ -48,8 +47,7 @@
                     },
                     dataType: "json",
                     success: function (response) {
-                        document.getElementById('goToLinkShopee').click();
-                        location.reload();
+                        myModal.hide();
                     },
                     error: function (response) {
                         console.log(response);
