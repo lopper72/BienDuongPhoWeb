@@ -15,7 +15,7 @@
                             <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="unlockPage();" href="javascript:void(0)">{{$product->shopper_link}}</a></p>
                             <div class="imgShopee">
                                 <a onclick="unlockPage();" href="javascript:void(0)">
-                                    <img src="{{asset('library/images/image-shopee-v2.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
+                                    <img src="{{asset('library/images/image-shopee.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
                                 </a>
                             </div>
                             <h4>BIẾN ĐƯỜNG PHỐ XIN CHÂN THÀNH CẢM ƠN QUÝ ĐỘC GIẢ!</h4>
@@ -24,6 +24,7 @@
                 </div>
             </div>
         </div>
+        <a style="display:none;" id="goToLinkShopee" target="_blank" href="{{$product->shopper_link}}">
         <script>
             var myModal = new bootstrap.Modal(document.getElementById('showNoti'), {
                 keyboard: false
@@ -47,13 +48,8 @@
                     },
                     dataType: "json",
                     success: function (response) {
-                        var link = document.createElement('a');
-                        link.href = '{{$product->shopper_link}}';
-                        link.setAttribute('target', '_blank');
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        myModal.hide();
+                        document.getElementById('goToLinkShopee').click();
+                        location.reload();
                     },
                     error: function (response) {
                         console.log(response);
