@@ -12,13 +12,18 @@ class ProductController extends Controller
     {
         session_start();
         $product = Product::where('slug', '=', $slug)->first();
+        
         if(isset($_SESSION['product_id']) && in_array($product->id,$_SESSION['product_id'])){
             $_SESSION['show_url_shopee'] = 'n';
         }else{
             $_SESSION['show_url_shopee'] = 'y';
         }
+        $description = $product->description;
+        preg_match('/<img [^>]*src="([^"]+)"/', $description, $matches);
+        $imageUrl = isset($matches[1]) ? $matches[1] : '';
         return view('client.product-detail', [
-            'product' => $product
+            'product' => $product,
+            'imageUrl' => $imageUrl
         ]);
     }
 

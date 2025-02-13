@@ -15,7 +15,7 @@
                             <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="unlockPage();" href="javascript:void(0)">{{$product->shopper_link}}</a></p>
                             <div class="imgShopee">
                                 <a onclick="unlockPage();" href="javascript:void(0)">
-                                    <img src="{{asset('library/images/image-shopee-v2.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
+                                    <img src="{{asset('library/images/image-shopee.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
                                 </a>
                             </div>
                             <h4>BIẾN ĐƯỜNG PHỐ XIN CHÂN THÀNH CẢM ƠN QUÝ ĐỘC GIẢ!</h4>
@@ -53,7 +53,9 @@
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
-                        myModal.hide();
+                        setTimeout(function() {
+                            location.reload();
+                        }, 500);
                     },
                     error: function (response) {
                         console.log(response);

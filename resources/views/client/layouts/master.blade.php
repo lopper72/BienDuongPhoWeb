@@ -16,6 +16,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
+        @if (isset($imageUrl))
+            <meta property="og:title" content="{{$product->name}}" />
+            <meta property="og:image" content="<?php if($imageUrl != ""){ echo htmlspecialchars($imageUrl);} ?>" />
+            <meta property="og:url" content="{{route('blog',$product->slug);}}" />
+            <meta property="og:type" content="website" />
+            <meta property="og:site_name" content="Biến Đường Phố" />
+        @endif
+        
 		@livewireStyles
 	</head>
 	<body>
