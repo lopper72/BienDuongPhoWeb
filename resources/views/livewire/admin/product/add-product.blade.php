@@ -213,6 +213,17 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-span-1 sm:col-span-2 md:col-span-8">
+                                    <label for="product_description2" class="block text-sm font-medium leading-6 text-gray-900">Chi tiết Bài Đăng</label>
+                                    <div class="mt-2">
+                                        <div wire:ignore>
+                                            <textarea wire:model="product_description2"
+                                                      class="min-h-fit h-48"
+                                                      name="product_description2"
+                                                      id="product_description2">{{$product_description2}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         {{-- <div class="col-span-1 sm:col-span-2 md:col-span-3 bg-slate-200 overflow-y-scroll" style="height: 1000px" >
@@ -318,44 +329,68 @@
 </div>
 
 <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            function initCKEditor(){
-                ClassicEditor
-                .create( document.querySelector( '#product_description' ),{
-                    ckfinder: {
-                        uploadUrl: '{{route('admin.ck-upload-image').'?_token='.csrf_token()}}'
-                    },
-                    mediaEmbed: {
-                        previewsInData: true,
-                        providers: [
-                            {
-                                name: "googleDrive",
-                                url: /^https:\/\/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view\?usp=sharing/,
-                                html: match => `<iframe src="https://drive.google.com/file/d/${match[1]}/preview" width="640" height="360" allow="autoplay"></iframe>`
-                            }
-                        ]
-                    }
-                } )
-                .then(editor => {
-                
-                    editor.model.document.on('change:data', () => {
-                        
-                        @this.set('product_description', editor.getData());
-                    })
-                    
-                })
-                .catch( error => {
-                    console.error( error );
-                } );
-            }
-            // Initialize CKEditor on page load
-            initCKEditor();
-
-            // Reinitialize CKEditor on Livewire updates
-            Livewire.hook('message.processed', (message, component) => {
-                initCKEditor();
+    document.addEventListener('DOMContentLoaded', function () {
+        function initCKEditor(){
+            // Initialize CKEditor for product_description
+            ClassicEditor
+            .create( document.querySelector( '#product_description' ),{
+                ckfinder: {
+                    uploadUrl: '{{route('admin.ck-upload-image').'?_token='.csrf_token()}}'
+                },
+                mediaEmbed: {
+                    previewsInData: true,
+                    providers: [
+                        {
+                            name: "googleDrive",
+                            url: /^https:\/\/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view\?usp=sharing/,
+                            html: match => `<iframe src="https://drive.google.com/file/d/${match[1]}/preview" width="640" height="360" allow="autoplay"></iframe>`
+                        }
+                    ]
+                }
+            })
+            .then(editor => {
+                editor.model.document.on('change:data', () => {
+                    @this.set('product_description', editor.getData());
+                });
+            })
+            .catch( error => {
+                console.error( error );
             });
-        });
 
+            // Initialize CKEditor for product_description2
+            ClassicEditor
+            .create( document.querySelector( '#product_description2' ),{
+                ckfinder: {
+                    uploadUrl: '{{route('admin.ck-upload-image').'?_token='.csrf_token()}}'
+                },
+                mediaEmbed: {
+                    previewsInData: true,
+                    providers: [
+                        {
+                            name: "googleDrive",
+                            url: /^https:\/\/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view\?usp=sharing/,
+                            html: match => `<iframe src="https://drive.google.com/file/d/${match[1]}/preview" width="640" height="360" allow="autoplay"></iframe>`
+                        }
+                    ]
+                }
+            })
+            .then(editor => {
+                editor.model.document.on('change:data', () => {
+                    @this.set('product_description2', editor.getData());
+                });
+            })
+            .catch( error => {
+                console.error( error );
+            });
+        }
+
+        // Initialize CKEditor on page load
+        initCKEditor();
+
+        // Reinitialize CKEditor on Livewire updates
+        Livewire.hook('message.processed', (message, component) => {
+            initCKEditor();
+        });
+    });
 </script>
 

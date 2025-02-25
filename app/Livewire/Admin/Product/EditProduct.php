@@ -50,6 +50,7 @@ class EditProduct extends Component
     public $videos = [];
     public $existedVideo;
     public $existingVideos = [];
+    public $product_description2;
 
     public function updatedVideos()
     {
@@ -73,6 +74,7 @@ class EditProduct extends Component
         //$this->product_retail_price = $product->retail_price;
         //$this->product_wholesale_price = $product->wholesale_price;
         $this->product_description = $product->description;
+        $this->product_description2 = $product->description2;
         //$this->product_uom = $product->uom;
         $this->is_active = $product->is_active;
         $this->is_full = $product->is_full;
@@ -263,6 +265,7 @@ class EditProduct extends Component
         //$product->retail_price = $this->product_retail_price;
         //$product->wholesale_price = $this->product_wholesale_price;
         $product->description = $this->product_description;
+        $product->description2 = $this->product_description2;
         $product->slug = Str::of($this->product_name)->slug('-');
         //$product->uom = $this->product_uom;
         $product->is_active = $this->is_active;
@@ -436,6 +439,7 @@ class EditProduct extends Component
             'product_detail_list' => $this->product_detail_list,
             'product_detail_image_list' => $this->product_detail_image_list,
             'product_description' => $this->product_description,
+            'product_description2' => $this->product_description2,
             'existingVideos' => $this->existingVideos, // Pass existing videos to the view
         ]);
     }

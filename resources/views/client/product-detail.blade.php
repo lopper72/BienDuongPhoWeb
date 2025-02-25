@@ -14,8 +14,8 @@
                             <p>Mời bạn CLICK vào liên kết bên dưới và <span>MỞ ỨNG DỤNG SHOPEE</span> để xem thêm bài viết!</p>
                             <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="unlockPage();" target="_blank" href="{{$product->shopper_link}}">{{$product->shopper_link}}</a></p>
                             <div class="imgShopee">
-                                <a onclick="unlockPage();" target="_blank" href="{{$product->shopper_link}}">
-                                    <img src="{{asset('library/images/image-shopee.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100">
+                                <a onclick="unlockPage();" class="object-fit-cover w-100 h-100 custom-height" target="_blank" href="{{$product->shopper_link}}">
+                                    <img src="{{asset('library/images/image-shopee.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100 custom-height">
                                 </a>
                             </div>
                             <h4>BIẾN ĐƯỜNG PHỐ XIN CHÂN THÀNH CẢM ƠN QUÝ ĐỘC GIẢ!</h4>
@@ -59,6 +59,14 @@
     <div class="container mb-4">
         <h3 class="contentTitle">{{$product->name}}</h3>
         <div class="contentDetail">
+            
+            
+            @if ($product->description != "")
+                @php
+                    echo nl2br($product->description);
+                @endphp
+            @endif
+
             {{-- Display existing videos --}}
             @if (!empty($existingVideos))
                
@@ -73,10 +81,10 @@
                     @endforeach
                 </div>
             @endif
-            
-            @if ($product->description != "")
+
+            @if ($product->description2 != "")
                 @php
-                    echo nl2br($product->description);
+                    echo nl2br($product->description2);
                 @endphp
             @endif
 
@@ -87,6 +95,9 @@
 @endsection
 
 <style>
+    .custom-height {
+    height: 100% !important;
+}
 .video-container {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
@@ -100,5 +111,10 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
+.imgShopee {
+    display: flex; /* or display: grid; */
+    align-items: stretch; /* Ensures children stretch to fill the height */
+    height: 300px; /* Set a specific height */
 }
 </style>

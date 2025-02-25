@@ -47,6 +47,7 @@ class AddProduct extends Component
     public $videos = [];
     public $existedVideo;
     public $isLoading = false;
+    public $product_description2;
 
     public function updatedVideos()
     {
@@ -196,6 +197,7 @@ class AddProduct extends Component
         $product->retail_price = $this->product_retail_price;
         $product->wholesale_price = $this->product_wholesale_price;
         $product->description = $this->product_description;
+        $product->description2 = $this->product_description2;
         $product->slug = Str::of($this->product_name)->slug('-');
         $product->uom = $this->product_uom;
         $product->is_active =  $this->is_active;
