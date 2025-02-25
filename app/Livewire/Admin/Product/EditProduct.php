@@ -235,8 +235,9 @@ class EditProduct extends Component
 
 
         // Add existing videos to the video_names array
-        if (!empty($existingVideos)) {
-            $video_names = array_merge($video_names, $existingVideos);
+       
+        if (!empty($this->existingVideos)) {
+            $video_names = array_merge($video_names, $this->existingVideos);
         }
 
         // Process new uploaded videos
@@ -283,6 +284,7 @@ class EditProduct extends Component
         $product->brand_ids = $keys;
         
         // Store all video names as a JSON string in the database
+
         if (!empty($video_names)) {
             $product->image = json_encode($video_names); // Store as JSON
         }else{
