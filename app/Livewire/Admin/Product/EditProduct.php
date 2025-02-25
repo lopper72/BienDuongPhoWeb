@@ -47,13 +47,14 @@ class EditProduct extends Component
     public $selected_categories = [];
     public $selected_brands = [];
     public $keys = [];
-    public $photo;
-    public $existedPhoto;
+    public $videos = [];
+    public $existedVideo;
+    public $existingVideos = [];
 
-    public function updatedPhoto()
+    public function updatedVideos()
     {
         $this->validate([
-            'photo' => 'image|max:10240',
+            'videos.*' => 'required|mimes:mp4,mov,avi,wmv|max:102400', // Giới hạn 100MB cho mỗi video
         ]);
     }
     
@@ -93,9 +94,12 @@ class EditProduct extends Component
         if ( $this->product_detail_list_brand == ""){
             $this->product_detail_list_brand = [];
         }
-        if($product->image){
-            $this->existedPhoto = "images/products/" . $product->image;
+        if($product->image) {
+            $this->existedVideo =  $product->image;
         }
+        
+        // Cập nhật danh sách video hiện có
+        $this->existingVideos = $this->getExistingVideos();
 
         if(is_null($this->is_active)){
             $this->is_active = '1';
@@ -226,19 +230,29 @@ class EditProduct extends Component
         //     ]);
         // }
 
-        // if ($this->photo) {
-        //     $this->validate([
-        //         'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        //     ], [
-        //         'photo.image' => 'File không phải là ảnh',
-        //         'photo.mimes' => 'Ảnh không đúng định dạng',
-        //         'photo.max' => 'Ảnh không được lớn hơn 2MB'
-        //     ]);
-        //     Storage::delete('public\\' . $this->existedPhoto);
-        //     $photo_name = time() . uniqid() . '.' . $this->photo->extension();
-        //     ImageOptimizer::optimize($this->photo->path());
-        //     $this->photo->storeAs(path: "public\images\products", name: $photo_name);
-        // }
+        // Initialize an array to hold video names
+        $video_names = [];
+
+
+        // Add existing videos to the video_names array
+        if (!empty($existingVideos)) {
+            $video_names = array_merge($video_names, $existingVideos);
+        }
+
+        // Process new uploaded videos
+        if ($this->videos) {
+            foreach ($this->videos as $video) {
+                $this->validate([
+                    'videos.*' => 'mimes:mp4,mov,avi,wmv|max:1024000'
+                ], [
+                    'videos.*.mimes' => 'Video không đúng định dạng',
+                    'videos.*.max' => 'Video không được lớn hơn 100MB'
+                ]);
+                $video_name = time() . uniqid() . '.' . $video->extension();
+                $video->storeAs(path: "public/videos/products", name: $video_name);
+                $video_names[] = $video_name; // Add video name to the array
+            }
+        }
 
         $product = Product::find($this->id);
         $product->code = $this->product_code;
@@ -268,8 +282,11 @@ class EditProduct extends Component
         $keys = json_encode(array_values($this->selected_brands));
         $product->brand_ids = $keys;
         
-        if ($this->photo) {
-            $product->image = $photo_name;
+        // Store all video names as a JSON string in the database
+        if (!empty($video_names)) {
+            $product->image = json_encode($video_names); // Store as JSON
+        }else{
+            $product->image = null;
         }
 
         $product->save();
@@ -376,11 +393,20 @@ class EditProduct extends Component
         }
     }
 
+    // Add a method to retrieve existing videos
+    public function getExistingVideos()
+    {
+        if ($this->existedVideo) {
+            return json_decode($this->existedVideo, true) ?: []; // Decode JSON to array or return empty array
+        }
+        return []; // Ensure it returns an empty array if no videos exist
+    }
+
     public function render()
     {
         $this->initinalRender();
 
-        
+
         $product_details = null;
         
         if($this->product_detail_number == 0){
@@ -402,6 +428,29 @@ class EditProduct extends Component
             // }
             // $this->product_detail_title[$this->product_detail_number-1] = "Chương ".$count;
         }
-        return view('livewire.admin.product.edit-product', ['brands' => $this->brands, 'categories' => $this->categories, 'product_detail_list' => $this->product_detail_list, 'product_detail_image_list' => $this->product_detail_image_list, 'product_description' => $this->product_description]);
+        return view('livewire.admin.product.edit-product', [
+            'brands' => $this->brands,
+            'categories' => $this->categories,
+            'product_detail_list' => $this->product_detail_list,
+            'product_detail_image_list' => $this->product_detail_image_list,
+            'product_description' => $this->product_description,
+            'existingVideos' => $this->existingVideos, // Pass existing videos to the view
+        ]);
     }
+
+    public function removeVideo($index)
+    {
+        // Xóa video khỏi mảng videos
+        unset($this->videos[$index]);
+        $this->videos = array_values($this->videos); // Đảm bảo mảng không có khoảng trống
+
+        // Cập nhật danh sách video hiện có
+    }
+    public function removeVideoExit($index)
+    {
+       
+        unset($this->existingVideos[$index]);
+
+    }
+    
 }

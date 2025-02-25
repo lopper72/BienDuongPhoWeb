@@ -59,11 +59,46 @@
     <div class="container mb-4">
         <h3 class="contentTitle">{{$product->name}}</h3>
         <div class="contentDetail">
+            {{-- Display existing videos --}}
+            @if (!empty($existingVideos))
+               
+                <div class="video-gallery">
+                    @foreach ($existingVideos as $video)
+                        <div class="video-container mb-4">
+                            <video controls class="rounded-lg shadow-md w-full" >
+                                <source src="{{ asset('storage/videos/products/' . $video) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+            
             @if ($product->description != "")
                 @php
                     echo nl2br($product->description);
                 @endphp
             @endif
+
+            
+            
         </div>
     </div>
 @endsection
+
+<style>
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>

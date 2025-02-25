@@ -18,12 +18,16 @@ class ProductController extends Controller
         }else{
             $_SESSION['show_url_shopee'] = 'y';
         }
+        // Retrieve existing videos
+        $existingVideos = json_decode($product->image, true) ?: []; // Decode JSON to array or return empty array
+
         $description = $product->description;
         preg_match('/<img [^>]*src="([^"]+)"/', $description, $matches);
         $imageUrl = isset($matches[1]) ? $matches[1] : '';
         return view('client.product-detail', [
             'product' => $product,
-            'imageUrl' => $imageUrl
+            'imageUrl' => $imageUrl,
+            'existingVideos' => $existingVideos // Pass existing videos to the view
         ]);
     }
 

@@ -30,7 +30,7 @@
                         </svg>
                     </th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-12 text-center">STT</th>
-                    <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-20 text-center"></th>
+                    {{-- <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-20 text-center"></th> --}}
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-36 text-center">Mã Bài Đăng</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Tên Bài Đăng</th>
                     {{-- <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-32 text-right">Giá lẽ (VND)</th>
@@ -53,7 +53,7 @@
                             <input type="checkbox" name="cbx_delete_product" {{$product->hasOrder() || $product->hasImport() ? 'disabled' : ''}} class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:model="selected_index.{{$index}}" value="{{$product->id}}">
                         </td>
                         <td class="px-2 py-2 whitespace-nowrap text-center">{{ $products->perPage() * ($products->currentPage() - 1) + $loop->iteration }}</td>
-                        <td class="px-2 py-2 whitespace-nowrap text-center">
+                        {{-- <td class="px-2 py-2 whitespace-nowrap text-center">
                             <div class="flex justify-center">
                                 @if ($product->image)
                                     <img src="{{ asset('storage/images/products/' . $product->image) }}" alt="Ảnh đại diện" class="w-15 h-15 shadow-md">
@@ -61,7 +61,7 @@
                                     <img src="{{ asset('library/images/image-not-found.jpg') }}" alt="Ảnh đại diện" class="w-15 h-15 shadow-md">
                                 @endif
                             </div>
-                        </td>
+                        </td> --}}
                         <td class="px-2 py-2 whitespace-nowrap text-center">{{$product->code}}</td>
                         <td class="px-2 py-2">{{$product->name}}</td>
                         {{-- <td class="px-2 py-2 whitespace-nowrap text-right">{{number_format($product->retail_price, 0, ',', '.')}}</td>

@@ -44,8 +44,17 @@ class AddProduct extends Component
     public $selected_categories = [];
     public $selected_brands = [];
     public $keys = [];
-    public $photo;
-    public $existedPhoto;
+    public $videos = [];
+    public $existedVideo;
+    public $isLoading = false;
+
+    public function updatedVideos()
+    {
+        $this->validate([
+            'videos.*' => 'required|mimes:mp4,mov,avi,wmv|max:102400', // Giới hạn 100MB cho mỗi video
+        ]);
+    }
+    
 
     public function mount($brands, $categories)
     {
@@ -161,31 +170,22 @@ class AddProduct extends Component
             //'product_uom.required' => 'Đơn vị tính là bắt buộc.'
         ]);
 
-        // for($i = 0; $i < $this->product_detail_number; $i++){
-        //     $this->validate([
-        //         'product_detail_title.'.$i => 'required',
-        //         'product_detail_order.'.$i => 'required',
-        //         'product_detail_order.*' => 'distinct',
-        //     ], [
-        //         'product_detail_title.'.$i.'.required' => 'Tiêu đề là bắt buộc.',
-        //         'product_detail_order.'.$i.'.required' => 'Thứ tự là bắt buộc.',
-        //         'product_detail_order.*.distinct' => 'Các Chương Trong Bài Đăng không được trùng nhau!',
-        //     ]);
-        // }
-        // if ($this->photo) {
-        //     $this->validate([
-        //         'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        //     ], [
-        //         'photo.image' => 'File không phải là ảnh',
-        //         'photo.mimes' => 'Ảnh không đúng định dạng',
-        //         'photo.max' => 'Ảnh không được lớn hơn 2MB'
-        //     ]);
-        //     Storage::delete('public\\' . $this->existedPhoto);
-        //     $photo_name = time() . uniqid() . '.' . $this->photo->extension();
-        //     ImageOptimizer::optimize($this->photo->path());
-        //     $this->photo->storeAs(path: "public\images\products", name: $photo_name);
-        // }
-      
+        // Initialize an array to hold video names
+        $video_names = [];
+
+        if ($this->videos) {
+            foreach ($this->videos as $video) {
+                $this->validate([
+                    'videos.*' => 'mimes:mp4,mov,avi,wmv|max:1024000'
+                ], [
+                    'videos.*.mimes' => 'Video không đúng định dạng',
+                    'videos.*.max' => 'Video không được lớn hơn 100MB'
+                ]);
+                $video_name = time() . uniqid() . '.' . $video->extension();
+                $video->storeAs(path: "public/videos/products", name: $video_name);
+                $video_names[] = $video_name; // Add video name to the array
+            }
+        }
         
 
         $product = new Product();
@@ -213,8 +213,8 @@ class AddProduct extends Component
         $keys = json_encode(array_values($this->selected_brands));
         $product->brand_ids = $keys;
       
-        if ($this->photo) {
-            $product->image = $photo_name;
+        if (!empty($video_names)) {
+            $product->image = json_encode($video_names); // Store as JSON
         }
 
         $product->save();
@@ -269,12 +269,7 @@ class AddProduct extends Component
     //     $this->dispatch('reloadjs');
     // }
 
-    public function updatedPhoto()
-    {
-        $this->validate([
-            'photo' => 'image|max:10240',
-        ]);
-    }
+
     
     public function initinalRender(){
         
@@ -316,5 +311,14 @@ class AddProduct extends Component
         $this->generateProductCode();
         $this->initinalRender();
         return view('livewire.admin.product.add-product', ['brands' => $this->brands, 'categories' => $this->categories, 'product_detail_list' => $this->product_detail_list, 'product_detail_image_list' => $this->product_detail_image_list]);
+    }
+
+    public function removeVideo($index)
+    {
+        unset($this->videos[$index]);
+        $this->videos = array_values($this->videos); // Re-index the array
+        
+        // Update existingVideos after removing a video
+        $this->existingVideos = $this->videos; // Assuming existingVideos is a property in the class
     }
 }

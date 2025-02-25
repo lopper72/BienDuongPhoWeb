@@ -92,30 +92,46 @@
                                         <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                     @enderror
                                 </div> --}}
-                                <div class="col-span-1 sm:col-span-3" style="display:none">
-                                    <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Logo</label>
+                                <style>
+                                    .spinner {
+                                        border: 4px solid rgba(0, 0, 0, 0.1);
+                                        width: 36px;
+                                        height: 36px;
+                                        border-radius: 50%;
+                                        border-left-color: #09f;
+                                        animation: spin 1s linear infinite;
+                                    }
+                                
+                                    @keyframes spin {
+                                        to { transform: rotate(360deg); }
+                                    }
+                                </style>
+                                <div class="col-span-1 sm:col-span-8">
+                                    <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Video</label>
                                     <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                                         <div class="text-center mx-auto inline">
-                                            @if ($photo || $existedPhoto)
-                                                @if ($photo)
-                                                    <img src="{{ $photo->temporaryUrl() }}" alt="Photo Preview" class="rounded-lg shadow-md w-48 h-64">
-                                                @else
-                                                    <img src="{{ asset('storage/' . $existedPhoto) }}" alt="Photo Preview" class="rounded-lg shadow-md w-48 h-64">
-                                                @endif
-                                            @endif
-                                            @if (!$photo)
-                                                <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-                                                </svg>
-                                            @endif
+                                            <!-- Hiển Thị Loading Khi Upload -->
+                                            <div wire:loading wire:target="videos">
+                                                <div class="spinner"></div>
+                                                <p>Đang tải lên, vui lòng chờ...</p>
+                                            </div>
+                                            @foreach ($videos as $index => $video)
+                                                <div class="flex items-center">
+                                                    <video controls class="rounded-lg shadow-md h-80" wire:loading.remove>
+                                                        <source src="{{ $video->temporaryUrl() }}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                    <button type="button" wire:click="removeVideo({{ $index }})" class="ml-2 text-red-600">Xóa</button>
+                                                </div>
+                                            @endforeach
                                             <div class="mt-4 text-sm leading-6 text-gray-600">
                                                 <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                                                    Tải hình ảnh lên</span>
-                                                    <input id="file-upload" name="file-upload" wire:model="photo" type="file" class="sr-only">
+                                                    Tải Video lên
+                                                    <input id="file-upload" name="file-upload" wire:model="videos" type="file" multiple class="sr-only">
                                                 </label>
                                             </div>
-                                            <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF nhỏ hơn hoặc bằng 2MB 125x180</p>
-                                            @error('photo')
+                                            <p class="text-xs leading-5 text-gray-600">Chỉ cho phép định dạng MP4,MOV,AVI,WMV</p>
+                                            @error('videos.*')
                                                 <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                                             @enderror
                                         </div>
