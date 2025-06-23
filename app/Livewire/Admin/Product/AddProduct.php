@@ -48,6 +48,7 @@ class AddProduct extends Component
     public $existedVideo;
     public $isLoading = false;
     public $product_description2;
+    public $tiktok_link = '';
 
     public function updatedVideos()
     {
@@ -206,7 +207,7 @@ class AddProduct extends Component
         $product->source = $this->product_source;
         $product->author = $this->product_author;
         $product->shopper_link = $this->shopper_link;
-       
+        $product->tiktok_link = $this->tiktok_link; 
 
         $keys = json_encode(array_values($this->selected_brands));
        

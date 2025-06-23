@@ -51,6 +51,7 @@ class EditProduct extends Component
     public $existedVideo;
     public $existingVideos = [];
     public $product_description2;
+    public $tiktok_link = '';
 
     public function updatedVideos()
     {
@@ -81,7 +82,7 @@ class EditProduct extends Component
         $this->product_source = $product->source;
         $this->product_author = $product->author;
         $this->shopper_link = $product->shopper_link;
-
+        $this->tiktok_link = $product->tiktok_link;
         $this->selected_brands = json_decode($product->brand_ids);
         $this->selected_categories =  json_decode($product->category_ids);
 
@@ -273,7 +274,7 @@ class EditProduct extends Component
         $product->source = $this->product_source;
         $product->author = $this->product_author;
         $product->shopper_link = $this->shopper_link;
-       
+        $product->tiktok_link = $this->tiktok_link;     
         if (is_null($this->selected_categories)) {
             $this->selected_categories = [];
         }

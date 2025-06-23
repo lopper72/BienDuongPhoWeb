@@ -8,17 +8,32 @@
     @if ($product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0 && $_SESSION['show_url_shopee'] == 'y')
         <div id="showNoti" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" id="myModalContent" style="position: relative;">
+                    <a 
+                        onclick="unlockPage()" 
+                        style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; color: #ff3333; font-size: 32px; cursor: pointer; z-index: 10;"
+                        title="Unlock and Go to Shopee"
+                        href="{{$product->shopper_link}}"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
                     <div class="modal-body">
                         <div class="contentShopee">
-                            <p>Mời bạn CLICK vào liên kết bên dưới và <span>MỞ ỨNG DỤNG SHOPEE</span> để xem thêm bài viết!</p>
-                            <p><i class="fa-solid fa-hand-point-right"></i> <a onclick="unlockPage();" target="_blank" href="{{$product->shopper_link}}">{{$product->shopper_link}}</a></p>
+                            {{-- <p>Mời bạn CLICK vào liên kết bên dưới và <span>MỞ ỨNG DỤNG SHOPEE</span> để xem thêm bài viết!</p>
+                            <p><i class="fa-solid fa-hand-point-right"></i> 
+                                <a onclick="unlockPage();" target="_blank" href="{{$product->shopper_link}}">{{$product->shopper_link}}</a>
+                            </p> --}}
                             <div class="imgShopee">
                                 <a onclick="unlockPage();" class="object-fit-cover w-100 h-100 custom-height" target="_blank" href="{{$product->shopper_link}}">
                                     <img src="{{asset('library/images/image-shopee.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100 custom-height">
                                 </a>
                             </div>
-                            <h4>BIẾN ĐƯỜNG PHỐ XIN CHÂN THÀNH CẢM ƠN QUÝ ĐỘC GIẢ!</h4>
+                            <h4 
+                                style="cursor: pointer; background: #ff3333; color: #fff; padding: 12px 0; border-radius: 6px; text-align: center; margin-top: 16px;"
+                                onclick="closeAndRedirectTikTok()"
+                            >
+                                XEM VÀ QUAY LẠI ĐỌC BÀI!
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -53,6 +68,27 @@
                         console.log(response);
                     }
                 });
+            }
+            
+
+            function closeAndRedirectShopee() {
+                unlockPage();
+                //window.open("{{$product->shopper_link}}", "_blank");
+            }
+
+            function closeAndRedirectTikTok() {
+                var tiktokLink = "{{$product->tiktok_link}}";
+                var shopeeLink = "{{$product->shopper_link}}";
+                setTimeout(function() {
+                    if (tiktokLink && tiktokLink.trim() !== "") {
+                        unlockPage();
+                        window.open(tiktokLink, "_blank");
+                    } else {
+                        unlockPage();
+                        window.open(shopeeLink, "_blank");
+                        
+                    }
+                }, 1000);
             }
         </script> 
     @endif
