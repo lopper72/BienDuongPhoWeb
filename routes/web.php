@@ -150,6 +150,8 @@ Route::get('/admin/setup', Setup::class)->middleware([CheckSetup::class])->name(
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/{slug}', [ClientProductController::class, 'blog'])->name('blog');
 Route::post('/check-url-shopee', [ClientProductController::class, 'checkUrlShopee'])->name('check_url_shopee');
+Route::post('/check-url-tiktok', [ClientProductController::class, 'checkUrlTiktok'])->name('check_url_tiktok');
+
 
 
 

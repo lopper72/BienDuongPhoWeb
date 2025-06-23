@@ -8,16 +8,30 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    private function setShowUrlShopee($productId) {
+        if (isset($_SESSION['product_id_shopee']) && in_array($productId, $_SESSION['product_id_shopee'])) {
+            $_SESSION['show_url_shopee'] = 'n';
+        } else {
+            $_SESSION['show_url_shopee'] = 'y';
+        }
+    }
+
+    private function setShowUrlTiktok($productId) {
+        if (isset($_SESSION['product_id_tiktok']) && in_array($productId, $_SESSION['product_id_tiktok'])) {
+            $_SESSION['show_url_tiktok'] = 'n';
+        } else {
+            $_SESSION['show_url_tiktok'] = 'y';
+        }
+    }
+
     public function blog($slug)
     {
         session_start();
         $product = Product::where('slug', '=', $slug)->first();
         
-        if(isset($_SESSION['product_id']) && in_array($product->id,$_SESSION['product_id'])){
-            $_SESSION['show_url_shopee'] = 'n';
-        }else{
-            $_SESSION['show_url_shopee'] = 'y';
-        }
+        $this->setShowUrlShopee($product->id);
+        $this->setShowUrlTiktok($product->id);
+
         // Retrieve existing videos
         $existingVideos = json_decode($product->image, true) ?: []; // Decode JSON to array or return empty array
 
@@ -33,14 +47,27 @@ class ProductController extends Controller
 
     public function checkUrlShopee(){
         session_start();
-        if (!isset($_SESSION['product_id'])) {
-            $_SESSION['product_id'][] = $_POST['idProduct'];
+        if (!isset($_SESSION['product_id_shopee'])) {
+            $_SESSION['product_id_shopee'][] = $_POST['idProductShopee'];
         }else {
-            if (!in_array($_POST['idProduct'],$_SESSION['product_id'])) {
-                $_SESSION['product_id'][] = $_POST['idProduct'];
+            if (!in_array($_POST['idProductShopee'],$_SESSION['product_id_shopee'])) {
+                $_SESSION['product_id_shopee'][] = $_POST['idProductShopee'];
             }
         }
         $_SESSION['show_url_shopee'] = 'n';
+        return response()->json(['message' => 'completed']);
+    }
+
+    public function checkUrlTiktok(){
+        session_start();
+        if (!isset($_SESSION['product_id_tiktok'])) {
+            $_SESSION['product_id_tiktok'][] = $_POST['idProductTikTok'];
+        }else {
+            if (!in_array($_POST['idProductTikTok'],$_SESSION['product_id_tiktok'])) {
+                $_SESSION['product_id_tiktok'][] = $_POST['idProductTikTok'];
+            }
+        }
+        $_SESSION['show_url_tiktok'] = 'n';
         return response()->json(['message' => 'completed']);
     }
 }
