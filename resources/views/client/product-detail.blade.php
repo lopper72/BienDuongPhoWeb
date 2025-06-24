@@ -25,7 +25,7 @@
                             </p> --}}
                             <div class="imgShopee">
                                 <a onclick="unlockPage();" class="w-100 h-100 custom-height" target="_blank" href="{{$product->shopper_link}}">
-                                    <img src="{{asset('library/images/image-shopee.png')}}" alt="image shopee" class="object-fit-cover w-100 h-100 custom-height">
+                                    <img src="{{asset('library/images/image-shopee.png')}}" alt="image shopee" class=" w-100 h-100 custom-height">
                                 </a>
                             </div>
                             <h4 
@@ -46,7 +46,7 @@
            
             setTimeout(function() {
                 myModal.show();
-            }, 5000);
+            }, 2000);
             
             function unlockPage(){
                 var idProduct = {{$product->id}};
@@ -118,8 +118,8 @@
             });
            
             setTimeout(function() {
-                myModal2.show();
-            }, 2000);
+                    myModal2.show();
+            }, 5000);
             
             function unlockPageTikTok(){
                 var idProduct = {{$product->id}};
