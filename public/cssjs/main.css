@@ -63,13 +63,11 @@ ul{
     text-align: center;
     font-size: 16px;
     color: #333;
-    margin-top: 50px;
 }
-.imgShopee{
-    width: 300px;
+/* .imgShopee{
     margin: auto;
     margin-bottom: 30px;
-}
+} */
 .contentShopee i{
     color: #ffd900;
 }
