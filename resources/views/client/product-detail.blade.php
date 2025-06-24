@@ -97,7 +97,7 @@
 .custom-backdrop {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.35);
+    background: rgba(0,0,0,0.7);
     z-index: 1999;
     display: block;
 }
@@ -122,6 +122,10 @@
     color: #ff3333;
     cursor: pointer;
     text-decoration: none;
+}
+html.noscroll, body.noscroll {
+    overflow: hidden !important;
+    height: 100% !important;
 }
 </style>
 
@@ -188,6 +192,33 @@ window.addEventListener('DOMContentLoaded', function() {
     if ((tiktok && tiktok.style.display !== 'none') || (shopee && shopee.style.display !== 'none')) {
         if (backdrop) backdrop.style.display = 'block';
     }
+    // Theo dõi backdrop để khóa/mở scroll
+    if (backdrop) {
+        const observer = new MutationObserver(function() {
+            if (backdrop.style.display !== 'none') {
+                lockScroll();
+            } else {
+                unlockScroll();
+            }
+        });
+        observer.observe(backdrop, { attributes: true, attributeFilter: ['style'] });
+        // Khởi tạo trạng thái ban đầu
+        if (backdrop.style.display !== 'none') {
+            lockScroll();
+        } else {
+            unlockScroll();
+        }
+    }
 });
+
+function lockScroll() {
+    document.body.classList.add('noscroll');
+    document.documentElement.classList.add('noscroll');
+}
+
+function unlockScroll() {
+    document.body.classList.remove('noscroll');
+    document.documentElement.classList.remove('noscroll');
+}
 </script>
 
