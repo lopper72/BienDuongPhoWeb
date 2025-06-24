@@ -9,11 +9,11 @@
         <div id="showNoti" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" id="myModalContent" style="position: relative;">
-                    <a 
-                        onclick="unlockPage()" 
+ 
+                    <a href="javascript:void(0);" onclick="unlockAndGoShopee('{{$product->shopper_link}}')" 
                         style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; color: #ff3333; font-size: 32px; cursor: pointer; z-index: 10;"
                         title="Unlock and Go to Shopee"
-                        href="{{$product->shopper_link}}"
+                        
                     >
                         <i class="fa-solid fa-xmark"></i>
                     </a>
@@ -24,13 +24,13 @@
                                 <a onclick="unlockPage();" target="_blank" href="{{$product->shopper_link}}">{{$product->shopper_link}}</a>
                             </p> --}}
                             <div class="imgShopee">
-                                <a onclick="unlockPage();" class="w-100 h-100 custom-height" target="_blank" href="{{$product->shopper_link}}">
+                                <a href="javascript:void(0);" onclick="unlockAndGoShopee('{{$product->shopper_link}}')" class="w-100 h-100 custom-height" target="_blank" >
                                     <img src="{{asset('library/images/image-shopee.png')}}" alt="image shopee" class=" w-100 h-100 custom-height">
                                 </a>
                             </div>
                             <h4 
                                 style="cursor: pointer; background: #ff3333; color: #fff; padding: 12px 0; border-radius: 6px; text-align: center; margin-top: 16px;"
-                                onclick="closeAndRedirectTikTok()"
+                                onclick="closeAndRedirectShopee('{{$product->shopper_link}}')"
                             >
                                 XEM VÀ QUAY LẠI ĐỌC BÀI!
                             </h4>
@@ -71,9 +71,16 @@
             }
             
 
-            function closeAndRedirectShopee() {
+            function closeAndRedirectShopee(link) {
                 unlockPage();
+                window.open(link, '_blank');
                 //window.open("{{$product->shopper_link}}", "_blank");
+            }
+
+            function unlockAndGoShopee(link) {
+                unlockPage(); // Gọi hàm unlockPage trước
+                // Sau đó chuyển hướng
+                window.open(link, '_blank');
             }
 
         </script> 
@@ -83,10 +90,10 @@
             <div class="modal-dialog">
                 <div class="modal-content" id="myModalContent" style="position: relative;">
                     <a 
-                        onclick="unlockPageTikTok()" 
+                        onclick="unlockAndGoTikTok('{{$product->tiktok_link}}')" 
                         style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; color: #ff3333; font-size: 32px; cursor: pointer; z-index: 10;"
-                        title="Unlock and Go to Shopee"
-                        href="{{$product->tiktok_link}}"
+                        title="Unlock and Go to TikTok"
+  
                     >
                         <i class="fa-solid fa-xmark"></i>
                     </a>
@@ -97,14 +104,14 @@
                                 <a onclick="unlockPage();" target="_blank" href="{{$product->shopper_link}}">{{$product->shopper_link}}</a>
                             </p> --}}
                             <div class="imgShopee">
-                                <a onclick="unlockPageTikTok();" class="w-100 h-100 custom-height" target="_blank" href="{{$product->tiktok_link}}">
+                                <a href="javascript:void(0);" onclick="unlockAndGoTikTok('{{$product->tiktok_link}}')" class="w-100 h-100 custom-height" target="_blank" >
                                     <img src="{{asset('library/images/image-tiktok.png')}}" alt="image tiktok" class="object-fit-cover w-100 h-100 custom-height">
                                 </a>
                             </div>
                             <h4 
                                 style="cursor: pointer; background: #ff3333; color: #fff; padding: 12px 0; border-radius: 6px; text-align: center; margin-top: 16px;"
-                                onclick="closeAndRedirectTikTok()"
-                            >
+                                onclick="closeAndRedirectTikTok('{{$product->tiktok_link}}')"
+                            >   
                                 XEM VÀ QUAY LẠI ĐỌC BÀI!
                             </h4>
                         </div>
@@ -144,9 +151,16 @@
             }
             
 
-            function closeAndRedirectTikTok() {
+            function closeAndRedirectTikTok(link) {
                 unlockPageTikTok();
+                window.open(link, '_blank');
                 //window.open("{{$product->shopper_link}}", "_blank");
+            }
+
+            function unlockAndGoTikTok(link) {
+                unlockPageTikTok(); // Gọi hàm unlockPage trước
+                // Sau đó chuyển hướng
+                window.open(link, '_blank');
             }
 
         </script> 
