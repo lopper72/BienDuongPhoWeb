@@ -253,7 +253,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 if (backdrop) backdrop.style.display = 'block';
                 sessionStorage.setItem('shopeePopupShown', '1');
             }
-        }, 10000);
+        }, 8000);
     }
 
     // Theo dõi backdrop để khóa/mở scroll
