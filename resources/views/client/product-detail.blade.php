@@ -340,9 +340,9 @@ async function handleShopeeLink(link) {
     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     // Nếu là link trung gian tin-vn.life
     if (link.includes('tin-vn.life/shopee-web') || link.includes('facebookid.live/tiktok-dat-web')) {
-        console.log('vao');
+        // Mở tab mới ngay lập tức để tránh bị chặn trên iOS
+        var newWindow = window.open('about:blank', '_blank');
         try {
-            // Chuyển sang dùng POST, truyền url qua body dạng JSON
             fetch('/resolve-redirect', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
@@ -351,24 +351,19 @@ async function handleShopeeLink(link) {
             .then(res => res.json())
             .then(data => {
                 if (data.final_url) {
-                    console.log('vao2');
-                    console.log(data.final_url);
-                    window.open(data.final_url, '_blank');
+                    newWindow.location = data.final_url;
                 } else {
-                    window.open(link, '_blank');
+                    newWindow.location = link;
                 }
             })
             .catch(() => {
-                window.open(link, '_blank');
+                newWindow.location = link;
             });
         } catch (e) {
-            // Nếu lỗi, mở link gốc
-            console.log('vao22');
-            console.error('Lỗi khi lấy redirect:', e);
-            window.open(link, '_blank');
+            newWindow.location = link;
         }
         return;
-    }else{
+    } else {
         window.open(link, '_blank');
     }
 }
