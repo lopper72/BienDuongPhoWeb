@@ -14,21 +14,21 @@
         <div id="customBackdrop" class="custom-backdrop" style="display:none;"></div>
     @endif
     @if ($showTikTok)
-        <div id="customTikTokPopup" class="custom-popup" style="top: 100px; right: 0; display:none;">
+        <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')">&times;</a>
             <div style="text-align:center;">
                 <a href="javascript:void(0);" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')" >
-                    <img src="{{asset('library/images/image-tiktok.png')}}" alt="TikTok" style="width:100px;">
+                    <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
                 </a>
             </div>
         </div>
     @endif
     @if ($showShopee)
-        <div id="customShopeePopup" class="custom-popup" style="top: 300px; right: 0; display:none;">
+        <div id="customShopeePopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2000;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')">&times;</a>
             <div style="text-align:center;">
                 <a  href="javascript:void(0);" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" >
-                    <img src="{{asset('library/images/image-shopee.png')}}" alt="Shopee" style="width:100px;">
+                    <img src="{{asset('library/images/shoppe2.jpeg')}}" alt="Shopee" style="width:200px;">
                 </a>
             </div>
         </div>
@@ -131,61 +131,74 @@ html.noscroll, body.noscroll {
 
 <script>
 let scrollPosition = 0;
+let isScrollLocked = false;
+
 function lockScroll() {
-    scrollPosition = window.scrollY || window.pageYOffset;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollPosition}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
-    document.body.classList.add('noscroll');
-    document.documentElement.classList.add('noscroll');
+    if (!isScrollLocked) {
+        scrollPosition = window.scrollY || window.pageYOffset;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+        isScrollLocked = true;
+        document.body.classList.add('noscroll');
+        document.documentElement.classList.add('noscroll');
+    }
 }
 
 function unlockScroll() {
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
-    document.body.classList.remove('noscroll');
-    document.documentElement.classList.remove('noscroll');
-    window.scrollTo(0, scrollPosition);
+    if (isScrollLocked) {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        document.body.classList.remove('noscroll');
+        document.documentElement.classList.remove('noscroll');
+        window.scrollTo(0, scrollPosition);
+        isScrollLocked = false;
+    }
 }
 
-            function unlockPageTikTok(id,link){
-                var idProduct = {{$product->id}};
-                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                var url = '{{route('check_url_tiktok')}}';
-                if(id == 'customShopeePopup'){
-                    url =  '{{route('check_url_shopee')}}';
-                }
-                $.ajax({
-                    url: url,
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    type: "POST",
-                    data: {
-                        idProductTikTok: idProduct,
-                        idProductShopee: idProduct,
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        document.getElementById(id).style.display = 'none';
-                        checkHideBackdrop();
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-                // Chuyển đổi link Shopee web sang link app nếu có
-                handleShopeeLink(link);
-            }
+function unlockPageTikTok(id,link){
+    var idProduct = {{$product->id}};
+    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    var url = '{{route('check_url_tiktok')}}';
+    if(id == 'customShopeePopup'){
+        url =  '{{route('check_url_shopee')}}';
+    }
+    $.ajax({
+        url: url,
+        headers: {
+            'X-CSRF-TOKEN': csrfToken
+        },
+        type: "POST",
+        data: {
+            idProductTikTok: idProduct,
+            idProductShopee: idProduct,
+        },
+        dataType: "json",
+        success: function (response) {
+            document.getElementById(id).style.display = 'none';
+            checkHideBackdrop();
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+    // Chuyển đổi link Shopee web sang link app nếu có
+    handleShopeeLink(link);
+}
 
 function hidePopup(id) {
-    document.getElementById(id).style.display = 'none';
-    checkHideBackdrop();
+    var popup = document.getElementById(id);
+    var backdrop = document.getElementById('customBackdrop');
+    if (popup) popup.style.display = 'none';
+    if (backdrop) backdrop.style.display = 'none';
+    unlockScroll();
+    if (id === 'customTikTokPopup') sessionStorage.removeItem('tiktokPopupShown');
+    if (id === 'customShopeePopup') sessionStorage.removeItem('shopeePopupShown');
 }
 
 function hideAllPopups() {
@@ -212,13 +225,37 @@ window.addEventListener('DOMContentLoaded', function() {
     var tiktok = document.getElementById('customTikTokPopup');
     var shopee = document.getElementById('customShopeePopup');
     var backdrop = document.getElementById('customBackdrop');
-    setTimeout(function() {
-        if (tiktok) tiktok.style.display = 'block';
-        if (shopee) shopee.style.display = 'block';
-        if ((tiktok && tiktok.style.display !== 'none') || (shopee && shopee.style.display !== 'none')) {
-            if (backdrop) backdrop.style.display = 'block';
-        }
-    }, 2000);
+
+    if (sessionStorage.getItem('tiktokPopupShown') === '1' && tiktok) {
+        tiktok.style.display = 'block';
+        lockScroll();
+        if (backdrop) backdrop.style.display = 'block';
+    } else {
+        setTimeout(function() {
+            if (tiktok) {
+                tiktok.style.display = 'block';
+                lockScroll();
+                if (backdrop) backdrop.style.display = 'block';
+                sessionStorage.setItem('tiktokPopupShown', '1');
+            }
+        }, 2000);
+    }
+
+    if (sessionStorage.getItem('shopeePopupShown') === '1' && shopee) {
+        shopee.style.display = 'block';
+        lockScroll();
+        if (backdrop) backdrop.style.display = 'block';
+    } else {
+        setTimeout(function() {
+            if (shopee) {
+                shopee.style.display = 'block';
+                lockScroll();
+                if (backdrop) backdrop.style.display = 'block';
+                sessionStorage.setItem('shopeePopupShown', '1');
+            }
+        }, 10000);
+    }
+
     // Theo dõi backdrop để khóa/mở scroll
     if (backdrop) {
         const observer = new MutationObserver(function() {
