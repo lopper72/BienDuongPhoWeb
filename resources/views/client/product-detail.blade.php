@@ -292,16 +292,7 @@ window.addEventListener('DOMContentLoaded', function() {
     console.log(currentProductId);
     console.log(getCookie('shopeePopupShown'));
     console.log(getCookie('shopeePopupProductId'));
-    if (
-        getCookie('shopeePopupShown') === '1' &&
-        getCookie('shopeePopupProductId') == currentProductId &&
-        shopee
-    ) {
-        // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
-        // shopee.style.display = 'block';
-        // lockScroll();
-        // if (backdrop) backdrop.style.display = 'block';
-    } else {
+   
         setTimeout(function() {
             if (shopee) {
                 console.log('vao2');
@@ -311,7 +302,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 
             }
         }, 2000);
-    }
+ 
 
     // Theo dõi backdrop để khóa/mở scroll
     if (backdrop) {
@@ -338,10 +329,15 @@ async function handleShopeeLink(link) {
     // Loại bỏ ký tự @ đầu nếu có
     link = link.replace(/^@/, '');
     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    // Nếu là link trung gian tin-vn.life
+    // Hàm phát hiện iOS
+    function isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
+    // Hàm phát hiện Android
+    function isAndroid() {
+        return /Android/.test(navigator.userAgent);
+    }
     if (link.includes('tin-vn.life/shopee-web') || link.includes('facebookid.live/tiktok-dat-web')) {
-        // Mở tab mới ngay lập tức để tránh bị chặn trên iOS
-        var newWindow = window.open('about:blank', '_blank');
         try {
             fetch('/resolve-redirect', {
                 method: 'POST',
@@ -350,21 +346,36 @@ async function handleShopeeLink(link) {
             })
             .then(res => res.json())
             .then(data => {
-                if (data.final_url) {
-                    window.location.href = data.final_url;
+                var finalUrl = data.final_url ? data.final_url : link;
+                if (isIOS()) {
+                    // iOS: chuyển trang hiện tại
+                    window.location.href = finalUrl;
                 } else {
-                    window.location.href = link;
+                    // Android & desktop: mở tab mới
+                    window.open(finalUrl, '_blank');
                 }
             })
             .catch(() => {
-                window.location.href = link;
+                if (isIOS()) {
+                    window.location.href = link;
+                } else {
+                    window.open(link, '_blank');
+                }
             });
         } catch (e) {
-            window.location.href = link;
+            if (isIOS()) {
+                window.location.href = link;
+            } else {
+                window.open(link, '_blank');
+            }
         }
         return;
     } else {
-        window.location.href = link;
+        if (isIOS()) {
+            window.location.href = link;
+        } else {
+            window.open(link, '_blank');
+        }
     }
 }
 </script>
