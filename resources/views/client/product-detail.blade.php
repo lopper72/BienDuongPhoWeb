@@ -352,7 +352,7 @@ async function handleShopeeLink(link) {
                 if (data.final_url) {
                     console.log('vao2');
                     console.log(data.final_url);
-                    //window.location.href = data.final_url;
+               
                     window.open(data.final_url, '_blank');
                 } else {
                     window.open(link, '_blank');
