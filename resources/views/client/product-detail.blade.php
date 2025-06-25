@@ -238,28 +238,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function convertShopeeWebToApp(url) {
-    url = url.replace(/^@/, '');
-    let match = url.match(/shopee\.vn\/product\/(\d+)\/(\d+)/);
-    if (match) {
-        let shopid = match[1];
-        let itemid = match[2];
-        return `shopee://open?shopid=${shopid}&itemid=${itemid}`;
-    }
-    let urlObj;
-    try {
-        urlObj = new URL(url);
-    } catch (e) {
-        return null;
-    }
-    if (urlObj.hostname === 'tin-vn.life' && urlObj.pathname === '/shopee-web') {
-        let realShopeeUrl = urlObj.searchParams.get('url');
-        if (realShopeeUrl) {
-            return convertShopeeWebToApp(realShopeeUrl);
-        }
-    }
-    return null;
-}
+
 
 async function handleShopeeLink(link) {
     // Loại bỏ ký tự @ đầu nếu có
@@ -290,20 +269,11 @@ async function handleShopeeLink(link) {
             });
         } catch (e) {
             // Nếu lỗi, mở link gốc
-            console.log('vao2');
             console.error('Lỗi khi lấy redirect:', e);
                 alert('Không thể chuyển hướng do lỗi bảo mật trình duyệt hoặc server không cho phép!');
             window.open(link, '_blank');
         }
         return;
-    }
-
-    // Nếu là link Shopee chuẩn
-    let appLink = convertShopeeWebToApp(link);
-    if (appLink) {
-        window.open(appLink, '_blank');
-    } else {
-        window.open(link, '_blank');
     }
 }
 </script>
