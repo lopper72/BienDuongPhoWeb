@@ -7,8 +7,8 @@
 @section('content')
  
     @php
-        $showTikTok = $product->tiktok_link != "" && filter_var($product->tiktok_link, FILTER_VALIDATE_URL) && strpos($product->tiktok_link, "http") === 0 && $_SESSION['show_url_tiktok'] == 'y';
-        $showShopee = $product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0 && $_SESSION['show_url_shopee'] == 'y';
+        $showTikTok = $product->tiktok_link != "" && filter_var($product->tiktok_link, FILTER_VALIDATE_URL) && strpos($product->tiktok_link, "http") === 0 ;
+        $showShopee = $product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0 ;
     @endphp
     @if ($showTikTok || $showShopee)
         <div id="customBackdrop" class="custom-backdrop" style="display:none;"></div>
@@ -256,11 +256,19 @@ function eraseCookie(name) {
 
 // Đặt ở đầu script, trước khi kiểm tra hiển thị popup
 window.addEventListener('DOMContentLoaded', function() {
-    // Xóa cookie trạng thái popup khi vào trang
-    // eraseCookie('tiktokPopupShown');
-    // eraseCookie('tiktokPopupProductId');
-    // eraseCookie('shopeePopupShown');
-    // eraseCookie('shopeePopupProductId');
+    // Chỉ xóa cookie nếu là lần đầu vào trang (không phải back/forward)
+    var navType = window.performance && window.performance.getEntriesByType
+        ? (window.performance.getEntriesByType('navigation')[0]?.type)
+        : (window.performance && window.performance.navigation ? window.performance.navigation.type : null);
+
+    // navType === 'reload' hoặc 'navigate' là lần đầu vào hoặc reload
+    // navType === 'back_forward' là back/forward
+    if (navType === 'navigate' || navType === 0 || navType === 'reload' || navType === 1) {
+        eraseCookie('tiktokPopupShown');
+        eraseCookie('tiktokPopupProductId');
+        eraseCookie('shopeePopupShown');
+        eraseCookie('shopeePopupProductId');
+    }
 
     var tiktok = document.getElementById('customTikTokPopup');
     var shopee = document.getElementById('customShopeePopup');
@@ -350,7 +358,7 @@ async function handleShopeeLink(link) {
         if (isIOS()) {
             window.location.href = link;
         } else {
-            window.open(link, '_blank');
+            window.location.href = link;
         }
     
 }
