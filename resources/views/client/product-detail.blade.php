@@ -351,20 +351,20 @@ async function handleShopeeLink(link) {
             .then(res => res.json())
             .then(data => {
                 if (data.final_url) {
-                    newWindow.location = data.final_url;
+                    window.location.href = data.final_url;
                 } else {
-                    newWindow.location = link;
+                    window.location.href = link;
                 }
             })
             .catch(() => {
-                newWindow.location = link;
+                window.location.href = link;
             });
         } catch (e) {
-            newWindow.location = link;
+            window.location.href = link;
         }
         return;
     } else {
-        window.open(link, '_blank');
+        window.location.href = link;
     }
 }
 </script>
