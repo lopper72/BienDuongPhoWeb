@@ -297,6 +297,15 @@ window.addEventListener('DOMContentLoaded', function() {
         getCookie('shopeePopupProductId') == currentProductId &&
         shopee
     ) {
+        setTimeout(function() {
+            if (shopee) {
+                console.log('vao2');
+                shopee.style.display = 'block';
+                lockScroll();
+                if (backdrop) backdrop.style.display = 'block';
+                
+            }
+        }, 2000);
         // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
         // tiktok.style.display = 'block';
         // lockScroll();
