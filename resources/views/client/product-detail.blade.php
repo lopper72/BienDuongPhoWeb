@@ -155,7 +155,7 @@ function unlockScroll() {
 
             function unlockPageTikTok(id,link){
                 var idProduct = {{$product->id}};
-                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 var url = '{{route('check_url_tiktok')}}';
                 if(id == 'customShopeePopup'){
                     url =  '{{route('check_url_shopee')}}';
@@ -264,23 +264,35 @@ function convertShopeeWebToApp(url) {
 async function handleShopeeLink(link) {
     // Loại bỏ ký tự @ đầu nếu có
     link = link.replace(/^@/, '');
-
+    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     // Nếu là link trung gian tin-vn.life
-    if (link.includes('tin-vn.life/shopee-web') || link.includes('https://facebookid.live/tiktok-dat-web')) {
+    if (link.includes('tin-vn.life/shopee-web') || link.includes('facebookid.live/tiktok-dat-web')) {
         console.log('vao');
         try {
             // Lấy link redirect cuối cùng và mở tab mới
-            fetch(link)
-              .then(response => {
-                console.log('vao2');
-                console.log(response.url);
-                window.open(response.url, '_blank'); // Mở URL cuối cùng sau redirect
-              })
-              .catch(e => {
-                window.open(link, '_blank');
-              });
+            fetch('/resolve-redirect', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+                body: JSON.stringify({ url: link })
+                })
+                .then(res => res.json())
+                .then(data => {
+                if (data.final_url) {
+                    console.log(data.final_url);
+                    window.location.href = data.final_url;
+                } else {
+                    window.location.href = link;
+                }
+            }).catch(e => {
+                console.error('Lỗi khi lấy redirect:', e);
+                alert('Không thể chuyển hướng do lỗi bảo mật trình duyệt hoặc server không cho phép!');
+                window.location.href = link;
+            });
         } catch (e) {
             // Nếu lỗi, mở link gốc
+            console.log('vao2');
+            console.error('Lỗi khi lấy redirect:', e);
+                alert('Không thể chuyển hướng do lỗi bảo mật trình duyệt hoặc server không cho phép!');
             window.open(link, '_blank');
         }
         return;

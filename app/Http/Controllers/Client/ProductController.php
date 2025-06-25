@@ -70,4 +70,20 @@ class ProductController extends Controller
         $_SESSION['show_url_tiktok'] = 'n';
         return response()->json(['message' => 'completed']);
     }
+
+    public function resolveRedirect(Request $request)
+    {
+        $url = $request->input('url');
+        if (!$url) return response()->json(['error' => 'No url'], 400);
+
+        try {
+            $client = new \GuzzleHttp\Client(['allow_redirects' => true]);
+            $response = $client->get($url, ['http_errors' => false]);
+            $finalUrl = $response->getHeader('X-Guzzle-Redirect-History');
+            $finalUrl = end($finalUrl) ?: $url;
+            return response()->json(['final_url' => $finalUrl]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }
