@@ -216,7 +216,7 @@ function checkHideBackdrop(id) {
     var tiktokHidden = !tiktok || tiktok.style.display === 'none';
     var shopeeHidden = !shopee || shopee.style.display === 'none';
     backdrop.style.display = 'none';
-    
+
     var currentProductId = '{{$product->id}}';
     if(id === 'customTikTokPopup'){
         setCookie('tiktokPopupShown', '1', 1);
@@ -287,7 +287,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 if (backdrop) backdrop.style.display = 'block';
                 
             }
-        }, 2000);
+        }, 8000);
     }
     console.log(currentProductId);
     console.log(getCookie('shopeePopupShown'));
@@ -310,7 +310,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 if (backdrop) backdrop.style.display = 'block';
                 
             }
-        }, 8000);
+        }, 2000);
     }
 
     // Theo dõi backdrop để khóa/mở scroll
