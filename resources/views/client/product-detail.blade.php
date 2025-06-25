@@ -8,7 +8,7 @@
  
     @php
         $showTikTok = $product->tiktok_link != "" && filter_var($product->tiktok_link, FILTER_VALIDATE_URL) && strpos($product->tiktok_link, "http") === 0 && $_SESSION['show_url_tiktok'] == 'y';
-        $showShopee = $product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0 && $_SESSION['show_url_shopee'] == 'y';
+        $showShopee = $product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0 ;
     @endphp
     @if ($showTikTok || $showShopee)
         <div id="customBackdrop" class="custom-backdrop" style="display:none;"></div>
@@ -292,7 +292,16 @@ window.addEventListener('DOMContentLoaded', function() {
     console.log(currentProductId);
     console.log(getCookie('shopeePopupShown'));
     console.log(getCookie('shopeePopupProductId'));
-   
+    if (
+        getCookie('shopeePopupShown') === '2' &&
+        getCookie('shopeePopupProductId') == currentProductId &&
+        shopee
+    ) {
+        // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
+        // tiktok.style.display = 'block';
+        // lockScroll();
+        // if (backdrop) backdrop.style.display = 'block';
+    } else {
         setTimeout(function() {
             if (shopee) {
                 console.log('vao2');
@@ -302,7 +311,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 
             }
         }, 2000);
- 
+    }    
 
     // Theo dõi backdrop để khóa/mở scroll
     if (backdrop) {
