@@ -339,6 +339,7 @@ async function handleShopeeLink(link) {
     link = link.replace(/^@/, '');
     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     // Nếu là link trung gian tin-vn.life
+    if (link.includes('tin-vn.life/shopee-web') || link.includes('facebookid.live/tiktok-dat-web')) {
         console.log('vao');
         try {
             // Chuyển sang dùng POST, truyền url qua body dạng JSON
@@ -352,7 +353,6 @@ async function handleShopeeLink(link) {
                 if (data.final_url) {
                     console.log('vao2');
                     console.log(data.final_url);
-               
                     window.open(data.final_url, '_blank');
                 } else {
                     window.open(link, '_blank');
@@ -368,7 +368,9 @@ async function handleShopeeLink(link) {
             window.open(link, '_blank');
         }
         return;
-    
+    }else{
+        window.open(link, '_blank');
+    }
 }
 </script>
 
