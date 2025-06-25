@@ -11,10 +11,10 @@
         $showShopee = $product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0 && $_SESSION['show_url_shopee'] == 'y';
     @endphp
     @if ($showTikTok || $showShopee)
-        <div id="customBackdrop" class="custom-backdrop"></div>
+        <div id="customBackdrop" class="custom-backdrop" style="display:none;"></div>
     @endif
     @if ($showTikTok)
-        <div id="customTikTokPopup" class="custom-popup" style="top: 100px; right: 0;">
+        <div id="customTikTokPopup" class="custom-popup" style="top: 100px; right: 0; display:none;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')">&times;</a>
             <div style="text-align:center;">
                 <a href="javascript:void(0);" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')" target="_blank">
@@ -24,7 +24,7 @@
         </div>
     @endif
     @if ($showShopee)
-        <div id="customShopeePopup" class="custom-popup" style="top: 300px; right: 0;">
+        <div id="customShopeePopup" class="custom-popup" style="top: 300px; right: 0; display:none;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')">&times;</a>
             <div style="text-align:center;">
                 <a  href="javascript:void(0);" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" target="_blank">
@@ -130,6 +130,28 @@ html.noscroll, body.noscroll {
 </style>
 
 <script>
+let scrollPosition = 0;
+function lockScroll() {
+    scrollPosition = window.scrollY || window.pageYOffset;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollPosition}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.classList.add('noscroll');
+    document.documentElement.classList.add('noscroll');
+}
+
+function unlockScroll() {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    document.body.classList.remove('noscroll');
+    document.documentElement.classList.remove('noscroll');
+    window.scrollTo(0, scrollPosition);
+}
 
             function unlockPageTikTok(id,link){
                 var idProduct = {{$product->id}};
@@ -189,9 +211,13 @@ window.addEventListener('DOMContentLoaded', function() {
     var tiktok = document.getElementById('customTikTokPopup');
     var shopee = document.getElementById('customShopeePopup');
     var backdrop = document.getElementById('customBackdrop');
-    if ((tiktok && tiktok.style.display !== 'none') || (shopee && shopee.style.display !== 'none')) {
-        if (backdrop) backdrop.style.display = 'block';
-    }
+    setTimeout(function() {
+        if (tiktok) tiktok.style.display = 'block';
+        if (shopee) shopee.style.display = 'block';
+        if ((tiktok && tiktok.style.display !== 'none') || (shopee && shopee.style.display !== 'none')) {
+            if (backdrop) backdrop.style.display = 'block';
+        }
+    }, 2000);
     // Theo dõi backdrop để khóa/mở scroll
     if (backdrop) {
         const observer = new MutationObserver(function() {
@@ -210,15 +236,5 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-
-function lockScroll() {
-    document.body.classList.add('noscroll');
-    document.documentElement.classList.add('noscroll');
-}
-
-function unlockScroll() {
-    document.body.classList.remove('noscroll');
-    document.documentElement.classList.remove('noscroll');
-}
 </script>
 
