@@ -275,6 +275,8 @@ async function handleShopeeLink(link) {
                 window.location.href = link;
         }
         return;
+    }else{
+        window.location.href = link;
     }
 }
 </script>
