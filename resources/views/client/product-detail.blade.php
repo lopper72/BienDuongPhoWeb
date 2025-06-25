@@ -8,7 +8,7 @@
  
     @php
         $showTikTok = $product->tiktok_link != "" && filter_var($product->tiktok_link, FILTER_VALIDATE_URL) && strpos($product->tiktok_link, "http") === 0 && $_SESSION['show_url_tiktok'] == 'y';
-        $showShopee = $product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0 ;
+        $showShopee = $product->shopper_link != "" && filter_var($product->shopper_link, FILTER_VALIDATE_URL) && strpos($product->shopper_link, "http") === 0;
     @endphp
     @if ($showTikTok || $showShopee)
         <div id="customBackdrop" class="custom-backdrop" style="display:none;"></div>
@@ -293,7 +293,7 @@ window.addEventListener('DOMContentLoaded', function() {
     console.log(getCookie('shopeePopupShown'));
     console.log(getCookie('shopeePopupProductId'));
     if (
-        getCookie('shopeePopupShown') === '2' &&
+        getCookie('shopeePopupShown') === '1' &&
         getCookie('shopeePopupProductId') == currentProductId &&
         shopee
     ) {
@@ -346,46 +346,13 @@ async function handleShopeeLink(link) {
     function isAndroid() {
         return /Android/.test(navigator.userAgent);
     }
-    if (link.includes('tin-vn.life/shopee-web') || link.includes('facebookid.live/tiktok-dat-web')) {
-        try {
-            fetch('/resolve-redirect', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
-                body: JSON.stringify({ url: link })
-            })
-            .then(res => res.json())
-            .then(data => {
-                var finalUrl = data.final_url ? data.final_url : link;
-                if (isIOS()) {
-                    // iOS: chuyển trang hiện tại
-                    window.location.href = finalUrl;
-                } else {
-                    // Android & desktop: mở tab mới
-                    window.open(finalUrl, '_blank');
-                }
-            })
-            .catch(() => {
-                if (isIOS()) {
-                    window.location.href = link;
-                } else {
-                    window.open(link, '_blank');
-                }
-            });
-        } catch (e) {
-            if (isIOS()) {
-                window.location.href = link;
-            } else {
-                window.open(link, '_blank');
-            }
-        }
-        return;
-    } else {
+   
         if (isIOS()) {
             window.location.href = link;
         } else {
             window.open(link, '_blank');
         }
-    }
+    
 }
 </script>
 
