@@ -73,14 +73,15 @@ class ProductController extends Controller
 
     public function resolveRedirect(Request $request)
     {
-        $url = $request->input('url');
-        if (!$url) return response()->json(['error' => 'No url'], 400);
+           // $url = $request->input('url'); // Cách này cũng được với Laravel >= 5.4
+    $url = $request->json('url'); // Đảm bảo lấy từ body JSON
+    if (!$url) return response()->json(['error' => 'No url'], 400);
 
         try {
-            $client = new \GuzzleHttp\Client(['allow_redirects' => true]);
+            $client = new \GuzzleHttp\Client(['allow_redirects' => true, 'timeout' => 10]);
             $response = $client->get($url, ['http_errors' => false]);
-            $finalUrl = $response->getHeader('X-Guzzle-Redirect-History');
-            $finalUrl = end($finalUrl) ?: $url;
+            $redirects = $response->getHeader(\GuzzleHttp\RedirectMiddleware::HISTORY_HEADER);
+            $finalUrl = end($redirects) ?: $url;
             return response()->json(['final_url' => $finalUrl]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

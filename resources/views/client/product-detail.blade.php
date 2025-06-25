@@ -17,7 +17,7 @@
         <div id="customTikTokPopup" class="custom-popup" style="top: 100px; right: 0; display:none;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')">&times;</a>
             <div style="text-align:center;">
-                <a href="javascript:void(0);" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')" target="_blank">
+                <a href="javascript:void(0);" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')" >
                     <img src="{{asset('library/images/image-tiktok.png')}}" alt="TikTok" style="width:100px;">
                 </a>
             </div>
@@ -27,7 +27,7 @@
         <div id="customShopeePopup" class="custom-popup" style="top: 300px; right: 0; display:none;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')">&times;</a>
             <div style="text-align:center;">
-                <a  href="javascript:void(0);" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" target="_blank">
+                <a  href="javascript:void(0);" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" >
                     <img src="{{asset('library/images/image-shopee.png')}}" alt="Shopee" style="width:100px;">
                 </a>
             </div>
@@ -248,30 +248,31 @@ async function handleShopeeLink(link) {
     if (link.includes('tin-vn.life/shopee-web') || link.includes('facebookid.live/tiktok-dat-web')) {
         console.log('vao');
         try {
-            // Lấy link redirect cuối cùng và mở tab mới
+            // Chuyển sang dùng POST, truyền url qua body dạng JSON
             fetch('/resolve-redirect', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
                 body: JSON.stringify({ url: link })
-                })
-                .then(res => res.json())
-                .then(data => {
+            })
+            .then(res => res.json())
+            .then(data => {
                 if (data.final_url) {
+                    console.log('vao2');
                     console.log(data.final_url);
                     window.location.href = data.final_url;
                 } else {
                     window.location.href = link;
                 }
-            }).catch(e => {
-                console.error('Lỗi khi lấy redirect:', e);
-                alert('Không thể chuyển hướng do lỗi bảo mật trình duyệt hoặc server không cho phép!');
+            })
+            .catch(() => {
                 window.location.href = link;
             });
         } catch (e) {
             // Nếu lỗi, mở link gốc
+            console.log('vao22');
             console.error('Lỗi khi lấy redirect:', e);
-                alert('Không thể chuyển hướng do lỗi bảo mật trình duyệt hoặc server không cho phép!');
-            window.open(link, '_blank');
+
+                window.location.href = link;
         }
         return;
     }
