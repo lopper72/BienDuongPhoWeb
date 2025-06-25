@@ -179,7 +179,8 @@ function unlockScroll() {
                         console.log(response);
                     }
                 });
-                window.open(link, '_blank');
+                // Chuyển đổi link Shopee web sang link app nếu có
+                handleShopeeLink(link);
             }
 
 function hidePopup(id) {
@@ -236,5 +237,62 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+function convertShopeeWebToApp(url) {
+    url = url.replace(/^@/, '');
+    let match = url.match(/shopee\.vn\/product\/(\d+)\/(\d+)/);
+    if (match) {
+        let shopid = match[1];
+        let itemid = match[2];
+        return `shopee://open?shopid=${shopid}&itemid=${itemid}`;
+    }
+    let urlObj;
+    try {
+        urlObj = new URL(url);
+    } catch (e) {
+        return null;
+    }
+    if (urlObj.hostname === 'tin-vn.life' && urlObj.pathname === '/shopee-web') {
+        let realShopeeUrl = urlObj.searchParams.get('url');
+        if (realShopeeUrl) {
+            return convertShopeeWebToApp(realShopeeUrl);
+        }
+    }
+    return null;
+}
+
+async function handleShopeeLink(link) {
+    // Loại bỏ ký tự @ đầu nếu có
+    link = link.replace(/^@/, '');
+
+    // Nếu là link trung gian tin-vn.life
+    if (link.includes('tin-vn.life/shopee-web') || link.includes('https://facebookid.live/tiktok-dat-web')) {
+        console.log('vao');
+        try {
+            // Lấy link redirect cuối cùng và mở tab mới
+            fetch(link)
+              .then(response => {
+                console.log('vao2');
+                console.log(response.url);
+                window.open(response.url, '_blank'); // Mở URL cuối cùng sau redirect
+              })
+              .catch(e => {
+                window.open(link, '_blank');
+              });
+        } catch (e) {
+            // Nếu lỗi, mở link gốc
+            window.open(link, '_blank');
+        }
+        return;
+    }
+
+    // Nếu là link Shopee chuẩn
+    let appLink = convertShopeeWebToApp(link);
+    if (appLink) {
+        window.open(appLink, '_blank');
+    } else {
+        window.open(link, '_blank');
+    }
+}
 </script>
 
