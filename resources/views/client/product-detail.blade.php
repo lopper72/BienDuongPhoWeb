@@ -353,24 +353,24 @@ async function handleShopeeLink(link) {
                 if (data.final_url) {
                     console.log('vao2');
                     console.log(data.final_url);
-                    window.location.href = data.final_url;
+                    window.open(data.final_url, '_blank');
                 } else {
-                    window.location.href = link;
+                    window.open(link, '_blank');
                 }
             })
             .catch(() => {
-                window.location.href = link;
+                window.open(link, '_blank');
             });
         } catch (e) {
             // Nếu lỗi, mở link gốc
             console.log('vao22');
             console.error('Lỗi khi lấy redirect:', e);
 
-                window.location.href = link;
+                window.open(link, '_blank');
         }
         return;
     }else{
-        window.location.href = link;
+        window.open(link, '_blank');
     }
 }
 </script>
