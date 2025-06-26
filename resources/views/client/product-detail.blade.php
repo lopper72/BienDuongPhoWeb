@@ -295,31 +295,9 @@ window.addEventListener('DOMContentLoaded', function() {
                 if (backdrop) backdrop.style.display = 'block';
                 
             }
-        }, 8000);
+        }, 5000);
     }
-    console.log(currentProductId);
-    console.log(getCookie('shopeePopupShown'));
-    console.log(getCookie('shopeePopupProductId'));
-    if (
-        getCookie('shopeePopupShown') === '1' &&
-        getCookie('shopeePopupProductId') == currentProductId &&
-        shopee
-    ) {
-        // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
-        // tiktok.style.display = 'block';
-        // lockScroll();
-        // if (backdrop) backdrop.style.display = 'block';
-    } else {
-        setTimeout(function() {
-            if (shopee) {
-                console.log('vao2');
-                shopee.style.display = 'block';
-                lockScroll();
-                if (backdrop) backdrop.style.display = 'block';
-                
-            }
-        }, 2000);
-    }    
+
 
     // Theo dõi backdrop để khóa/mở scroll
     if (backdrop) {
