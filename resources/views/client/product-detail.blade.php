@@ -356,7 +356,8 @@ async function handleShopeeLink(link) {
     }
    
         if (isIOS()) {
-            window.location.href = link;
+            window.open(link, '_blank');
+            //window.location.href = link;
         } else {
             window.location.href = link;
         }
