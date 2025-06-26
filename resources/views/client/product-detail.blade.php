@@ -361,10 +361,11 @@ async function handleShopeeLink(link) {
     }
    
         if (isIOS()) {
-            openShopeeAffiliate(link);
+            window.open(link, '_blank');
+            //openShopeeAffiliate(link);
         } else {
-            openShopeeAffiliate(link);
-            //window.location.href = link;
+            //openShopeeAffiliate(link);
+            window.location.href = link;
         }
     
 }
