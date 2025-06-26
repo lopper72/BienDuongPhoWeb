@@ -341,6 +341,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
 });
 
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
 
 async function handleShopeeLink(link) {
     // Loại bỏ ký tự @ đầu nếu có
@@ -356,8 +361,7 @@ async function handleShopeeLink(link) {
     }
    
         if (isIOS()) {
-            window.open(link, '_blank');
-            //window.location.href = link;
+            window.location.href = link;
         } else {
             window.location.href = link;
         }
