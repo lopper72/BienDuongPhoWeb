@@ -341,11 +341,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
 });
 
-window.addEventListener('pageshow', function(event) {
-    if (event.persisted) {
-        window.location.reload();
-    }
-});
+// window.addEventListener('pageshow', function(event) {
+//     if (event.persisted) {
+//         window.location.reload();
+//     }
+// });
 
 async function handleShopeeLink(link) {
     // Loại bỏ ký tự @ đầu nếu có
@@ -361,11 +361,49 @@ async function handleShopeeLink(link) {
     }
    
         if (isIOS()) {
-            window.location.href = link;
+            openShopeeAffiliate(link);
         } else {
-            window.location.href = link;
+            openShopeeAffiliate(link);
+            //window.location.href = link;
         }
     
+}
+
+async function openShopeeAffiliate(affiliateLink) {
+    // Gửi link affiliate lên backend để resolve
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    let res = await fetch('/resolve-affiliate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        },
+        body: JSON.stringify({url: affiliateLink})
+    });
+    let data = await res.json();
+    console.log(data);
+    if (!data.final_url) {
+        // Nếu không resolve được, mở link affiliate
+        window.location.href = affiliateLink;
+        return;
+    }
+    // Tách shopid/itemid từ link gốc
+    let match = data.final_url.match(/product\/(\d+)\/(\d+)/);
+    if (match) {
+        let deepLink = `shopee://open?shopid=${match[1]}&itemid=${match[2]}`;
+        // Dùng iframe ẩn để mở deep link, fallback sang affiliate link
+        let iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = deepLink;
+        document.body.appendChild(iframe);
+        setTimeout(function() {
+            window.location.href = affiliateLink;
+            document.body.removeChild(iframe);
+        }, 2000);
+    } else {
+        // Nếu không tách được, mở link affiliate
+        window.location.href = affiliateLink;
+    }
 }
 </script>
 
