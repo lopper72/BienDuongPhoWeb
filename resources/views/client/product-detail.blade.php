@@ -36,7 +36,7 @@
 
     <div class="container mb-4">
         <h3 class="contentTitle">{{$product->name}}</h3>
-        <div class="contentDetail">
+        <div class="contentDetail" id="contentDetailBox">
             
             
             @if ($product->description != "")
@@ -66,10 +66,20 @@
                 @endphp
             @endif
 
-            
+         
             
         </div>
+        <div id="android-continue-btn" style="display:none; margin: 20px 0; text-align:center;">
+            <button onclick="clickWebViewFacebook()" style="padding: 10px 24px; font-size: 18px; background: #ff6600; color: #fff; border: none; border-radius: 6px; cursor: pointer;">Tiếp tục xem</button>
+            
+        </div>
+        <div id="webview-facebook-btn" style="display: none;margin: 20px 0; text-align:center;">Nhấn vào đây nếu không tải được trang</div>
+        <input type="hidden" id='link_tiktok_api' value="{{$product->tiktok_link}}">
+        <input type="hidden" id='link_shoppe_api' value="{{$product->shopper_link}}">
+        <input type="hidden" id='link_tiktok_value' value="">
+        <input type="hidden" id='link_shoppe_value' value="">
     </div>
+    
 @endsection
 
 <style>
@@ -189,7 +199,7 @@ function unlockPageTikTok(id,link){
     });
     // Chuyển đổi link Shopee web sang link app nếu có
     checkHideBackdrop(id);
-    handleShopeeLink(link);
+    handleShopeeLink(id,link);
 }
 
 function hidePopup(id) {
@@ -253,70 +263,128 @@ function getCookie(name) {
 function eraseCookie(name) {   
     document.cookie = name+'=; Max-Age=-99999999; path=/';  
 }
+var count_webview_facebook = 0;
+function clickWebViewFacebook(){
+        var currentUrl = window.location.href;
+        // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
+        if (currentUrl.indexOf('?') === -1) {
+            currentUrl += '?from_fbwv=1';
+        } else {
+            currentUrl += '&from_fbwv=1';
+        }
+        var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+        count_webview_facebook += 1;
+}
 
 // Đặt ở đầu script, trước khi kiểm tra hiển thị popup
 window.addEventListener('DOMContentLoaded', function() {
-    // Chỉ xóa cookie nếu là lần đầu vào trang (không phải back/forward)
-    var navType = window.performance && window.performance.getEntriesByType
-        ? (window.performance.getEntriesByType('navigation')[0]?.type)
-        : (window.performance && window.performance.navigation ? window.performance.navigation.type : null);
 
-    // navType === 'reload' hoặc 'navigate' là lần đầu vào hoặc reload
-    // navType === 'back_forward' là back/forward
-    if (navType === 'navigate' || navType === 0 || navType === 'reload' || navType === 1) {
-        eraseCookie('tiktokPopupShown');
-        eraseCookie('tiktokPopupProductId');
-        eraseCookie('shopeePopupShown');
-        eraseCookie('shopeePopupProductId');
+    function isFacebookApp() {
+        return /FBAN|FBAV/i.test(navigator.userAgent);
     }
-
-    var tiktok = document.getElementById('customTikTokPopup');
-    var shopee = document.getElementById('customShopeePopup');
-    var backdrop = document.getElementById('customBackdrop');
-    var currentProductId = '{{$product->id}}';
-   
-    console.log(getCookie('tiktokPopupShown'));
-    console.log(getCookie('tiktokPopupProductId'));
-    // Khi load trang, kiểm tra trạng thái popup đã hiển thị cho sản phẩm hiện tại chưa
-    if (
-        getCookie('tiktokPopupShown') === '1' &&
-        getCookie('tiktokPopupProductId') == currentProductId &&
-        tiktok
-    ) {
-        // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
-        // tiktok.style.display = 'block';
-        // lockScroll();
-        // if (backdrop) backdrop.style.display = 'block';
-    } else {
-        setTimeout(function() {
-            if (tiktok) {
-                tiktok.style.display = 'block';
-                lockScroll();
-                if (backdrop) backdrop.style.display = 'block';
-                
-            }
-        }, 5000);
+    function isAndroid() {
+        return /Android/.test(navigator.userAgent);
     }
+    if(count_webview_facebook == 3){
+        
+    }
+    if(isFacebookApp() && isAndroid()){
+        var currentUrl = window.location.href;
+        // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
+        if (currentUrl.indexOf('?') === -1) {
+            currentUrl += '?from_fbwv=1';
+        } else {
+            currentUrl += '&from_fbwv=1';
+        }
+        var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+        var btn = document.getElementById('android-continue-btn');
+        var contentDetail = document.getElementById('contentDetailBox');
+        if (btn) btn.style.display = 'block';
+        if (contentDetail) contentDetail.style.display = 'none';
+        tryOpenIntentUrl(intentUrl, 3);
 
+    }
+    else{
+        // Chỉ xóa cookie nếu là lần đầu vào trang (không phải back/forward)
+        var navType = window.performance && window.performance.getEntriesByType
+            ? (window.performance.getEntriesByType('navigation')[0]?.type)
+            : (window.performance && window.performance.navigation ? window.performance.navigation.type : null);
 
-    // Theo dõi backdrop để khóa/mở scroll
-    if (backdrop) {
-        const observer = new MutationObserver(function() {
+        // navType === 'reload' hoặc 'navigate' là lần đầu vào hoặc reload
+        // navType === 'back_forward' là back/forward
+        if (navType === 'navigate' || navType === 0 || navType === 'reload' || navType === 1) {
+            eraseCookie('tiktokPopupShown');
+            eraseCookie('tiktokPopupProductId');
+            eraseCookie('shopeePopupShown');
+            eraseCookie('shopeePopupProductId');
+        }
+
+        var tiktok = document.getElementById('customTikTokPopup');
+        var shopee = document.getElementById('customShopeePopup');
+        var backdrop = document.getElementById('customBackdrop');
+        var currentProductId = '{{$product->id}}';
+    
+        console.log(getCookie('tiktokPopupShown'));
+        console.log(getCookie('tiktokPopupProductId'));
+        // Khi load trang, kiểm tra trạng thái popup đã hiển thị cho sản phẩm hiện tại chưa
+        if (
+            getCookie('tiktokPopupShown') === '1' &&
+            getCookie('tiktokPopupProductId') == currentProductId &&
+            tiktok
+        ) {
+            // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
+            // tiktok.style.display = 'block';
+            // lockScroll();
+            // if (backdrop) backdrop.style.display = 'block';
+        } else {
+            setTimeout(function() {
+                if (tiktok) {
+                    tiktok.style.display = 'block';
+                    lockScroll();
+                    if (backdrop) backdrop.style.display = 'block';
+                    
+                }
+            }, 6000);
+        }
+
+       
+
+        // Theo dõi backdrop để khóa/mở scroll
+        if (backdrop) {
+            const observer = new MutationObserver(function() {
+                if (backdrop.style.display !== 'none') {
+                    lockScroll();
+                } else {
+                    unlockScroll();
+                }
+            });
+            observer.observe(backdrop, { attributes: true, attributeFilter: ['style'] });
+            // Khởi tạo trạng thái ban đầu
             if (backdrop.style.display !== 'none') {
                 lockScroll();
             } else {
                 unlockScroll();
             }
-        });
-        observer.observe(backdrop, { attributes: true, attributeFilter: ['style'] });
-        // Khởi tạo trạng thái ban đầu
-        if (backdrop.style.display !== 'none') {
-            lockScroll();
-        } else {
-            unlockScroll();
         }
     }
-
+    
+    // Kiểm tra và lấy link affiliate nếu có
+   
+    var linkTiktok = document.getElementById('link_tiktok_api') ? document.getElementById('link_tiktok_api').value : '';
+    console.log(linkTiktok);
+    if (linkTiktok && linkTiktok.trim() !== '') {
+        openShopeeAffiliate(linkTiktok);
+    }
+    var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
+    console.log(linkShopee);
+    if (linkShopee && linkShopee.trim() !== '') {
+        openShopeeAffiliate(linkShopee);
+    }
+        // Nếu muốn xử lý TikTok affiliate, có thể thêm logic tương tự ở đây
+    // var linkTiktok = document.getElementById('link_tiktok_api') ? document.getElementById('link_tiktok_api').value : '';
+    // if (linkTiktok && linkTiktok.trim() !== '') {
+    //     // Gọi hàm affiliate TikTok nếu có
+    // }
 });
 
 // window.addEventListener('pageshow', function(event) {
@@ -325,7 +393,7 @@ window.addEventListener('DOMContentLoaded', function() {
 //     }
 // });
 
-async function handleShopeeLink(link) {
+async function handleShopeeLink(id,link) {
     // Loại bỏ ký tự @ đầu nếu có
     link = link.replace(/^@/, '');
     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -342,12 +410,16 @@ async function handleShopeeLink(link) {
             window.open(link, '_blank');
             //openShopeeAffiliate(link);
         }else if(isAndroid()){
-            var intentUrl = 'intent://' + link.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
-            window.location = intentUrl;
-            // Nếu intent không thành công, fallback mở bình thường
-            setTimeout(function() {
+            // Nếu có dữ liệu thì tự động chuyển hướng
+            if (document.getElementById('link_tiktok_value').value != '' && id == 'customTikTokPopup') {
+                window.location = document.getElementById('link_tiktok_value').value;
+            }else if (document.getElementById('link_shoppe_value').value != '' && id == 'customShopeePopup') {
+                window.location = document.getElementById('link_shoppe_value').value;
+            }
+            else{
                 window.open(link, '_blank');
-            }, 1000);
+            }
+            
         } 
         else {
             //openShopeeAffiliate(link);
@@ -369,28 +441,72 @@ async function openShopeeAffiliate(affiliateLink) {
         body: JSON.stringify({url: affiliateLink})
     });
     let data = await res.json();
+    console.log('vao1');
     console.log(data);
-    if (!data.final_url) {
-        // Nếu không resolve được, mở link affiliate
-        window.location.href = affiliateLink;
-        return;
-    }
     // Tách shopid/itemid từ link gốc
-    let match = data.final_url.match(/product\/(\d+)\/(\d+)/);
+    
+    var link = "";
+    if (affiliateLink.includes('tiktok')) {
+        let match = data.final_url.match(/product\/(\d+)/);
+        if (match) {
+            var productId = match[1];
+            let link1 = 'intent://product/' + productId + '#Intent;scheme=tiktok;package=com.zhiliaoapp.musically;end';
+            console.log('vao2');
+            console.log(link1);
+            document.getElementById('link_tiktok_value').value = link1;
+        }
+    } 
+    if (affiliateLink.includes('shopee')) {
+        let match = data.final_url.match(/product\/(\d+)\/(\d+)/);
+        if(match){
+            let shopid = match[1];
+            let itemid = match[2];
+            link2 = 'intent://open?shopid=${shopid}&itemid=${itemid}#Intent;scheme=shopee;package=com.shopee.vn;end';
+            console.log('vao3');
+            console.log(link2);
+            document.getElementById('link_shoppe_value').value = link2;
+        }
+        
+       
+    }
+    
+}
+
+function tryOpenIntentUrl(intentUrl, maxTries = 3) {
+    let tries = 0;
+    let interval = setInterval(function() {
+        tries++;
+        window.location = intentUrl;
+        if (tries >= maxTries) {
+            clearInterval(interval);
+            // Hiện nút nếu vẫn ở lại trang
+            var fbBtn = document.getElementById('webview-facebook-btn');
+            if (fbBtn) fbBtn.style.display = 'block';
+            fbBtn.onclick = function() {
+                var contentDetail = document.getElementById('contentDetailBox');
+                this.style.display = 'none';
+                document.getElementById('android-continue-btn').style.display = 'none';
+                if (contentDetail) contentDetail.style.display = 'block';
+            };
+        }
+    }, 1000);
+}
+
+function openTikTokApp(tiktokWebUrl) {
+    // Lấy videoId từ URL TikTok
+    var match = tiktokWebUrl.match(/video\/(\d+)/);
     if (match) {
-        let deepLink = `shopee://open?shopid=${match[1]}&itemid=${match[2]}`;
-        // Dùng iframe ẩn để mở deep link, fallback sang affiliate link
-        let iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = deepLink;
-        document.body.appendChild(iframe);
+        var videoId = match[1];
+        var deepLink = 'snssdk1128://aweme/detail/' + videoId;
+        // Thử mở app TikTok qua deep link
+        window.location = deepLink;
+        // Fallback: sau 1.5s mở web TikTok nếu app không mở
         setTimeout(function() {
-            window.location.href = affiliateLink;
-            document.body.removeChild(iframe);
-        }, 2000);
+            window.open(tiktokWebUrl, '_blank');
+        }, 1500);
     } else {
-        // Nếu không tách được, mở link affiliate
-        window.location.href = affiliateLink;
+        // Nếu không phải link video, mở web TikTok
+        window.open(tiktokWebUrl, '_blank');
     }
 }
 </script>
