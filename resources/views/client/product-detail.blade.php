@@ -288,7 +288,7 @@ window.addEventListener('DOMContentLoaded', function() {
     if(count_webview_facebook == 3){
         
     }
-    if(isFacebookApp() && isAndroid()){
+    if(1 == 2 && isFacebookApp() && isAndroid()){
         var currentUrl = window.location.href;
         // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
         if (currentUrl.indexOf('?') === -1) {
@@ -446,7 +446,7 @@ async function openShopeeAffiliate(affiliateLink) {
     // Tách shopid/itemid từ link gốc
     
     var link = "";
-    if (affiliateLink.includes('tiktok')) {
+    if (affiliateLink.includes('tiktok-dat-web')) {
         let match = data.final_url.match(/product\/(\d+)/);
         if (match) {
             var productId = match[1];

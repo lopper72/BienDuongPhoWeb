@@ -91,7 +91,7 @@ class ProductController extends Controller
     public function resolveAffiliate(Request $request)
     {
         $url = $request->input('url');
-        $maxRedirects = 10; // Giới hạn số lần redirect để tránh vòng lặp vô hạn
+        $maxRedirects = 4; // Giới hạn số lần redirect để tránh vòng lặp vô hạn
         $currentUrl = $url;
         $client = new \GuzzleHttp\Client([
             'allow_redirects' => [
