@@ -341,7 +341,15 @@ async function handleShopeeLink(link) {
         if (isIOS()) {
             window.open(link, '_blank');
             //openShopeeAffiliate(link);
-        } else {
+        }else if(isAndroid()){
+            var intentUrl = 'intent://' + link.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+            window.location = intentUrl;
+            // Nếu intent không thành công, fallback mở bình thường
+            setTimeout(function() {
+                window.open(link, '_blank');
+            }, 1000);
+        } 
+        else {
             //openShopeeAffiliate(link);
             window.open(link, '_blank');
             //window.location.href = link;
