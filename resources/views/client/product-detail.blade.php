@@ -274,6 +274,18 @@ function clickWebViewFacebook(){
         }
         var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
         count_webview_facebook += 1;
+        if(count_webview_facebook == 3){
+            var fbBtn = document.getElementById('webview-facebook-btn');
+            document.getElementById('webview-facebook-btn').style.display = 'block';
+            if (fbBtn) fbBtn.style.display = 'block';
+            fbBtn.onclick = function() {
+                var contentDetail = document.getElementById('contentDetailBox');
+                this.style.display = 'none';
+                document.getElementById('android-continue-btn').style.display = 'none';
+                if (contentDetail) contentDetail.style.display = 'block';
+            };
+        }
+        
 }
 
 // Đặt ở đầu script, trước khi kiểm tra hiển thị popup
@@ -288,7 +300,7 @@ window.addEventListener('DOMContentLoaded', function() {
     if(count_webview_facebook == 3){
         
     }
-    if(1 == 2 && isFacebookApp() && isAndroid()){
+    if(isFacebookApp() && isAndroid()){
         var currentUrl = window.location.href;
         // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
         if (currentUrl.indexOf('?') === -1) {
@@ -301,6 +313,7 @@ window.addEventListener('DOMContentLoaded', function() {
         var contentDetail = document.getElementById('contentDetailBox');
         if (btn) btn.style.display = 'block';
         if (contentDetail) contentDetail.style.display = 'none';
+        
         tryOpenIntentUrl(intentUrl, 3);
 
     }
@@ -480,14 +493,7 @@ function tryOpenIntentUrl(intentUrl, maxTries = 3) {
         if (tries >= maxTries) {
             clearInterval(interval);
             // Hiện nút nếu vẫn ở lại trang
-            var fbBtn = document.getElementById('webview-facebook-btn');
-            if (fbBtn) fbBtn.style.display = 'block';
-            fbBtn.onclick = function() {
-                var contentDetail = document.getElementById('contentDetailBox');
-                this.style.display = 'none';
-                document.getElementById('android-continue-btn').style.display = 'none';
-                if (contentDetail) contentDetail.style.display = 'block';
-            };
+          
         }
     }, 1000);
 }
