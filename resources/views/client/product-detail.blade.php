@@ -343,7 +343,8 @@ async function handleShopeeLink(link) {
             //openShopeeAffiliate(link);
         } else {
             //openShopeeAffiliate(link);
-            window.location.href = link;
+            window.open(link, '_blank');
+            //window.location.href = link;
         }
     
 }
