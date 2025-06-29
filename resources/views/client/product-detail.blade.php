@@ -342,30 +342,10 @@ window.addEventListener('DOMContentLoaded', function() {
         console.log(getCookie('tiktokPopupShown'));
         console.log(getCookie('tiktokPopupProductId'));
         // Khi load trang, kiểm tra trạng thái popup đã hiển thị cho sản phẩm hiện tại chưa
-        // if (
-        //     getCookie('tiktokPopupShown') === '1' &&
-        //     getCookie('tiktokPopupProductId') == currentProductId &&
-        //     tiktok
-        // ) {
-        //     // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
-        //     // tiktok.style.display = 'block';
-        //     // lockScroll();
-        //     // if (backdrop) backdrop.style.display = 'block';
-        // } else {
-        //     setTimeout(function() {
-        //         if (tiktok) {
-        //             tiktok.style.display = 'block';
-        //             lockScroll();
-        //             if (backdrop) backdrop.style.display = 'block';
-                    
-        //         }
-        //     }, 2);
-        // }
-
         if (
-            getCookie('shopeePopupShown') === '1' &&
-            getCookie('shopeePopupProductId') == currentProductId &&
-            shopee
+            getCookie('tiktokPopupShown') === '1' &&
+            getCookie('tiktokPopupProductId') == currentProductId &&
+            tiktok
         ) {
             // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
             // tiktok.style.display = 'block';
@@ -373,15 +353,35 @@ window.addEventListener('DOMContentLoaded', function() {
             // if (backdrop) backdrop.style.display = 'block';
         } else {
             setTimeout(function() {
-                if (shopee) {
-                    console.log('vao2');
-                    shopee.style.display = 'block';
+                if (tiktok) {
+                    tiktok.style.display = 'block';
                     lockScroll();
                     if (backdrop) backdrop.style.display = 'block';
                     
                 }
-            }, 6000);
-        } 
+            }, 5000);
+        }
+
+        // if (
+        //     getCookie('shopeePopupShown') === '1' &&
+        //     getCookie('shopeePopupProductId') == currentProductId &&
+        //     shopee
+        // ) {
+        //     // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
+        //     // tiktok.style.display = 'block';
+        //     // lockScroll();
+        //     // if (backdrop) backdrop.style.display = 'block';
+        // } else {
+        //     setTimeout(function() {
+        //         if (shopee) {
+        //             console.log('vao2');
+        //             shopee.style.display = 'block';
+        //             lockScroll();
+        //             if (backdrop) backdrop.style.display = 'block';
+                    
+        //         }
+        //     }, 6000);
+        // } 
 
        
 

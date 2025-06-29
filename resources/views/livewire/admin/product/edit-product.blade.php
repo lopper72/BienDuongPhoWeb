@@ -167,7 +167,7 @@
                                         <input type="checkbox" @checked(old('active', $is_active)) class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:model="is_active" name="is_active" id="is_active" value="{{$is_active}}">
                                     </div>
                                 </div>
-                                <div class="col-span-1 sm:col-span-8">
+                                <div class="col-span-1 sm:col-span-8" style="display:none">
                                     <label for="shopper_link" class="block text-sm font-medium leading-6 text-gray-900">Link Shopee</label>
                                     <div class="mt-2">
                                         <input wire:model="shopper_link" type="text" name="shopper_link" id="shopper_link" autocomplete="shopper_link" class="text-left block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{$shopper_link}}">
@@ -177,7 +177,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-span-1 sm:col-span-8">
-                                    <label for="tiktok_link" class="block text-sm font-medium leading-6 text-gray-900">Link Tiktok</label>
+                                    <label for="tiktok_link" class="block text-sm font-medium leading-6 text-gray-900">Link Tiktok/Shopee</label>
                                     <div class="mt-2">
                                         <input wire:model="tiktok_link" type="text" name="tiktok_link" id="tiktok_link" autocomplete="tiktok_link" class="text-left block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{$tiktok_link}}">
                                     </div>
