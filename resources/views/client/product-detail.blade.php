@@ -225,9 +225,7 @@ function checkHideBackdrop(id) {
     var backdrop = document.getElementById('customBackdrop');
     var tiktokHidden = !tiktok || tiktok.style.display === 'none';
     var shopeeHidden = !shopee || shopee.style.display === 'none';
-    if (tiktokHidden && shopeeHidden) {
-        backdrop.style.display = 'none';
-    }
+    backdrop.style.display = 'none';
 
     var currentProductId = '{{$product->id}}';
     if(id === 'customTikTokPopup'){
@@ -344,25 +342,25 @@ window.addEventListener('DOMContentLoaded', function() {
         console.log(getCookie('tiktokPopupShown'));
         console.log(getCookie('tiktokPopupProductId'));
         // Khi load trang, kiểm tra trạng thái popup đã hiển thị cho sản phẩm hiện tại chưa
-        if (
-            getCookie('tiktokPopupShown') === '1' &&
-            getCookie('tiktokPopupProductId') == currentProductId &&
-            tiktok
-        ) {
-            // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
-            // tiktok.style.display = 'block';
-            // lockScroll();
-            // if (backdrop) backdrop.style.display = 'block';
-        } else {
-            setTimeout(function() {
-                if (tiktok) {
-                    tiktok.style.display = 'block';
-                    lockScroll();
-                    if (backdrop) backdrop.style.display = 'block';
+        // if (
+        //     getCookie('tiktokPopupShown') === '1' &&
+        //     getCookie('tiktokPopupProductId') == currentProductId &&
+        //     tiktok
+        // ) {
+        //     // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
+        //     // tiktok.style.display = 'block';
+        //     // lockScroll();
+        //     // if (backdrop) backdrop.style.display = 'block';
+        // } else {
+        //     setTimeout(function() {
+        //         if (tiktok) {
+        //             tiktok.style.display = 'block';
+        //             lockScroll();
+        //             if (backdrop) backdrop.style.display = 'block';
                     
-                }
-            }, 2);
-        }
+        //         }
+        //     }, 2);
+        // }
 
         if (
             getCookie('shopeePopupShown') === '1' &&
