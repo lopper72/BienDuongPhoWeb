@@ -447,14 +447,15 @@ async function handleShopeeLink(id,link) {
             //openShopeeAffiliate(link);
         }else if(isAndroid()){
             // Nếu có dữ liệu thì tự động chuyển hướng
-            if (document.getElementById('link_tiktok_value').value != '' && id == 'customTikTokPopup') {
-                window.location = document.getElementById('link_tiktok_value').value;
-            }else if (document.getElementById('link_shoppe_value').value != '' && id == 'customShopeePopup') {
-                window.location = document.getElementById('link_shoppe_value').value;
-            }
-            else{
-                window.open(link, '_blank');
-            }
+            // if (document.getElementById('link_tiktok_value').value != '' && id == 'customTikTokPopup') {
+            //     window.location = document.getElementById('link_tiktok_value').value;
+            // }else if (document.getElementById('link_shoppe_value').value != '' && id == 'customShopeePopup') {
+            //     window.location = document.getElementById('link_shoppe_value').value;
+            // }
+            // else{
+               
+            // }
+            window.open(link, '_blank');
             
         } 
         else {
