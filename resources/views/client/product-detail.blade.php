@@ -361,7 +361,7 @@ window.addEventListener('DOMContentLoaded', function() {
                     if (backdrop) backdrop.style.display = 'block';
                     
                 }
-            }, 6000);
+            }, 2);
         }
 
         if (
