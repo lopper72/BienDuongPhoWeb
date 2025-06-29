@@ -225,7 +225,9 @@ function checkHideBackdrop(id) {
     var backdrop = document.getElementById('customBackdrop');
     var tiktokHidden = !tiktok || tiktok.style.display === 'none';
     var shopeeHidden = !shopee || shopee.style.display === 'none';
-    backdrop.style.display = 'none';
+    if (tiktokHidden && shopeeHidden) {
+        backdrop.style.display = 'none';
+    }
 
     var currentProductId = '{{$product->id}}';
     if(id === 'customTikTokPopup'){
