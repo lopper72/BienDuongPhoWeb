@@ -51,7 +51,7 @@
                 <div class="video-gallery">
                     @foreach ($existingVideos as $video)
                         <div class="video-container mb-4">
-                            <video controls class="rounded-lg shadow-md w-full" >
+                            <video controls class="rounded-lg shadow-md w-full" onloadedmetadata="setVideoContainerHeight(this)">
                                 <source src="{{ asset('storage/videos/products/' . $video) }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
@@ -91,6 +91,7 @@
     padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     height: 0;
     overflow: hidden;
+    background: #000;
 }
 
 .video-container video {
@@ -537,6 +538,20 @@ function openTikTokApp(tiktokWebUrl) {
     } else {
         // Nếu không phải link video, mở web TikTok
         window.open(tiktokWebUrl, '_blank');
+    }
+}
+
+function setVideoContainerHeight(videoElem) {
+    var container = videoElem.closest('.video-container');
+    if (videoElem.videoWidth && videoElem.videoHeight && container) {
+        let ratio = videoElem.videoWidth / videoElem.videoHeight;
+        if (ratio < 0.8) {
+            // Dọc 9:16
+            container.style.height = '700px';
+        } else {
+            // Ngang hoặc khác, giữ height mặc định (0)
+            container.style.height = '';
+        }
     }
 }
 </script>
