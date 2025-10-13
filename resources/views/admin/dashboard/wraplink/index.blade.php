@@ -17,6 +17,6 @@
                 </li>
             </ol>
         </nav>
-        @livewire('admin.wraplink.list-wraplink')
+        @livewire('admin.wraplink.list-wrap-link')
     </div>
 @endsection

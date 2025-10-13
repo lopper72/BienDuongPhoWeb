@@ -79,6 +79,6 @@ public function deleteWrapLink($id){
                 ->paginate(10);
         }
         $this->list_wraplink = collect($wraplinks->items());
-        return view('livewire.admin.wraplink.list-wraplink', ['wraplinks' => $wraplinks]);
+        return view('livewire.admin.wraplink.list-wrap-link', ['wraplinks' => $wraplinks]);
     }
 }
