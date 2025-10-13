@@ -58,6 +58,6 @@ class AddWrapLink extends Component
     public function render()
     {
         $wraplinks = WrapLink::all();
-        return view('livewire.admin.wraplink.add-wraplink', ['wraplinks' => $wraplinks]);
+        return view('livewire.admin.wrap-link.add-wraplink', ['wraplinks' => $wraplinks]);
     }
 }
