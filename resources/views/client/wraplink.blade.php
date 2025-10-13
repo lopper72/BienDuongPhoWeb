@@ -9,7 +9,7 @@
         @if (isset($imageUrl2))
             <meta property="og:title" content="{{$product->name}}" />
             <meta property="og:image" content="{{ $imageUrl2 }}" />
-            <meta property="og:url" content="{{route('blog',$product->slug);}}" />
+            <meta property="og:url" content="{{ url('tintuc/' . $product->slug) }}" />
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="bienduongpho.net" />
             <meta property="og:description" content="Blog detail page" />
