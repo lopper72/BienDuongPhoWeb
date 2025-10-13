@@ -42,6 +42,8 @@ use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Client\BrandController as ClientBrandController;
 use App\Http\Controllers\Admin\ArapController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\Admin\WrapLinkController;
+use App\Http\Controllers\Client\WrapLinkDisplayController;
 
 
 
@@ -141,6 +143,11 @@ Route::group(['middleware' => [AdminAuth::class]], function () {
     Route::get('/admin/araps/view/{id}', [ArapController::class, 'view'])->name('admin.araps.view');
 
     Route::get('/admin/pdf/{id}', [PDFController::class, 'generatePDF'])->name('admin.pdf');
+
+    /* Brands  */
+    Route::get('/admin/wraplinks', [WrapLinkController::class, 'index'])->name('admin.wraplinks');
+    Route::get('/admin/wraplinks/add', [WrapLinkController::class, 'add'])->name('admin.wraplinks.add');
+    Route::get('/admin/wraplinks/edit/{id}', [WrapLinkController::class, 'edit'])->name('admin.wraplinks.edit');
 });
 Route::get('locale/{lang}', [LocaleController::class, 'setLocale']);
 Route::get('/admin/login', Login::class)->middleware([CheckAdminLogin::class])->name('admin.login');
@@ -149,6 +156,7 @@ Route::get('/admin/setup', Setup::class)->middleware([CheckSetup::class])->name(
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/{slug}', [ClientProductController::class, 'blog'])->name('blog');
+Route::get('/tintuc/{slug}', [WrapLinkDisplayController::class, 'blog'])->name('blog');
 Route::post('/check-url-shopee', [ClientProductController::class, 'checkUrlShopee'])->name('check_url_shopee');
 Route::post('/check-url-tiktok', [ClientProductController::class, 'checkUrlTiktok'])->name('check_url_tiktok');
 Route::post('/resolve-redirect', [ClientProductController::class, 'resolveRedirect']);

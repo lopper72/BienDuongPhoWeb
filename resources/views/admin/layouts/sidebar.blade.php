@@ -217,6 +217,18 @@
                                         Quản lý công nợ
                                     </a>
                                 </li>
+                                <li @if (in_array("TMWRAP", explode(',', $list_active_modules)) && in_array("TMWRAP", explode(',', $list_active_user))) @else style='display:none' @endif>
+                                    <a  class="group relative flex items-center gap-2 rounded-md px-2 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
+                                        href="{{route('admin.wraplinks')}}"
+                                        :class="page === 'araps' && '!text-white'">
+                                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8A99AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 16V8a2 2 0 0 0-1.06-1.76l-7-4a2 2 0 0 0-1.88 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1.06 1.76l7 4a2 2 0 0 0 1.88 0l7-4A2 2 0 0 0 21 16z"></path>
+                                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                        </svg>
+                                        Bọc Link
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
