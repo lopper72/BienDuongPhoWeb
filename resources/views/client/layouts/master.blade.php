@@ -24,6 +24,13 @@
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="Biến Đường Phố" />
         @endif
+        @if (isset($imageUrl2))
+            <meta property="og:title" content="{{$product->name}}" />
+            <meta property="og:image" content="<?php if($imageUrl2 != ""){ echo htmlspecialchars($imageUrl2);} ?>" />
+            <meta property="og:url" content="{{route('blog',$product->slug);}}" />
+            <meta property="og:type" content="website" />
+            <meta property="og:site_name" content="Biến Đường Phố" />
+        @endif
         
 		@livewireStyles
 	</head>

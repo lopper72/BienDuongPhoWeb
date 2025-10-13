@@ -32,14 +32,15 @@ class WrapLinkDisplayController extends Controller
         //$this->setShowUrlTiktok($product->id);
 
         // Retrieve existing videos
-        $existingVideos = json_decode($product->image, true) ?: []; // Decode JSON to array or return empty array
+        $existingVideos = json_decode($product->logo, true) ?: []; // Decode JSON to array or return empty array
 
         $description = $product->description;
-        preg_match('/<img [^>]*src="([^"]+)"/', $description, $matches);
-        $imageUrl = isset($matches[1]) ? $matches[1] : '';
+
+        // Use absolute URL for image from host
+        $imageUrl2 = asset('storage/images/wraplinks/' . $product->logo);
         return view('client.wraplink', [
             'product' => $product,
-            'imageUrl' => $imageUrl,
+            'imageUrl2' => $imageUrl2,
             'existingVideos' => $existingVideos // Pass existing videos to the view
         ]);
     }
