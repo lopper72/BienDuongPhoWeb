@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    @section('content')
-        @php
-            $redirectLink = $product->description != "" && filter_var($product->description, FILTER_VALIDATE_URL) && strpos($product->description, "http") === 0 ;
-        @endphp
-        
-        <div class="container mb-4">
-            <input type="hidden" id='link_affilate' value="{{$product->description}}">
-        </div>
-        
-    @endsection
 
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="" type="image/png">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         @if (isset($imageUrl2))
             <meta property="og:title" content="{{$product->name}}" />
@@ -28,16 +19,15 @@
         @endif
         
 	</head>
-	<body>
-            @yield('content')
-    </body>
+
 
     
     <script>
         // Đặt ở đầu script, trước khi kiểm tra hiển thị popup
         window.addEventListener('DOMContentLoaded', function() {
                 document.body.style.display = 'none';
-                link_affilate = document.getElementById('link_affilate').value;
+                var link = "{{ $product->description }}";
+
                  // if(link_affilate && link_affilate.trim() !== ''){
                 //      window.location.href = link_affilate;
                 // }
