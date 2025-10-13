@@ -34,6 +34,7 @@
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Tên Link</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Copy Đường Dẫn</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Link Affilate</th>
+                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider text-left">Số Lần Click</th>
                     <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-700 uppercase tracking-wider w-36 text-center">Hành Động</th>
                 </tr>
             </thead>
@@ -80,6 +81,22 @@
                             @else
                                 {{ $wraplink->description ? $wraplink->description : '-'}}
                             @endif
+                        </td>
+                        <td class="px-2 py-2 whitespace-nowrap">
+                           @php
+                                $details = DB::select('
+                                SELECT count(*) as total_click
+                                FROM affiliate_clicks aff
+                                WHERE aff.affiliate_link_id = '.$wraplink->id.'
+                                group by aff.affiliate_link_id');
+                                $total_click = 0;
+
+                                if (count($details) > 0) {
+                                    $details_first = $details[0];
+                                    $total_click = $details_first->total_click;
+                                }
+                            @endphp
+                                {{$total_click}}
                         </td>
                         <td class="px-2 py-2 whitespace-nowrap text-center">
                             <a href="{{route('admin.wraplinks.edit', $wraplink->id)}}" class="inline-flex items-center mr-2 text-indigo-600 hover:text-indigo-900">

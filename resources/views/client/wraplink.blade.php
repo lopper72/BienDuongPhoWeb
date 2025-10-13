@@ -27,7 +27,7 @@
         window.addEventListener('DOMContentLoaded', function() {
                 document.body.style.display = 'none';
                 var link = "{{ $product->description }}";
-
+                window.location.href = link;
                  // if(link_affilate && link_affilate.trim() !== ''){
                 //      window.location.href = link_affilate;
                 // }

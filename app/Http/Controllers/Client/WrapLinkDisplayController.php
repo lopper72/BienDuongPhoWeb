@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WrapLink;
+use App\Models\AffiliateClick;
 
 class WrapLinkDisplayController extends Controller
 {
@@ -18,6 +19,14 @@ class WrapLinkDisplayController extends Controller
         }
         
         $description = $product->description;
+
+        // Lưu thông tin click vào database
+        AffiliateClick::create([
+            'affiliate_link_id' => $product->id,
+            'ip' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+            'referrer' => request()->headers->get('referer'),
+        ]);
 
         // Use absolute URL for image from host
         $imageUrl2 = asset('storage/images/wraplinks/' . $product->logo);
