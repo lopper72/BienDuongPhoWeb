@@ -72,6 +72,6 @@ class EditWrapLink extends Component
         if($wraplink->logo) {
             $this->existedPhoto = "images/wraplinks/" . $wraplink->logo;
         }
-        return view('livewire.admin.wrap-link.edit-wraplink', ['categories' => $categories]);
+        return view('livewire.admin.wraplink.edit-wraplink', ['categories' => $categories]);
     }
 }
