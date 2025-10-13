@@ -261,9 +261,9 @@ function clickWebViewFacebook(){
 window.addEventListener('DOMContentLoaded', function() {
         document.body.style.display = 'none';
         link_affilate = document.getElementById('link_affilate').value;
-        if(link_affilate && link_affilate.trim() !== ''){
-             window.location.href = link_affilate;
-        }
+        // if(link_affilate && link_affilate.trim() !== ''){
+        //      window.location.href = link_affilate;
+        // }
        
 //     function isFacebookApp() {
 //         return /FBAN|FBAV/i.test(navigator.userAgent);
