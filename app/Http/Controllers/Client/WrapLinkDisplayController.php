@@ -23,7 +23,7 @@ class WrapLinkDisplayController extends Controller
         $wraplink->delete();
         return redirect()->route('admin.wraplinks');
     }
-    public function blog($slug)
+    public function wraplink($slug)
     {
         session_start();
         $product = WrapLink::where('slug', '=', $slug)->first();
