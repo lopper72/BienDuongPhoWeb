@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\WrapLink;
+namespace App\Livewire\Admin\Wrap;
 
 use Livewire\Component;
 use App\Models\WrapLink;
@@ -8,7 +8,7 @@ use App\Models\Product;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-class ListWrapLink extends Component
+class ListWrap extends Component
 {
     use WithPagination, WithoutUrlPagination; 
 
@@ -79,6 +79,6 @@ public function deleteWrapLink($id){
                 ->paginate(10);
         }
         $this->list_wraplink = collect($wraplinks->items());
-        return view('livewire.admin.wraplink.list-wrap-link', ['wraplinks' => $wraplinks]);
+        return view('livewire.admin.wrap.list-wrap', ['wraplinks' => $wraplinks]);
     }
 }

@@ -30,7 +30,7 @@
             </div>
 
             <div class="overflow-x-auto px-4 py-6 md:px-6 xl:px-7.5">
-                @livewire('admin.wraplink.edit-wraplink', ['id' => $wraplink->id])
+                @livewire('admin.wrap.edit-wrap', ['id' => $wraplink->id])
             </div>
         </div>
     </div>

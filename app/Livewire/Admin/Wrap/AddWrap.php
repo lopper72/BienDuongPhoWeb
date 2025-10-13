@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\wraplink;
+namespace App\Livewire\Admin\Wrap;
 
 use Livewire\Component;
 use App\Models\WrapLink;
@@ -9,26 +9,25 @@ use Livewire\WithFileUploads;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Illuminate\Support\Facades\Storage;
 
-class EditWrapLink extends Component
+class AddWrap extends Component
 {
     use WithFileUploads;
 
     public $wraplink_code = '';
     public $wraplink_name = '';
     public $description = '';
-    public $id;
     public $photo;
     public $existedPhoto;
 
-    public function updateWrapLink()
+    public function storeWrapLink()
     {
         $this->validate([
             'description' => 'required',
-            'wraplink_name' => 'required|unique:wraplinks,name,' . $this->id,
+            'wraplink_name' => 'required|unique:wraplinks,name',
         ], [
-            'description.required' => 'Link Chuyển Hướng là bắt buộc.',
-            'wraplink_name.required' => 'Tên Đường Dẫn là bắt buộc.',
-            'wraplink_name.unique' => 'Tên Đường Dẫn đã tồn tại.',
+            'description.required' => 'Mã Đường Dẫn Link là bắt buộc.',
+            'wraplink_name.required' => 'Tên Nội Dung là bắt buộc.',
+            'wraplink_name.unique' => 'Tên Nội Dung đã tồn tại.',
         ]);
         if ($this->photo) {
             $this->validate([
@@ -43,7 +42,7 @@ class EditWrapLink extends Component
             ImageOptimizer::optimize($this->photo->path());
             $this->photo->storeAs(path: "public\images\wraplinks", name: $photo_name);
         }
-        $wraplink = WrapLink::find($this->id);
+        $wraplink = new WrapLink();
         $wraplink->code = $this->wraplink_code;
         $wraplink->name = $this->wraplink_name;
         $wraplink->description = $this->description;
@@ -53,25 +52,12 @@ class EditWrapLink extends Component
         }
         $wraplink->save();
 
-        session()->flash('message', 'wraplink has been updated successfully!');
+        session()->flash('message', 'wraplink has been created successfully!');
         return redirect()->route('admin.wraplinks');
     }
-
-    public function mount($id)
-    {
-        $this->id = $id;
-    }
-
     public function render()
     {
-        $categories = WrapLink::all();
-        $wraplink = WrapLink::find($this->id);
-        $this->wraplink_code = $wraplink->code;
-        $this->wraplink_name = $wraplink->name;
-        $this->description = $wraplink->description;
-        if($wraplink->logo) {
-            $this->existedPhoto = "images/wraplinks/" . $wraplink->logo;
-        }
-        return view('livewire.admin.wraplink.edit-wraplink', ['categories' => $categories]);
+        $wraplinks = WrapLink::all();
+        return view('livewire.admin.wrap.add-wrap', ['wraplinks' => $wraplinks]);
     }
 }

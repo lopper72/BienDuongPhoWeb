@@ -10,12 +10,12 @@ class WrapLinkController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard.wraplink.list_wraplink');
+        return view('admin.dashboard.wrap.list_wrap');
     }
 
     public function add()
     {
-        return view('admin.dashboard.wraplink.add_wraplink');
+        return view('admin.dashboard.wrap.add_wrap');
     }
 
     public function delete($id){
@@ -27,6 +27,6 @@ class WrapLinkController extends Controller
     public function edit($id)
     {
         $wraplink = WrapLink::find($id);
-        return view('admin.dashboard.wraplink.edit_wraplink', ['wraplink' => $wraplink]);
+        return view('admin.dashboard.wrap.edit_wrap', ['wraplink' => $wraplink]);
     }
 }

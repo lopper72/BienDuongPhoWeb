@@ -30,7 +30,7 @@
             </div>
 
             <div class="overflow-x-auto px-4 py-6 md:px-6 xl:px-7.5">
-                @livewire('admin.wraplink.add-wraplink')
+                @livewire('admin.wrap.add-wrap')
             </div>
         </div>
     </div>
