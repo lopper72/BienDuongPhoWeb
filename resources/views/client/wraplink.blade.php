@@ -11,11 +11,6 @@
         
     @endsection
 
-    <style>
-            body{
-                    display: none;
-            }
-    </style>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,15 +22,16 @@
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="bienduongpho.net" />
             <meta property="og:description" content="Blog detail page" />
+            <title>{{ $product->name }}</title>
+        @else
+            <meta property="og:title" content="Bài viết không tồn tại">
         @endif
         
-		@livewireStyles
 	</head>
 	<body>
-          
             @yield('content')
     </body>
-    @livewireScripts
+
     
     <script>
         // Đặt ở đầu script, trước khi kiểm tra hiển thị popup
