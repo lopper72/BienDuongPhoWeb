@@ -10,7 +10,7 @@ class WrapLinkController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard.wraplink.index');
+        return view('admin.dashboard.wraplink.list_wraplink');
     }
 
     public function add()
