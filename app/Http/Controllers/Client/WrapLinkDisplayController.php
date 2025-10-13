@@ -12,6 +12,10 @@ class WrapLinkDisplayController extends Controller
     public function wraplink($slug)
     {
         $product = WrapLink::where('slug', '=', $slug)->first();
+
+        if (!$product) {
+            abort(404, 'Product not found');
+        }
         
         $description = $product->description;
 
