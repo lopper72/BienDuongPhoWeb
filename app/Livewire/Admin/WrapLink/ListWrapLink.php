@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\wraplink;
+namespace App\Livewire\Admin\WrapLink;
 
 use Livewire\Component;
 use App\Models\WrapLink;
