@@ -29,7 +29,8 @@
             <meta property="og:image" content="{{ $imageUrl2 }}" />
             <meta property="og:url" content="{{route('blog',$product->slug);}}" />
             <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="Biến Đường Phố" />
+            <meta property="og:site_name" content="bienduongpho.net" />
+            <meta property="og:description" content="Blog detail page" />
         @endif
         
 		@livewireStyles

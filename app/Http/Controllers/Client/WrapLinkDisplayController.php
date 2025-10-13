@@ -8,21 +8,7 @@ use App\Models\WrapLink;
 
 class WrapLinkDisplayController extends Controller
 {
-    public function index()
-    {
-        return view('admin.dashboard.wraplink.index');
-    }
-
-    public function add()
-    {
-        return view('admin.dashboard.wraplink.add_wraplink');
-    }
-
-    public function delete($id){
-        $wraplink = WrapLink::find($id);
-        $wraplink->delete();
-        return redirect()->route('admin.wraplinks');
-    }
+    
     public function wraplink($slug)
     {
         session_start();
@@ -45,9 +31,4 @@ class WrapLinkDisplayController extends Controller
         ]);
     }
 
-    public function edit($id)
-    {
-        $wraplink = WrapLink::find($id);
-        return view('admin.dashboard.wraplink.edit_wraplink', ['wraplink' => $wraplink]);
-    }
 }
