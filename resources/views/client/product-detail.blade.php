@@ -17,7 +17,7 @@
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')">&times;</a>
             <div style="text-align:center;">
-                <a href="javascript:void(0);" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')" >
+                <a href="javascript:void(0);" rel="noopener noreferrer"  onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')" >
                     <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
                 </a>
             </div>
@@ -27,7 +27,7 @@
         <div id="customShopeePopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2000;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')">&times;</a>
             <div style="text-align:center;">
-                <a  href="javascript:void(0);" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" >
+                <a  href="javascript:void(0);" rel="noopener noreferrer"  onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" >
                     <img src="{{asset('library/images/shoppe2.jpeg')}}" alt="Shopee" style="width:200px;">
                 </a>
             </div>
