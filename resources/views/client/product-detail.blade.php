@@ -15,9 +15,9 @@
     @endif
     @if ($showTikTok)
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
-            <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')">&times;</a>
+            <a href="javascript:void(0);" class="close-btn" onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')">&times;</a>
             <div style="text-align:center;">
-                <a href="javascript:void(0);" rel="noopener noreferrer"  onclick="unlockPageTikTok('customTikTokPopup','{{$product->tiktok_link}}')" >
+                <a href="javascript:void(0);" rel="noopener noreferrer"  onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')" >
                     <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
                 </a>
             </div>
@@ -434,6 +434,15 @@ async function handleShopeeLink(id,link) {
     // Loại bỏ ký tự @ đầu nếu có
     link = link.replace(/^@/, '');
     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    // Hàm phát hiện Facebook Webview
+    function isFacebookWebview() {
+        return /FBAN|FBAV/i.test(navigator.userAgent) ||
+               (document.referrer && (document.referrer.includes('facebook.com') || document.referrer.includes('messenger.com'))) ||
+               window.name === 'fbIframe' ||
+               (window.parent !== window && window.parent.location.hostname.includes('facebook.com'));
+    }
+
     // Hàm phát hiện iOS
     function isIOS() {
         return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -442,29 +451,75 @@ async function handleShopeeLink(id,link) {
     function isAndroid() {
         return /Android/.test(navigator.userAgent);
     }
-   
-        if (isIOS()) {
-            window.open(link, '_blank');
-            //openShopeeAffiliate(link);
-        }else if(isAndroid()){
-            // Nếu có dữ liệu thì tự động chuyển hướng
-            // if (document.getElementById('link_tiktok_value').value != '' && id == 'customTikTokPopup') {
-            //     window.location = document.getElementById('link_tiktok_value').value;
-            // }else if (document.getElementById('link_shoppe_value').value != '' && id == 'customShopeePopup') {
-            //     window.location = document.getElementById('link_shoppe_value').value;
-            // }
-            // else{
-               
-            // }
-            window.open(link, '_blank');
-            
-        } 
-        else {
-            //openShopeeAffiliate(link);
-            window.open(link, '_blank');
-            //window.location.href = link;
-        }
-    
+
+    // Nếu đang trong Facebook Webview, chuyển hướng trong cùng cửa sổ
+    if (isFacebookWebview()) {
+        window.location.href = link;
+        return;
+    }
+
+    // Xử lý bình thường cho các trình duyệt khác
+    if (isIOS()) {
+        window.open(link, '_blank');
+        //openShopeeAffiliate(link);
+    } else if(isAndroid()){
+        // Nếu có dữ liệu thì tự động chuyển hướng
+        // if (document.getElementById('link_tiktok_value').value != '' && id == 'customTikTokPopup') {
+        //     window.location = document.getElementById('link_tiktok_value').value;
+        // }else if (document.getElementById('link_shoppe_value').value != '' && id == 'customShopeePopup') {
+        //     window.location = document.getElementById('link_shoppe_value').value;
+        // }
+        // else{
+
+        // }
+        window.open(link, '_blank');
+
+    }
+    else {
+        //openShopeeAffiliate(link);
+        window.open(link, '_blank');
+        //window.location.href = link;
+    }
+
+}
+
+async function handleTikTokLink(id,link) {
+    // Loại bỏ ký tự @ đầu nếu có
+    link = link.replace(/^@/, '');
+
+    // Hàm phát hiện Facebook Webview
+    function isFacebookWebview() {
+        return /FBAN|FBAV/i.test(navigator.userAgent) ||
+               (document.referrer && (document.referrer.includes('facebook.com') || document.referrer.includes('messenger.com'))) ||
+               window.name === 'fbIframe' ||
+               (window.parent !== window && window.parent.location.hostname.includes('facebook.com'));
+    }
+
+    // Hàm phát hiện iOS
+    function isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
+    // Hàm phát hiện Android
+    function isAndroid() {
+        return /Android/.test(navigator.userAgent);
+    }
+
+    // Nếu đang trong Facebook Webview, chuyển hướng trong cùng cửa sổ
+    if (isFacebookWebview()) {
+        window.location.href = link;
+        return;
+    }
+
+    // Xử lý bình thường cho các trình duyệt khác
+    if (isIOS()) {
+        window.open(link, '_blank');
+    } else if(isAndroid()){
+        window.open(link, '_blank');
+    }
+    else {
+        window.open(link, '_blank');
+    }
+
 }
 
 async function openShopeeAffiliate(affiliateLink) {
@@ -555,4 +610,3 @@ function setVideoContainerHeight(videoElem) {
     }
 }
 </script>
-
