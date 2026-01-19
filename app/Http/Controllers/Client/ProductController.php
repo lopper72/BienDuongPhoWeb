@@ -28,7 +28,11 @@ class ProductController extends Controller
     {
         session_start();
         $product = Product::where('slug', '=', $slug)->first();
-        
+
+        if (!$product) {
+            abort(404, 'Product not found');
+        }
+
         $this->setShowUrlShopee($product->id);
         $this->setShowUrlTiktok($product->id);
 
@@ -136,5 +140,30 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'Cannot resolve link', 'message' => $e->getMessage()], 400);
         }
+    }
+
+    public function testFacebookWebviewSlug($slug, Request $request)
+    {
+        session_start();
+        $product = Product::where('slug', '=', $slug)->first();
+
+        if (!$product) {
+            abort(404, 'Product not found');
+        }
+
+        $this->setShowUrlShopee($product->id);
+        $this->setShowUrlTiktok($product->id);
+
+        // Retrieve existing videos
+        $existingVideos = json_decode($product->image, true) ?: []; // Decode JSON to array or return empty array
+
+        $description = $product->description;
+        preg_match('/<img [^>]*src="([^"]+)"/', $description, $matches);
+        $imageUrl = isset($matches[1]) ? $matches[1] : '';
+        return view('client.test-facebook-webview', [
+            'product' => $product,
+            'imageUrl' => $imageUrl,
+            'existingVideos' => $existingVideos // Pass existing videos to the view
+        ]);
     }
 }
