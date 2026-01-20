@@ -411,7 +411,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 
-async function handleTikTokLink(id,link) {
+function handleTikTokLink(id,link) {
     // Loại bỏ ký tự @ đầu nếu có
     link = link.replace(/^@/, '');
 
