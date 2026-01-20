@@ -21,7 +21,10 @@
                     <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
                 </div>
             </div>
-            
+            <br>
+            <br>
+            <br>
+            <a  href="{{$product->tiktok_link}}" rel="noopener noreferrer" target="_blank" style="cursor:pointer;">test</a>
         </div>
     @endif
     @if ($showShopee)
@@ -432,7 +435,7 @@ async function handleTikTokLink(id,link) {
     // Nếu đang trong Facebook Webview, chuyển hướng trong cùng cửa sổ
     if (isFacebookWebview()) {
         window.open(link, '_blank', 'noopener,noreferrer');
-        return;
+       
     }
 
     // Xử lý bình thường cho các trình duyệt khác
