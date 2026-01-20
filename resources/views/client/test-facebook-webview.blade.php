@@ -273,7 +273,7 @@ function clickWebViewFacebook(){
         } else {
             currentUrl += '&from_fbwv=1';
         }
-        var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+        var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;end';
         window.location = intentUrl;
         count_webview_facebook += 1;
         if(count_webview_facebook == 3){
@@ -310,7 +310,7 @@ window.addEventListener('DOMContentLoaded', function() {
         } else {
             currentUrl += '&from_fbwv=1';
         }
-        var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+        var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;end';
         
         var btn = document.getElementById('android-continue-btn');
         var contentDetail = document.getElementById('contentDetailBox');
@@ -405,30 +405,9 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Kiểm tra và lấy link affiliate nếu có
-   
-    var linkTiktok = document.getElementById('link_tiktok_api') ? document.getElementById('link_tiktok_api').value : '';
-    console.log(linkTiktok);
-    if (linkTiktok && linkTiktok.trim() !== '') {
-        openShopeeAffiliate(linkTiktok);
-    }
-    var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
-    console.log(linkShopee);
-    if (linkShopee && linkShopee.trim() !== '') {
-        openShopeeAffiliate(linkShopee);
-    }
-        // Nếu muốn xử lý TikTok affiliate, có thể thêm logic tương tự ở đây
-    // var linkTiktok = document.getElementById('link_tiktok_api') ? document.getElementById('link_tiktok_api').value : '';
-    // if (linkTiktok && linkTiktok.trim() !== '') {
-    //     // Gọi hàm affiliate TikTok nếu có
-    // }
-});
 
-// window.addEventListener('pageshow', function(event) {
-//     if (event.persisted) {
-//         window.location.reload();
-//     }
-// });
+
+});
 
 async function handleShopeeLink(id,link) {
     // Loại bỏ ký tự @ đầu nếu có
@@ -452,33 +431,20 @@ async function handleShopeeLink(id,link) {
         return /Android/.test(navigator.userAgent);
     }
 
-    // Nếu đang trong Facebook Webview, chuyển hướng trong cùng cửa sổ
+
     if (isFacebookWebview()) {
         window.location.href = link;
         return;
     }
 
-    // Xử lý bình thường cho các trình duyệt khác
     if (isIOS()) {
         window.open(link, '_blank');
-        //openShopeeAffiliate(link);
     } else if(isAndroid()){
-        // Nếu có dữ liệu thì tự động chuyển hướng
-        // if (document.getElementById('link_tiktok_value').value != '' && id == 'customTikTokPopup') {
-        //     window.location = document.getElementById('link_tiktok_value').value;
-        // }else if (document.getElementById('link_shoppe_value').value != '' && id == 'customShopeePopup') {
-        //     window.location = document.getElementById('link_shoppe_value').value;
-        // }
-        // else{
-
-        // }
         window.open(link, '_blank');
 
     }
     else {
-        //openShopeeAffiliate(link);
         window.open(link, '_blank');
-        //window.location.href = link;
     }
 
 }
@@ -522,48 +488,6 @@ async function handleTikTokLink(id,link) {
 
 }
 
-async function openShopeeAffiliate(affiliateLink) {
-    // Gửi link affiliate lên backend để resolve
-    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    let res = await fetch('/resolve-affiliate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': token
-        },
-        body: JSON.stringify({url: affiliateLink})
-    });
-    let data = await res.json();
-    console.log('vao1');
-    console.log(data);
-    // Tách shopid/itemid từ link gốc
-    
-    var link = "";
-    if (affiliateLink.includes('tiktok-dat-web')) {
-        let match = data.final_url.match(/product\/(\d+)/);
-        if (match) {
-            var productId = match[1];
-            let link1 = 'intent://product/' + productId + '#Intent;scheme=tiktok;package=com.zhiliaoapp.musically;end';
-            console.log('vao2');
-            console.log(link1);
-            document.getElementById('link_tiktok_value').value = link1;
-        }
-    } 
-    if (affiliateLink.includes('shopee')) {
-        let match = data.final_url.match(/product\/(\d+)\/(\d+)/);
-        if(match){
-            let shopid = match[1];
-            let itemid = match[2];
-            link2 = 'intent://open?shopid=${shopid}&itemid=${itemid}#Intent;scheme=shopee;package=com.shopee.vn;end';
-            console.log('vao3');
-            console.log(link2);
-            document.getElementById('link_shoppe_value').value = link2;
-        }
-        
-       
-    }
-    
-}
 
 function tryOpenIntentUrl(intentUrl, maxTries = 3) {
     let tries = 0;
@@ -578,33 +502,14 @@ function tryOpenIntentUrl(intentUrl, maxTries = 3) {
     }, 1000);
 }
 
-function openTikTokApp(tiktokWebUrl) {
-    // Lấy videoId từ URL TikTok
-    var match = tiktokWebUrl.match(/video\/(\d+)/);
-    if (match) {
-        var videoId = match[1];
-        var deepLink = 'snssdk1128://aweme/detail/' + videoId;
-        // Thử mở app TikTok qua deep link
-        window.location = deepLink;
-        // Fallback: sau 1.5s mở web TikTok nếu app không mở
-        setTimeout(function() {
-            window.open(tiktokWebUrl, '_blank');
-        }, 1500);
-    } else {
-        // Nếu không phải link video, mở web TikTok
-        window.open(tiktokWebUrl, '_blank');
-    }
-}
 
 function setVideoContainerHeight(videoElem) {
     var container = videoElem.closest('.video-container');
     if (videoElem.videoWidth && videoElem.videoHeight && container) {
         let ratio = videoElem.videoWidth / videoElem.videoHeight;
         if (ratio < 0.8) {
-            // Dọc 9:16
             container.style.height = '700px';
         } else {
-            // Ngang hoặc khác, giữ height mặc định (0)
             container.style.height = '';
         }
     }
