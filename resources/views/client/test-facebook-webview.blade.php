@@ -15,21 +15,21 @@
     @endif
     @if ($showTikTok)
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
-            <a href="javascript:void(0);" class="close-btn" onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')">&times;</a>
+            <div class="close-btn" onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')" style="cursor:pointer;">&times;</div>
             <div style="text-align:center;">
-                <a href="javascript:void(0);" rel="noopener noreferrer"  onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')" >
+                <div onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')" style="cursor:pointer;">
                     <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
-                </a>
+                </div>
             </div>
         </div>
     @endif
     @if ($showShopee)
         <div id="customShopeePopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2000;">
-            <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')">&times;</a>
+            <div class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" style="cursor:pointer;">&times;</div>
             <div style="text-align:center;">
-                <a  href="javascript:void(0);" rel="noopener noreferrer"  onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" >
+                <div onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" style="cursor:pointer;">
                     <img src="{{asset('library/images/shoppe2.jpeg')}}" alt="Shopee" style="width:200px;">
-                </a>
+                </div>
             </div>
         </div>
     @endif
@@ -433,17 +433,20 @@ async function handleShopeeLink(id,link) {
 
 
     if (isFacebookWebview()) {
+        // Mở link Shopee trong cùng cửa sổ Facebook webview
         window.location.href = link;
         return;
     }
 
     if (isIOS()) {
+        // Mở link Shopee trong Safari trên iOS
         window.open(link, '_blank');
     } else if(isAndroid()){
+        // Mở link Shopee trong Chrome trên Android
         window.open(link, '_blank');
-
     }
     else {
+        // Mở link Shopee trong tab mới trên các trình duyệt khác
         window.open(link, '_blank');
     }
 
@@ -472,7 +475,7 @@ async function handleTikTokLink(id,link) {
 
     // Nếu đang trong Facebook Webview, chuyển hướng trong cùng cửa sổ
     if (isFacebookWebview()) {
-        window.location.href = link;
+        window.open(link, '_blank');
         return;
     }
 
