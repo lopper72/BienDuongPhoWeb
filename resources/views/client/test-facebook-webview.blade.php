@@ -21,6 +21,12 @@
                     <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
+            <a href="{{ $product->tiktok_link }}" rel="noopener noreferrer" target="_blank">
+                <div>testaaaaaa</div>
+            </a>
         </div>
     @endif
     @if ($showShopee)
