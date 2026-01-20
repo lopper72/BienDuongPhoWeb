@@ -17,16 +17,11 @@
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
             <div class="close-btn" onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')" style="cursor:pointer;">&times;</div>
             <div style="text-align:center;">
-                <div onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')" style="cursor:pointer;">
+                <a href="{{ $product->tiktok_link }}" rel="noopener noreferrer" target="_blank">
                     <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
                 </div>
             </div>
-            <br>
-            <br>
-            <br>
-            <a href="{{ $product->tiktok_link }}" rel="noopener noreferrer" target="_blank">
-                <div>testaaaaaa</div>
-            </a>
+            
         </div>
     @endif
     @if ($showShopee)
