@@ -200,7 +200,6 @@ function unlockPageTikTok(id,link){
     });
     // Chuyển đổi link Shopee web sang link app nếu có
     checkHideBackdrop(id);
-    handleShopeeLink(id,link);
 }
 
 function hidePopup(id) {
@@ -340,8 +339,6 @@ window.addEventListener('DOMContentLoaded', function() {
         var backdrop = document.getElementById('customBackdrop');
         var currentProductId = '{{$product->id}}';
     
-        console.log(getCookie('tiktokPopupShown'));
-        console.log(getCookie('tiktokPopupProductId'));
         // Khi load trang, kiểm tra trạng thái popup đã hiển thị cho sản phẩm hiện tại chưa
         if (
             getCookie('tiktokPopupShown') === '1' &&
@@ -409,48 +406,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
 });
 
-async function handleShopeeLink(id,link) {
-    // Loại bỏ ký tự @ đầu nếu có
-    link = link.replace(/^@/, '');
-    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-    // Hàm phát hiện Facebook Webview
-    function isFacebookWebview() {
-        return /FBAN|FBAV/i.test(navigator.userAgent) ||
-               (document.referrer && (document.referrer.includes('facebook.com') || document.referrer.includes('messenger.com'))) ||
-               window.name === 'fbIframe' ||
-               (window.parent !== window && window.parent.location.hostname.includes('facebook.com'));
-    }
-
-    // Hàm phát hiện iOS
-    function isIOS() {
-        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    }
-    // Hàm phát hiện Android
-    function isAndroid() {
-        return /Android/.test(navigator.userAgent);
-    }
-
-
-    if (isFacebookWebview()) {
-        // Mở link Shopee trong cùng cửa sổ Facebook webview
-        window.location.href = link;
-        return;
-    }
-
-    if (isIOS()) {
-        // Mở link Shopee trong Safari trên iOS
-        window.open(link, '_blank');
-    } else if(isAndroid()){
-        // Mở link Shopee trong Chrome trên Android
-        window.open(link, '_blank');
-    }
-    else {
-        // Mở link Shopee trong tab mới trên các trình duyệt khác
-        window.open(link, '_blank');
-    }
-
-}
 
 async function handleTikTokLink(id,link) {
     // Loại bỏ ký tự @ đầu nếu có
