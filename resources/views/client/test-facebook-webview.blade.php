@@ -15,9 +15,9 @@
     @endif
     @if ($showTikTok)
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
-            <a class="close-btn" href="{{$product->tiktok_link}}" onclick="closeModel('customTikTokPopup')" target="_blank">&times;</a>
+            <a class="close-btn" href="{{$product->tiktok_link}}" rel="noopener noreferrer" onclick="closeModel('customTikTokPopup')" target="_blank">&times;</a>
             <div style="text-align:center;">
-                <a href="{{$product->tiktok_link}}" onclick="closeModel('customTikTokPopup')" target="_blank" >
+                <a href="{{$product->tiktok_link}}" rel="noopener noreferrer" onclick="closeModel('customTikTokPopup')" target="_blank" >
                     <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
                 </a>
             </div>
