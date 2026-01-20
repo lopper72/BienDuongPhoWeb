@@ -444,6 +444,9 @@ async function handleTikTokLink(id,link) {
     else {
         window.open(link, '_blank', 'noopener,noreferrer');
     }
+    // Chuyển đổi link Shopee web sang link app nếu có
+    checkHideBackdrop(id);
+    hideAllPopups();
 
 }
 
