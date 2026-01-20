@@ -17,7 +17,7 @@
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
             <div class="close-btn" onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')" style="cursor:pointer;">&times;</div>
             <div style="text-align:center;">
-                <a href="{{ $product->tiktok_link }}" rel="noopener noreferrer" target="_blank">
+                <div  onclick="handleTikTokLink('customTikTokPopup','{{$product->tiktok_link}}')" style="cursor:pointer;">
                     <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
                 </div>
             </div>
@@ -431,18 +431,18 @@ async function handleTikTokLink(id,link) {
 
     // Nếu đang trong Facebook Webview, chuyển hướng trong cùng cửa sổ
     if (isFacebookWebview()) {
-        window.open(link, '_blank');
+        window.open(link, '_blank', 'noopener,noreferrer');
         return;
     }
 
     // Xử lý bình thường cho các trình duyệt khác
     if (isIOS()) {
-        window.open(link, '_blank');
+        window.open(link, '_blank', 'noopener,noreferrer');
     } else if(isAndroid()){
-        window.open(link, '_blank');
+        window.open(link, '_blank', 'noopener,noreferrer');
     }
     else {
-        window.open(link, '_blank');
+        window.open(link, '_blank', 'noopener,noreferrer');
     }
 
 }
