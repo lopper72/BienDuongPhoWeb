@@ -18,7 +18,7 @@
             <a class="close-btn" href="{{$product->tiktok_link}}" rel="noopener noreferrer" onclick="closeModel('customTikTokPopup')" target="_blank">&times;</a>
             <div style="text-align:center;">
                 <a href="{{$product->tiktok_link}}" rel="noopener noreferrer" onclick="closeModel('customTikTokPopup')" target="_blank" >
-                    <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
+                    <img class="custom-popup-image" src="{{asset('library/images/popup-picture.png')}}" alt="TikTok">
                 </a>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" style="cursor:pointer;">&times;</div>
             <div style="text-align:center;">
                 <div onclick="unlockPageTikTok('customShopeePopup','{{$product->shopper_link}}')" style="cursor:pointer;">
-                    <img src="{{asset('library/images/shoppe2.jpeg')}}" alt="Shopee" style="width:200px;">
+                    <img class="custom-popup-image" src="{{asset('library/images/popup-picture.png')}}" alt="Shopee">
                 </div>
             </div>
         </div>
@@ -118,10 +118,17 @@
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-    padding: 5px 6px;
-    min-width: 100px;
-    max-width: 260px;
+    padding: 8px;
+    width: 66vw;
+    max-width: 900px;
+    max-height: 66vh;
     transition: all 0.3s;
+}
+.custom-popup-image {
+    display: block;
+    width: 100%;
+    max-height: calc(66vh - 16px);
+    object-fit: contain;
 }
 .close-btn {
     position: absolute;
@@ -137,6 +144,12 @@
 html.noscroll, body.noscroll {
     overflow: hidden !important;
     height: 100% !important;
+}
+@media only screen and (max-width: 768px) {
+    .custom-popup {
+        width: 90vw;
+        max-width: 90vw;
+    }
 }
 </style>
 
@@ -357,7 +370,7 @@ window.addEventListener('DOMContentLoaded', function() {
                     if (backdrop) backdrop.style.display = 'block';
                     
                 }
-            }, 5000);
+            }, 1000);
         }
 
         // if (
